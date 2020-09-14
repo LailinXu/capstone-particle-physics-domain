@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Week 5 Notebook: Building a Deep Learning Model &#8212; Particle Physics and Machine Learning</title>
+    <title>Week 4 Notebook: Simple Classifiers &#8212; Particle Physics and Machine Learning</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
     <link href="../_static/css/index.css" rel="stylesheet">
     <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
@@ -37,8 +37,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Week 6: Evalulating Model Performance and Robustness" href="06.html" />
-    <link rel="prev" title="Week 5: Building a Deep Learning Model" href="05.html" />
+    <link rel="next" title="Week 5: Building a Deep Learning Model" href="05.html" />
+    <link rel="prev" title="Week 4: Simple Classifiers" href="04.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="docsearch:language" content="en">
@@ -94,22 +94,22 @@
    Week 3: Feature Engineering
   </a>
  </li>
- <li class="toctree-l1">
+ <li class="toctree-l1 current active">
   <a class="reference internal" href="04.html">
    Week 4: Simple Classifiers
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="reference internal" href="05.html">
-   Week 5: Building a Deep Learning Model
   </a>
   <ul class="current">
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     Week 5 Notebook: Building a Deep Learning Model
+     Week 4 Notebook: Simple Classifiers
     </a>
    </li>
   </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05.html">
+   Week 5: Building a Deep Learning Model
+  </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="06.html">
@@ -178,7 +178,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/weeks/05-deep-learning.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/weeks/04-simple-classifiers.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -202,21 +202,21 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/jmduarte/capstone-particle-physics-domain/master?urlpath=tree/weeks/05-deep-learning.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/jmduarte/capstone-particle-physics-domain/master?urlpath=tree/weeks/04-simple-classifiers.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
                     alt="Interact on binder">Binder</button></a>
         
         
-        <a class="jupyterhub-button" href="https://datahub.ucsd.edu/hub/user-redirect/git-pull?repo=https://github.com/jmduarte/capstone-particle-physics-domain&urlpath=tree/capstone-particle-physics-domain/weeks/05-deep-learning.ipynb&branch=master"><button type="button"
+        <a class="jupyterhub-button" href="https://datahub.ucsd.edu/hub/user-redirect/git-pull?repo=https://github.com/jmduarte/capstone-particle-physics-domain&urlpath=tree/capstone-particle-physics-domain/weeks/04-simple-classifiers.ipynb&branch=master"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch JupyterHub" data-toggle="tooltip"
                 data-placement="left"><img class="jupyterhub-button-logo"
                     src="../_static/images/logo_jupyterhub.svg"
                     alt="Interact on JupyterHub">JupyterHub</button></a>
         
         
-        <a class="colab-button" href="https://colab.research.google.com/github/jmduarte/capstone-particle-physics-domain/blob/master/weeks/05-deep-learning.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+        <a class="colab-button" href="https://colab.research.google.com/github/jmduarte/capstone-particle-physics-domain/blob/master/weeks/04-simple-classifiers.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
                 title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
                     src="../_static/images/logo_colab.png"
                     alt="Interact on Colab">Colab</button></a>
@@ -233,7 +233,24 @@
             <i class="fas fa-list"></i> Contents
         </div>
         <nav id="bd-toc-nav">
-            
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#decision-tree-classifier">
+   Decision Tree Classifier
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#support-vector-machine-classifier">
+   Support Vector Machine Classifier
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fully-connected-neural-network-classifier">
+   Fully Connected Neural Network Classifier
+  </a>
+ </li>
+</ul>
+
         </nav>
     </div>
 </div>
@@ -242,8 +259,9 @@
         
               <div>
                 
-  <div class="section" id="week-5-notebook-building-a-deep-learning-model">
-<h1>Week 5 Notebook: Building a Deep Learning Model<a class="headerlink" href="#week-5-notebook-building-a-deep-learning-model" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="week-4-notebook-simple-classifiers">
+<h1>Week 4 Notebook: Simple Classifiers<a class="headerlink" href="#week-4-notebook-simple-classifiers" title="Permalink to this headline">¶</a></h1>
+<p>This week, we’re going to build some simple classifiers.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">keras</span>
@@ -290,7 +308,7 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 27 features</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 27 jet-level features</span>
 <span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;fj_jetNTracks&#39;</span><span class="p">,</span>
             <span class="s1">&#39;fj_nSV&#39;</span><span class="p">,</span>
             <span class="s1">&#39;fj_tau0_trackEtaRel_0&#39;</span><span class="p">,</span>
@@ -339,23 +357,7 @@
 </div>
 </div>
 </div>
-<p>Note on bytestrings versus strings: <code class="docutils literal notranslate"><span class="pre">uproot</span></code> expects bytestrings for branch names, so we need to encode our usual strings (or preface them with <code class="docutils literal notranslate"><span class="pre">b</span></code>).</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;fj_zratio&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;fj_zratio&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;fj_zratio&#39;</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fj_zratio
-b&#39;fj_zratio&#39;
-b&#39;fj_zratio&#39;
-</pre></div>
-</div>
-</div>
-</div>
+<p>Let’s set up a function to get features and labels.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_features_labels</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">remove_mass_pt_window</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">entrystop</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -363,20 +365,27 @@ b&#39;fj_zratio&#39;
     <span class="n">root_file</span> <span class="o">=</span> <span class="n">uproot</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
     <span class="n">tree</span> <span class="o">=</span> <span class="n">root_file</span><span class="p">[</span><span class="s1">&#39;deepntuplizer/tree&#39;</span><span class="p">]</span>
     <span class="n">feature_array</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">arrays</span><span class="p">(</span><span class="n">branches</span><span class="o">=</span><span class="n">features</span><span class="p">,</span> 
-                                <span class="n">entrystop</span><span class="o">=</span><span class="n">entrystop</span><span class="p">)</span>
+                                <span class="n">entrystop</span><span class="o">=</span><span class="n">entrystop</span><span class="p">,</span>
+                                <span class="n">namedecode</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
     <span class="n">spec_array</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">arrays</span><span class="p">(</span><span class="n">branches</span><span class="o">=</span><span class="n">spectators</span><span class="p">,</span> 
-                             <span class="n">entrystop</span><span class="o">=</span><span class="n">entrystop</span><span class="p">)</span>
+                             <span class="n">entrystop</span><span class="o">=</span><span class="n">entrystop</span><span class="p">,</span>
+                             <span class="n">namedecode</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
     <span class="n">label_array_all</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">arrays</span><span class="p">(</span><span class="n">branches</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> 
-                                  <span class="n">entrystop</span><span class="o">=</span><span class="n">entrystop</span><span class="p">)</span>
+                                  <span class="n">entrystop</span><span class="o">=</span><span class="n">entrystop</span><span class="p">,</span>
+                                  <span class="n">namedecode</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
 
-    <span class="n">feature_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">feature_array</span><span class="p">[</span><span class="n">feat</span><span class="o">.</span><span class="n">encode</span><span class="p">()]</span> <span class="k">for</span> <span class="n">feat</span> <span class="ow">in</span> <span class="n">features</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">spec_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">spec_array</span><span class="p">[</span><span class="n">spec</span><span class="o">.</span><span class="n">encode</span><span class="p">()]</span> <span class="k">for</span> <span class="n">spec</span> <span class="ow">in</span> <span class="n">spectators</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">feature_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">feature_array</span><span class="p">[</span><span class="n">feat</span><span class="p">]</span> <span class="k">for</span> <span class="n">feat</span> <span class="ow">in</span> <span class="n">features</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">spec_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">spec_array</span><span class="p">[</span><span class="n">spec</span><span class="p">]</span> <span class="k">for</span> <span class="n">spec</span> <span class="ow">in</span> <span class="n">spectators</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     
     <span class="n">njets</span> <span class="o">=</span> <span class="n">feature_array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     
     <span class="n">label_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">njets</span><span class="p">,</span><span class="n">nlabels</span><span class="p">))</span>
-    <span class="n">label_array</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">label_array_all</span><span class="p">[</span><span class="sa">b</span><span class="s1">&#39;sample_isQCD&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">label_array_all</span><span class="p">[</span><span class="sa">b</span><span class="s1">&#39;label_QCD_b&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">label_array_all</span><span class="p">[</span><span class="sa">b</span><span class="s1">&#39;label_QCD_bb&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">label_array_all</span><span class="p">[</span><span class="sa">b</span><span class="s1">&#39;label_QCD_c&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">label_array_all</span><span class="p">[</span><span class="sa">b</span><span class="s1">&#39;label_QCD_cc&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">label_array_all</span><span class="p">[</span><span class="sa">b</span><span class="s1">&#39;label_QCD_others&#39;</span><span class="p">])</span>
-    <span class="n">label_array</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">label_array_all</span><span class="p">[</span><span class="sa">b</span><span class="s1">&#39;label_H_bb&#39;</span><span class="p">]</span>
+    <span class="n">label_array</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">label_array_all</span><span class="p">[</span><span class="s1">&#39;sample_isQCD&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">label_array_all</span><span class="p">[</span><span class="s1">&#39;label_QCD_b&#39;</span><span class="p">]</span> <span class="o">+</span> \
+                                                          <span class="n">label_array_all</span><span class="p">[</span><span class="s1">&#39;label_QCD_bb&#39;</span><span class="p">]</span> <span class="o">+</span> \
+                                                          <span class="n">label_array_all</span><span class="p">[</span><span class="s1">&#39;label_QCD_c&#39;</span><span class="p">]</span> <span class="o">+</span> \
+                                                          <span class="n">label_array_all</span><span class="p">[</span><span class="s1">&#39;label_QCD_cc&#39;</span><span class="p">]</span> <span class="o">+</span> \
+                                                          <span class="n">label_array_all</span><span class="p">[</span><span class="s1">&#39;label_QCD_others&#39;</span><span class="p">])</span>
+    <span class="n">label_array</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">label_array_all</span><span class="p">[</span><span class="s1">&#39;label_H_bb&#39;</span><span class="p">]</span>
 
     <span class="c1"># remove samples outside mass/pT window</span>
     <span class="k">if</span> <span class="n">remove_mass_pt_window</span><span class="p">:</span>
@@ -404,6 +413,37 @@ b&#39;fj_zratio&#39;
 </div>
 </div>
 </div>
+<div class="section" id="decision-tree-classifier">
+<h2>Decision Tree Classifier<a class="headerlink" href="#decision-tree-classifier" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">tree</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">DecisionTreeClassifier</span><span class="p">()</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">feature_array</span><span class="p">,</span> <span class="n">label_array</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="support-vector-machine-classifier">
+<h2>Support Vector Machine Classifier<a class="headerlink" href="#support-vector-machine-classifier" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">linear_model</span>
+<span class="n">svm</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">SGDClassifier</span><span class="p">()</span>
+<span class="n">svm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">feature_array</span><span class="p">,</span> <span class="n">label_array</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SGDClassifier()
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="fully-connected-neural-network-classifier">
+<h2>Fully Connected Neural Network Classifier<a class="headerlink" href="#fully-connected-neural-network-classifier" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">keras.models</span> <span class="kn">import</span> <span class="n">Model</span>
@@ -462,6 +502,8 @@ None
 <span class="n">history</span> <span class="o">=</span> <span class="n">keras_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">feature_array</span><span class="p">,</span> <span class="n">label_array</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> 
                           <span class="n">epochs</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">validation_split</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                           <span class="n">callbacks</span> <span class="o">=</span> <span class="n">callbacks</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="c1"># reload best weights</span>
+<span class="n">keras_model</span><span class="o">.</span><span class="n">load_weights</span><span class="p">(</span><span class="s1">&#39;keras_model_best.h5&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -483,7 +525,7 @@ None
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/05-deep-learning_9_0.png" src="../_images/05-deep-learning_9_0.png" />
+<img alt="../_images/04-simple-classifiers_13_0.png" src="../_images/04-simple-classifiers_13_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -498,18 +540,21 @@ None
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># reload best weights</span>
-<span class="n">keras_model</span><span class="o">.</span><span class="n">load_weights</span><span class="p">(</span><span class="s1">&#39;keras_model_best.h5&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># run model inference on test data set</span>
+<span class="n">predict_array_nn</span> <span class="o">=</span> <span class="n">keras_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">feature_array_test</span><span class="p">)</span>
+<span class="n">predict_array_tree</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">feature_array_test</span><span class="p">)</span>
+<span class="n">predict_array_svm</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">feature_array_test</span><span class="p">)</span>
 
-<span class="c1"># run model inference on test data set</span>
-<span class="n">predict_array_test</span> <span class="o">=</span> <span class="n">keras_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">feature_array_test</span><span class="p">)</span>
-
-<span class="c1"># create ROC curve</span>
-<span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">threshold</span> <span class="o">=</span> <span class="n">roc_curve</span><span class="p">(</span><span class="n">label_array_test</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">predict_array_test</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
+<span class="c1"># create ROC curves</span>
+<span class="n">fpr_tree</span><span class="p">,</span> <span class="n">tpr_tree</span><span class="p">,</span> <span class="n">threshold_tree</span> <span class="o">=</span> <span class="n">roc_curve</span><span class="p">(</span><span class="n">label_array_test</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">predict_array_tree</span><span class="p">)</span>
+<span class="n">fpr_svm</span><span class="p">,</span> <span class="n">tpr_svm</span><span class="p">,</span> <span class="n">threshold_svm</span> <span class="o">=</span> <span class="n">roc_curve</span><span class="p">(</span><span class="n">label_array_test</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">predict_array_svm</span><span class="p">)</span>
+<span class="n">fpr_nn</span><span class="p">,</span> <span class="n">tpr_nn</span><span class="p">,</span> <span class="n">threshold_nn</span> <span class="o">=</span> <span class="n">roc_curve</span><span class="p">(</span><span class="n">label_array_test</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">predict_array_nn</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
     
-<span class="c1"># plot ROC curve</span>
+<span class="c1"># plot ROC curves</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tpr</span><span class="p">,</span> <span class="n">fpr</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;AUC = </span><span class="si">{:.1f}</span><span class="s2">%&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">auc</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span><span class="n">tpr</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tpr_tree</span><span class="p">,</span> <span class="n">fpr_tree</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Tree, AUC = </span><span class="si">{:.1f}</span><span class="s2">%&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">auc</span><span class="p">(</span><span class="n">fpr_tree</span><span class="p">,</span><span class="n">tpr_tree</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tpr_svm</span><span class="p">,</span> <span class="n">fpr_svm</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;SVM, AUC = </span><span class="si">{:.1f}</span><span class="s2">%&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">auc</span><span class="p">(</span><span class="n">fpr_svm</span><span class="p">,</span><span class="n">tpr_svm</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tpr_nn</span><span class="p">,</span> <span class="n">fpr_nn</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;NN, AUC = </span><span class="si">{:.1f}</span><span class="s2">%&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">auc</span><span class="p">(</span><span class="n">fpr_nn</span><span class="p">,</span><span class="n">tpr_nn</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;True positive rate&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;False positive rate&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">()</span>
@@ -517,14 +562,13 @@ None
 <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;ROC.png&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;ROC.pdf&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/05-deep-learning_11_0.png" src="../_images/05-deep-learning_11_0.png" />
+<img alt="../_images/04-simple-classifiers_15_0.png" src="../_images/04-simple-classifiers_15_0.png" />
+</div>
 </div>
 </div>
 </div>
@@ -557,8 +601,8 @@ None
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="05.html" title="previous page">Week 5: Building a Deep Learning Model</a>
-    <a class='right-next' id="next-link" href="06.html" title="next page">Week 6: Evalulating Model Performance and Robustness</a>
+    <a class='left-prev' id="prev-link" href="04.html" title="previous page">Week 4: Simple Classifiers</a>
+    <a class='right-next' id="next-link" href="05.html" title="next page">Week 5: Building a Deep Learning Model</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
