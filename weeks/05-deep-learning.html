@@ -1,0 +1,728 @@
+
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Week 5 Notebook: Building a Deep Learning Model &#8212; Particle Physics and Machine Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-dropdown.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Week 6: Evalulating Model Performance and Robustness" href="06.html" />
+    <link rel="prev" title="Week 5: Building a Deep Learning Model" href="05.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Particle Physics and Machine Learning</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../README.html">
+   Particle Physics and Machine Learning
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01.html">
+   Week 1: Introduction to Particle Physics and Jets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02.html">
+   Week 2: Data Formats and Exploration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03.html">
+   Week 3: Feature Engineering
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04.html">
+   Week 4: Simple Classifiers
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="reference internal" href="05.html">
+   Week 5: Building a Deep Learning Model
+  </a>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Week 5 Notebook: Building a Deep Learning Model
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06.html">
+   Week 6: Evalulating Model Performance and Robustness
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07.html">
+   Week 7: Optimizing Other Objectives
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08.html">
+   Week 8: Application to Real Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09.html">
+   Week 9: Extending the Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../zreferences.html">
+   References
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/weeks/05-deep-learning.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/jmduarte/capstone-particle-physics-domain/master?urlpath=tree/weeks/05-deep-learning.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        <a class="jupyterhub-button" href="https://datahub.ucsd.edu/hub/user-redirect/git-pull?repo=https://github.com/jmduarte/capstone-particle-physics-domain&urlpath=tree/capstone-particle-physics-domain/weeks/05-deep-learning.ipynb&branch=master"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch JupyterHub" data-toggle="tooltip"
+                data-placement="left"><img class="jupyterhub-button-logo"
+                    src="../_static/images/logo_jupyterhub.svg"
+                    alt="Interact on JupyterHub">JupyterHub</button></a>
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/jmduarte/capstone-particle-physics-domain/blob/master/weeks/05-deep-learning.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fully-connected-neural-network-classifier">
+   Fully Connected Neural Network Classifier
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#convolutional-1d-neural-network-classifier">
+   Convolutional 1D Neural Network Classifier
+  </a>
+ </li>
+</ul>
+
+        </nav>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="week-5-notebook-building-a-deep-learning-model">
+<h1>Week 5 Notebook: Building a Deep Learning Model<a class="headerlink" href="#week-5-notebook-building-a-deep-learning-model" title="Permalink to this headline">¶</a></h1>
+<p>Now, we’ll look at a deep learning model based on low-level track features.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">keras</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">roc_curve</span><span class="p">,</span> <span class="n">auc</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">uproot</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using TensorFlow backend.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/share/miniconda/envs/analysis/lib/python3.7/site-packages/tensorflow/python/framework/dtypes.py:516: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+  _np_qint8 = np.dtype([(&quot;qint8&quot;, np.int8, 1)])
+/usr/share/miniconda/envs/analysis/lib/python3.7/site-packages/tensorflow/python/framework/dtypes.py:517: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+  _np_quint8 = np.dtype([(&quot;quint8&quot;, np.uint8, 1)])
+/usr/share/miniconda/envs/analysis/lib/python3.7/site-packages/tensorflow/python/framework/dtypes.py:518: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+  _np_qint16 = np.dtype([(&quot;qint16&quot;, np.int16, 1)])
+/usr/share/miniconda/envs/analysis/lib/python3.7/site-packages/tensorflow/python/framework/dtypes.py:519: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+  _np_quint16 = np.dtype([(&quot;quint16&quot;, np.uint16, 1)])
+/usr/share/miniconda/envs/analysis/lib/python3.7/site-packages/tensorflow/python/framework/dtypes.py:520: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+  _np_qint32 = np.dtype([(&quot;qint32&quot;, np.int32, 1)])
+/usr/share/miniconda/envs/analysis/lib/python3.7/site-packages/tensorflow/python/framework/dtypes.py:525: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+  np_resource = np.dtype([(&quot;resource&quot;, np.ubyte, 1)])
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/share/miniconda/envs/analysis/lib/python3.7/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:541: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+  _np_qint8 = np.dtype([(&quot;qint8&quot;, np.int8, 1)])
+/usr/share/miniconda/envs/analysis/lib/python3.7/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:542: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+  _np_quint8 = np.dtype([(&quot;quint8&quot;, np.uint8, 1)])
+/usr/share/miniconda/envs/analysis/lib/python3.7/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:543: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+  _np_qint16 = np.dtype([(&quot;qint16&quot;, np.int16, 1)])
+/usr/share/miniconda/envs/analysis/lib/python3.7/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:544: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+  _np_quint16 = np.dtype([(&quot;quint16&quot;, np.uint16, 1)])
+/usr/share/miniconda/envs/analysis/lib/python3.7/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:545: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+  _np_qint32 = np.dtype([(&quot;qint32&quot;, np.int32, 1)])
+/usr/share/miniconda/envs/analysis/lib/python3.7/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:550: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+  np_resource = np.dtype([(&quot;resource&quot;, np.ubyte, 1)])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 48 track-level features</span>
+<span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;track_pt&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_ptrel&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;trackBTag_Eta&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;trackBTag_DeltaR&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;trackBTag_EtaRel&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;trackBTag_JetDistVal&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;trackBTag_Momentum&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;trackBTag_PPar&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;trackBTag_PParRatio&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;trackBTag_PtRatio&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;trackBTag_PtRel&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;trackBTag_Sip2dSig&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;trackBTag_Sip2dVal&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;trackBTag_Sip3dSig&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;trackBTag_Sip3dVal&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_VTX_ass&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_charge&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_deltaR&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_detadeta&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_dlambdadz&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_dlambdadz&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_dphidphi&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_dphidxy&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_dptdpt&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_drminsv&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_drsubjet1&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_drsubjet2&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_dxy&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_dxydxy&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_dxydz&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_dxysig&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_dz&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_dzdz&#39;</span><span class="p">,</span>        
+            <span class="s1">&#39;track_dzsig&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_erel&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_etarel&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_fromPV&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_isChargedHad&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_isEl&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_isMu&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_lostInnerHits&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_mass&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_normchi2&#39;</span><span class="p">,</span>            
+            <span class="s1">&#39;track_phirel&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_pt&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_ptrel&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_puppiw&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_quality&#39;</span><span class="p">]</span>
+
+<span class="c1"># spectators to define mass/pT window</span>
+<span class="n">spectators</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;fj_sdmass&#39;</span><span class="p">,</span>
+              <span class="s1">&#39;fj_pt&#39;</span><span class="p">]</span>
+
+<span class="c1"># 2 labels: QCD or Hbb (we&#39;ll reduce the following labels)</span>
+<span class="n">labels</span> <span class="o">=</span>  <span class="p">[</span><span class="s1">&#39;label_QCD_b&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;label_QCD_bb&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;label_QCD_c&#39;</span><span class="p">,</span> 
+           <span class="s1">&#39;label_QCD_cc&#39;</span><span class="p">,</span> 
+           <span class="s1">&#39;label_QCD_others&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;sample_isQCD&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;label_H_bb&#39;</span><span class="p">]</span>
+
+<span class="n">nfeatures</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">features</span><span class="p">)</span>
+<span class="n">nspectators</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">spectators</span><span class="p">)</span>
+<span class="n">nlabels</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="c1"># we&#39;re gonna zero-pad up to 60 tracks</span>
+<span class="n">ntracks</span> <span class="o">=</span> <span class="mi">60</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s set up a function to get features and labels.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_features_labels</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">remove_mass_pt_window</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">entrystop</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="c1"># load file</span>
+    <span class="n">root_file</span> <span class="o">=</span> <span class="n">uproot</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
+    <span class="n">tree</span> <span class="o">=</span> <span class="n">root_file</span><span class="p">[</span><span class="s1">&#39;deepntuplizer/tree&#39;</span><span class="p">]</span>
+    <span class="n">feature_array</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">arrays</span><span class="p">(</span><span class="n">branches</span><span class="o">=</span><span class="n">features</span><span class="p">,</span> 
+                                <span class="n">entrystop</span><span class="o">=</span><span class="n">entrystop</span><span class="p">,</span>
+                                <span class="n">namedecode</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+    <span class="n">spec_array</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">arrays</span><span class="p">(</span><span class="n">branches</span><span class="o">=</span><span class="n">spectators</span><span class="p">,</span> 
+                             <span class="n">entrystop</span><span class="o">=</span><span class="n">entrystop</span><span class="p">,</span>
+                             <span class="n">namedecode</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+    <span class="n">label_array_all</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">arrays</span><span class="p">(</span><span class="n">branches</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> 
+                                  <span class="n">entrystop</span><span class="o">=</span><span class="n">entrystop</span><span class="p">,</span>
+                                  <span class="n">namedecode</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+
+    <span class="n">feature_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">feature_array</span><span class="p">[</span><span class="n">feat</span><span class="p">]</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">ntracks</span><span class="p">,</span> <span class="n">clip</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">regular</span><span class="p">()</span> <span class="k">for</span> <span class="n">feat</span> <span class="ow">in</span> <span class="n">features</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">spec_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">spec_array</span><span class="p">[</span><span class="n">spec</span><span class="p">]</span> <span class="k">for</span> <span class="n">spec</span> <span class="ow">in</span> <span class="n">spectators</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="n">njets</span> <span class="o">=</span> <span class="n">feature_array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    
+    <span class="n">label_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">njets</span><span class="p">,</span><span class="n">nlabels</span><span class="p">))</span>
+    <span class="n">label_array</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">label_array_all</span><span class="p">[</span><span class="s1">&#39;sample_isQCD&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">label_array_all</span><span class="p">[</span><span class="s1">&#39;label_QCD_b&#39;</span><span class="p">]</span> <span class="o">+</span> \
+                                                          <span class="n">label_array_all</span><span class="p">[</span><span class="s1">&#39;label_QCD_bb&#39;</span><span class="p">]</span> <span class="o">+</span> \
+                                                          <span class="n">label_array_all</span><span class="p">[</span><span class="s1">&#39;label_QCD_c&#39;</span><span class="p">]</span> <span class="o">+</span> \
+                                                          <span class="n">label_array_all</span><span class="p">[</span><span class="s1">&#39;label_QCD_cc&#39;</span><span class="p">]</span> <span class="o">+</span> \
+                                                          <span class="n">label_array_all</span><span class="p">[</span><span class="s1">&#39;label_QCD_others&#39;</span><span class="p">])</span>
+    <span class="n">label_array</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">label_array_all</span><span class="p">[</span><span class="s1">&#39;label_H_bb&#39;</span><span class="p">]</span>
+
+    <span class="c1"># remove samples outside mass/pT window</span>
+    <span class="k">if</span> <span class="n">remove_mass_pt_window</span><span class="p">:</span>
+        <span class="n">feature_array</span> <span class="o">=</span> <span class="n">feature_array</span><span class="p">[(</span><span class="n">spec_array</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">40</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">spec_array</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">200</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">spec_array</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">300</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">spec_array</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">2000</span><span class="p">)]</span>
+        <span class="n">label_array</span> <span class="o">=</span> <span class="n">label_array</span><span class="p">[(</span><span class="n">spec_array</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">40</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">spec_array</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">200</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">spec_array</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">300</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">spec_array</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">2000</span><span class="p">)]</span>
+        <span class="n">spec_array</span> <span class="o">=</span> <span class="n">spec_array</span><span class="p">[(</span><span class="n">spec_array</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">40</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">spec_array</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">200</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">spec_array</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">300</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">spec_array</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">2000</span><span class="p">)]</span>
+    
+    <span class="c1"># remove unlabeled data</span>
+    <span class="n">feature_array</span> <span class="o">=</span> <span class="n">feature_array</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">label_array</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">==</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">spec_array</span> <span class="o">=</span> <span class="n">spec_array</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">label_array</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">==</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">label_array</span> <span class="o">=</span> <span class="n">label_array</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">label_array</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">==</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">feature_array</span><span class="p">,</span> <span class="n">label_array</span><span class="p">,</span> <span class="n">spec_array</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load training file</span>
+<span class="n">feature_array</span><span class="p">,</span> <span class="n">label_array</span><span class="p">,</span> <span class="n">spec_array</span> <span class="o">=</span> <span class="n">get_features_labels</span><span class="p">(</span><span class="s1">&#39;root://eospublic.cern.ch//eos/opendata/cms/datascience/HiggsToBBNtupleProducerTool/HiggsToBBNTuple_HiggsToBB_QCD_RunII_13TeV_MC/train/ntuple_merged_10.root&#39;</span><span class="p">,</span> 
+                                                             <span class="n">remove_mass_pt_window</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                                             <span class="n">entrystop</span><span class="o">=</span><span class="mi">20000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that the track array has a different “shape”:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">feature_array</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">label_array</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(18757, 60, 48)
+(18757, 2)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="fully-connected-neural-network-classifier">
+<h2>Fully Connected Neural Network Classifier<a class="headerlink" href="#fully-connected-neural-network-classifier" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">keras.models</span> <span class="kn">import</span> <span class="n">Model</span>
+<span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">BatchNormalization</span><span class="p">,</span> <span class="n">Conv1D</span><span class="p">,</span> <span class="n">Flatten</span><span class="p">,</span> <span class="n">Lambda</span>
+<span class="kn">import</span> <span class="nn">keras.backend</span> <span class="k">as</span> <span class="nn">K</span>
+
+<span class="c1"># define dense keras model</span>
+<span class="n">inputs</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">ntracks</span><span class="p">,</span><span class="n">nfeatures</span><span class="p">,),</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;input&#39;</span><span class="p">)</span>  
+<span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;bn_1&#39;</span><span class="p">)(</span><span class="n">inputs</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">Flatten</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;flatten_1&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;dense_1&#39;</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;dense_2&#39;</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;dense_3&#39;</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">outputs</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="n">nlabels</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;output&#39;</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">keras_model_dense</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="n">outputs</span><span class="p">)</span>
+<span class="n">keras_model_dense</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;adam&#39;</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">keras_model_dense</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;model_1&quot;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+input (InputLayer)           (None, 60, 48)            0         
+_________________________________________________________________
+bn_1 (BatchNormalization)    (None, 60, 48)            192       
+_________________________________________________________________
+flatten_1 (Flatten)          (None, 2880)              0         
+_________________________________________________________________
+dense_1 (Dense)              (None, 64)                184384    
+_________________________________________________________________
+dense_2 (Dense)              (None, 32)                2080      
+_________________________________________________________________
+dense_3 (Dense)              (None, 32)                1056      
+_________________________________________________________________
+output (Dense)               (None, 2)                 66        
+=================================================================
+Total params: 187,778
+Trainable params: 187,682
+Non-trainable params: 96
+_________________________________________________________________
+None
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define callbacks</span>
+<span class="kn">from</span> <span class="nn">keras.callbacks</span> <span class="kn">import</span> <span class="n">ModelCheckpoint</span><span class="p">,</span> <span class="n">EarlyStopping</span><span class="p">,</span> <span class="n">ReduceLROnPlateau</span>
+
+<span class="n">early_stopping</span> <span class="o">=</span> <span class="n">EarlyStopping</span><span class="p">(</span><span class="n">monitor</span><span class="o">=</span><span class="s1">&#39;val_loss&#39;</span><span class="p">,</span> <span class="n">patience</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">reduce_lr</span> <span class="o">=</span> <span class="n">ReduceLROnPlateau</span><span class="p">(</span><span class="n">patience</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">factor</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">model_checkpoint</span> <span class="o">=</span> <span class="n">ModelCheckpoint</span><span class="p">(</span><span class="s1">&#39;keras_model_dense_best.h5&#39;</span><span class="p">,</span> <span class="n">monitor</span><span class="o">=</span><span class="s1">&#39;val_loss&#39;</span><span class="p">,</span> <span class="n">save_best_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">callbacks</span> <span class="o">=</span> <span class="p">[</span><span class="n">early_stopping</span><span class="p">,</span> <span class="n">model_checkpoint</span><span class="p">,</span> <span class="n">reduce_lr</span><span class="p">]</span>
+
+<span class="c1"># fit keras model</span>
+<span class="n">history_dense</span> <span class="o">=</span> <span class="n">keras_model_dense</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">feature_array</span><span class="p">,</span> <span class="n">label_array</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> 
+                          <span class="n">epochs</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">validation_split</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                          <span class="n">callbacks</span> <span class="o">=</span> <span class="n">callbacks</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="c1"># reload best weights</span>
+<span class="n">keras_model_dense</span><span class="o">.</span><span class="n">load_weights</span><span class="p">(</span><span class="s1">&#39;keras_model_dense_best.h5&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /usr/share/miniconda/envs/analysis/lib/python3.7/site-packages/keras/backend/tensorflow_backend.py:422: The name tf.global_variables is deprecated. Please use tf.compat.v1.global_variables instead.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">history_dense</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;loss&#39;</span><span class="p">],</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Loss&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">history_dense</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;val_loss&#39;</span><span class="p">],</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Val. loss&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Epoch&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/05-deep-learning_11_0.png" src="../_images/05-deep-learning_11_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="convolutional-1d-neural-network-classifier">
+<h2>Convolutional 1D Neural Network Classifier<a class="headerlink" href="#convolutional-1d-neural-network-classifier" title="Permalink to this headline">¶</a></h2>
+<p>This model uses the <code class="docutils literal notranslate"><span class="pre">Conv1D</span></code> layer of Keras, but really it’s more like the Deep Sets architecture applied to jets, the so-caled Particle-flow network approach<a class="bibtex reference internal" href="../zreferences.html#komiske-2018cqr" id="id1">[5]</a><a class="bibtex reference internal" href="../zreferences.html#nips2017-6931" id="id2">[6]</a>.
+By using a kernel size of 1, we are applying the same fully connected neural network to each track.
+Then the <code class="docutils literal notranslate"><span class="pre">Lambda</span></code> layer sums over the tracks (actually it takes the mean).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">keras.models</span> <span class="kn">import</span> <span class="n">Model</span>
+<span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">BatchNormalization</span><span class="p">,</span> <span class="n">Conv1D</span><span class="p">,</span> <span class="n">Flatten</span><span class="p">,</span> <span class="n">Lambda</span>
+<span class="kn">import</span> <span class="nn">keras.backend</span> <span class="k">as</span> <span class="nn">K</span>
+
+<span class="c1"># define dense keras model</span>
+<span class="n">inputs</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">ntracks</span><span class="p">,</span><span class="n">nfeatures</span><span class="p">,),</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;input&#39;</span><span class="p">)</span>  
+<span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;bn_1&#39;</span><span class="p">)(</span><span class="n">inputs</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">Conv1D</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">strides</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;conv1d_1&#39;</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">Conv1D</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">strides</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;conv1d_2&#39;</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">Conv1D</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">strides</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;conv1d_3&#39;</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+<span class="c1">#x = Flatten(name=&#39;flatten_1&#39;)(x)</span>
+<span class="c1"># sum over tracks</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">Lambda</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">K</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">2</span><span class="p">),</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;lambda_1&#39;</span><span class="p">,</span> <span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="n">ntracks</span><span class="p">,</span><span class="mi">32</span><span class="p">))(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;dense_1&#39;</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">outputs</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="n">nlabels</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;output&#39;</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">keras_model_conv1d</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="n">outputs</span><span class="p">)</span>
+<span class="n">keras_model_conv1d</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;adam&#39;</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">keras_model_conv1d</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;model_2&quot;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+input (InputLayer)           (None, 60, 48)            0         
+_________________________________________________________________
+bn_1 (BatchNormalization)    (None, 60, 48)            192       
+_________________________________________________________________
+conv1d_1 (Conv1D)            (None, 60, 64)            3136      
+_________________________________________________________________
+conv1d_2 (Conv1D)            (None, 60, 32)            2080      
+_________________________________________________________________
+conv1d_3 (Conv1D)            (None, 60, 32)            1056      
+_________________________________________________________________
+lambda_1 (Lambda)            (None, 32)                0         
+_________________________________________________________________
+dense_1 (Dense)              (None, 100)               3300      
+_________________________________________________________________
+output (Dense)               (None, 2)                 202       
+=================================================================
+Total params: 9,966
+Trainable params: 9,870
+Non-trainable params: 96
+_________________________________________________________________
+None
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define callbacks</span>
+<span class="kn">from</span> <span class="nn">keras.callbacks</span> <span class="kn">import</span> <span class="n">ModelCheckpoint</span><span class="p">,</span> <span class="n">EarlyStopping</span><span class="p">,</span> <span class="n">ReduceLROnPlateau</span>
+
+<span class="n">early_stopping</span> <span class="o">=</span> <span class="n">EarlyStopping</span><span class="p">(</span><span class="n">monitor</span><span class="o">=</span><span class="s1">&#39;val_loss&#39;</span><span class="p">,</span> <span class="n">patience</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">reduce_lr</span> <span class="o">=</span> <span class="n">ReduceLROnPlateau</span><span class="p">(</span><span class="n">patience</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">factor</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">model_checkpoint</span> <span class="o">=</span> <span class="n">ModelCheckpoint</span><span class="p">(</span><span class="s1">&#39;keras_model_conv1d_best.h5&#39;</span><span class="p">,</span> <span class="n">monitor</span><span class="o">=</span><span class="s1">&#39;val_loss&#39;</span><span class="p">,</span> <span class="n">save_best_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">callbacks</span> <span class="o">=</span> <span class="p">[</span><span class="n">early_stopping</span><span class="p">,</span> <span class="n">model_checkpoint</span><span class="p">,</span> <span class="n">reduce_lr</span><span class="p">]</span>
+
+<span class="c1"># fit keras model</span>
+<span class="n">history_conv1d</span> <span class="o">=</span> <span class="n">keras_model_conv1d</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">feature_array</span><span class="p">,</span> <span class="n">label_array</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> 
+                          <span class="n">epochs</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">validation_split</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                          <span class="n">callbacks</span> <span class="o">=</span> <span class="n">callbacks</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="c1"># reload best weights</span>
+<span class="n">keras_model_conv1d</span><span class="o">.</span><span class="n">load_weights</span><span class="p">(</span><span class="s1">&#39;keras_model_conv1d_best.h5&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">history_conv1d</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;loss&#39;</span><span class="p">],</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Loss&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">history_conv1d</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;val_loss&#39;</span><span class="p">],</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Val. loss&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Epoch&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/05-deep-learning_15_0.png" src="../_images/05-deep-learning_15_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load testing file</span>
+<span class="n">feature_array_test</span><span class="p">,</span> <span class="n">label_array_test</span><span class="p">,</span> <span class="n">spec_array_test</span> <span class="o">=</span> <span class="n">get_features_labels</span><span class="p">(</span><span class="s1">&#39;root://eospublic.cern.ch//eos/opendata/cms/datascience/HiggsToBBNtupleProducerTool/HiggsToBBNTuple_HiggsToBB_QCD_RunII_13TeV_MC/test/ntuple_merged_0.root&#39;</span><span class="p">,</span> 
+                                                                            <span class="n">remove_mass_pt_window</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                                                            <span class="n">entrystop</span><span class="o">=</span><span class="mi">30000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># run model inference on test data set</span>
+<span class="n">predict_array_dnn</span> <span class="o">=</span> <span class="n">keras_model_dense</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">feature_array_test</span><span class="p">)</span>
+<span class="n">predict_array_cnn</span> <span class="o">=</span> <span class="n">keras_model_conv1d</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">feature_array_test</span><span class="p">)</span>
+
+<span class="c1"># create ROC curves</span>
+<span class="n">fpr_dnn</span><span class="p">,</span> <span class="n">tpr_dnn</span><span class="p">,</span> <span class="n">threshold_dnn</span> <span class="o">=</span> <span class="n">roc_curve</span><span class="p">(</span><span class="n">label_array_test</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">predict_array_dnn</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">fpr_cnn</span><span class="p">,</span> <span class="n">tpr_cnn</span><span class="p">,</span> <span class="n">threshold_cnn</span> <span class="o">=</span> <span class="n">roc_curve</span><span class="p">(</span><span class="n">label_array_test</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">predict_array_cnn</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
+    
+<span class="c1"># plot ROC curves</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tpr_dnn</span><span class="p">,</span> <span class="n">fpr_dnn</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Dense, AUC = </span><span class="si">{:.1f}</span><span class="s2">%&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">auc</span><span class="p">(</span><span class="n">fpr_cnn</span><span class="p">,</span><span class="n">tpr_cnn</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tpr_cnn</span><span class="p">,</span> <span class="n">fpr_cnn</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Conv1D, AUC = </span><span class="si">{:.1f}</span><span class="s2">%&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">auc</span><span class="p">(</span><span class="n">fpr_cnn</span><span class="p">,</span><span class="n">tpr_cnn</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;True positive rate&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;False positive rate&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mf">0.001</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/05-deep-learning_17_0.png" src="../_images/05-deep-learning_17_0.png" />
+</div>
+</div>
+<p>We see the more structurally-aware Conv1D/DeepSets model does better than a simple fully conneted neural network appraoch.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./weeks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="05.html" title="previous page">Week 5: Building a Deep Learning Model</a>
+    <a class='right-next' id="next-link" href="06.html" title="next page">Week 6: Evalulating Model Performance and Robustness</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Javier Duarte and Frank Wuerthwein<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="../_static/js/index.js"></script>
+    
+  </body>
+</html>
