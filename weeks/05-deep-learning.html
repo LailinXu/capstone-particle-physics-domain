@@ -410,6 +410,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">remove_mass_pt_window</span> <span class="o">=</span> <span class="n">remove_mass_pt_window</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">remove_unlabeled</span> <span class="o">=</span> <span class="n">remove_unlabeled</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">global_IDs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">local_IDs</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">file_mapping</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">max_entry</span> <span class="o">=</span> <span class="n">max_entry</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">open_files</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">list_files</span><span class="p">)</span>
@@ -419,11 +420,13 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">open_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">root_file</span><span class="p">)</span>
             <span class="n">tree</span> <span class="o">=</span> <span class="n">root_file</span><span class="p">[</span><span class="s1">&#39;deepntuplizer/tree&#39;</span><span class="p">]</span>
             <span class="n">tree_length</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tree</span><span class="p">),</span><span class="n">max_entry</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">global_IDs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">running_total</span><span class="o">+</span><span class="n">running_total</span><span class="o">+</span><span class="n">tree_length</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">global_IDs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">running_total</span><span class="p">,</span><span class="n">running_total</span><span class="o">+</span><span class="n">tree_length</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">local_IDs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">tree_length</span><span class="p">))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">file_mapping</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">tree_length</span><span class="p">))</span>
             <span class="n">running_total</span> <span class="o">+=</span> <span class="n">tree_length</span>
             <span class="n">root_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">global_IDs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">global_IDs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">local_IDs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">local_IDs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">file_mapping</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file_mapping</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">on_epoch_end</span><span class="p">()</span>
 
@@ -457,7 +460,7 @@
 
     <span class="k">def</span> <span class="nf">on_epoch_end</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="s1">&#39;Updates indexes after each epoch&#39;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">indexes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">global_IDs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">indexes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">local_IDs</span>
 
     <span class="k">def</span> <span class="nf">__data_generation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unique_files</span><span class="p">,</span> <span class="n">starts</span><span class="p">,</span> <span class="n">stops</span><span class="p">):</span>
         <span class="s1">&#39;Generates data containing batch_size samples&#39;</span> 
@@ -479,10 +482,10 @@
             
         <span class="c1"># Stack data if going over multiple files</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">unique_files</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">:</span>
-            <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">Xs</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-            <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">ys</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">Xs</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">ys</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_spectators</span><span class="p">:</span>
-                <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">zs</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+                <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">zs</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
             
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_spectators</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span>
