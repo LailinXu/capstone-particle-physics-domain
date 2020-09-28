@@ -190,6 +190,24 @@
 </div>
         <!-- Source interaction buttons -->
 
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/jmduarte/capstone-particle-physics-domain"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/jmduarte/capstone-particle-physics-domain/issues/new?title=Issue%20on%20page%20%2Fweeks/05-deep-learning.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/jmduarte/capstone-particle-physics-domain/edit/master/weeks/05-deep-learning.ipynb"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
 
         <!-- Full screen (wrap in <a> to have style consistency -->
         <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
@@ -251,8 +269,8 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#convolutional-1d-neural-network-classifier">
-   Convolutional 1D Neural Network Classifier
+  <a class="reference internal nav-link" href="#deep-sets-classifier">
+   Deep Sets Classifier
   </a>
  </li>
 </ul>
@@ -688,9 +706,9 @@ None
 </div>
 </div>
 </div>
-<div class="section" id="convolutional-1d-neural-network-classifier">
-<h2>Convolutional 1D Neural Network Classifier<a class="headerlink" href="#convolutional-1d-neural-network-classifier" title="Permalink to this headline">¶</a></h2>
-<p>This model uses the <code class="docutils literal notranslate"><span class="pre">Conv1D</span></code> layer of Keras, but really it’s more like the Deep Sets architecture applied to jets, the so-caled Particle-flow network approach<a class="bibtex reference internal" href="../zreferences.html#komiske-2018cqr" id="id1">[7]</a><a class="bibtex reference internal" href="../zreferences.html#nips2017-6931" id="id2">[8]</a>.
+<div class="section" id="deep-sets-classifier">
+<h2>Deep Sets Classifier<a class="headerlink" href="#deep-sets-classifier" title="Permalink to this headline">¶</a></h2>
+<p>This model uses the <code class="docutils literal notranslate"><span class="pre">Conv1D</span></code> layer of Keras, but really it’s more like the Deep Sets architecture applied to jets, the so-caled Particle-flow network approach<a class="bibtex reference internal" href="../zreferences.html#komiske-2018cqr" id="id1">[11]</a><a class="bibtex reference internal" href="../zreferences.html#nips2017-6931" id="id2">[14]</a>.
 By using a kernel size of 1, we are applying the same fully connected neural network to each track.
 Then the <code class="docutils literal notranslate"><span class="pre">Lambda</span></code> layer sums over the tracks (actually it takes the mean).</p>
 <div class="cell docutils container">
@@ -699,7 +717,7 @@ Then the <code class="docutils literal notranslate"><span class="pre">Lambda</sp
 <span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">BatchNormalization</span><span class="p">,</span> <span class="n">Conv1D</span><span class="p">,</span> <span class="n">Flatten</span><span class="p">,</span> <span class="n">Lambda</span>
 <span class="kn">import</span> <span class="nn">keras.backend</span> <span class="k">as</span> <span class="nn">K</span>
 
-<span class="c1"># define conv1d keras model</span>
+<span class="c1"># define Deep Sets model with Conv1D Keras layer</span>
 <span class="n">inputs</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">ntracks</span><span class="p">,</span><span class="n">nfeatures</span><span class="p">,),</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;input&#39;</span><span class="p">)</span>  
 <span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;bn_1&#39;</span><span class="p">)(</span><span class="n">inputs</span><span class="p">)</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">Conv1D</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">strides</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;conv1d_1&#39;</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
@@ -838,7 +856,7 @@ None
 <img alt="../_images/05-deep-learning_18_0.png" src="../_images/05-deep-learning_18_0.png" />
 </div>
 </div>
-<p>We see the more structurally-aware Conv1D/DeepSets model does better than a simple fully conneted neural network appraoch.</p>
+<p>We see the more structurally-aware Conv1D/Deep Sets model does better than a simple fully conneted neural network appraoch.</p>
 </div>
 </div>
 
@@ -878,7 +896,7 @@ None
     <div class="container">
       <p>
         
-          By Javier Duarte and Frank Wuerthwein<br/>
+          By Javier Duarte and Frank Würthwein<br/>
         
             &copy; Copyright 2020.<br/>
       </p>

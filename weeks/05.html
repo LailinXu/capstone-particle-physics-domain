@@ -190,6 +190,24 @@
 </div>
         <!-- Source interaction buttons -->
 
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/jmduarte/capstone-particle-physics-domain"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/jmduarte/capstone-particle-physics-domain/issues/new?title=Issue%20on%20page%20%2Fweeks/05.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/jmduarte/capstone-particle-physics-domain/edit/master/weeks/05.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
 
         <!-- Full screen (wrap in <a> to have style consistency -->
         <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
@@ -243,32 +261,35 @@
 <h2>Topics<a class="headerlink" href="#topics" title="Permalink to this headline">¶</a></h2>
 <p>This week’s assignments will guide you through the following topics:</p>
 <ul class="simple">
-<li><p>Create a baseline, deep learning model model</p></li>
+<li><p>Deep learning based on low-level features</p></li>
+<li><p>Embedding the inputs</p></li>
+<li><p>Choosing a neural network architecture</p></li>
 </ul>
 </div>
 <div class="section" id="reading">
 <h2>Reading<a class="headerlink" href="#reading" title="Permalink to this headline">¶</a></h2>
-<p>Please read the following:</p>
+<p>Please skim the following:</p>
 <ul class="simple">
-<li><p>Reading 1</p></li>
-<li><p>Reading 2</p></li>
+<li><p>Jet images: Ref. <a class="bibtex reference internal" href="../zreferences.html#deoliveira-2015xxd" id="id1">[9]</a></p></li>
+<li><p>Particle feature lists: Ref. <a class="bibtex reference internal" href="../zreferences.html#deepjet" id="id2">[10]</a></p></li>
+<li><p>Sets: Ref. <a class="bibtex reference internal" href="../zreferences.html#komiske-2018cqr" id="id3">[11]</a></p></li>
+<li><p>Graphs/point clouds: <a class="bibtex reference internal" href="../zreferences.html#moreno-2019bmu" id="id4">[12]</a><a class="bibtex reference internal" href="../zreferences.html#moreno-2019neq" id="id5">[1]</a><a class="bibtex reference internal" href="../zreferences.html#qu-2019gqs" id="id6">[13]</a></p></li>
 </ul>
 </div>
 <div class="section" id="tasks">
 <h2>Tasks<a class="headerlink" href="#tasks" title="Permalink to this headline">¶</a></h2>
 <p>Complete the following tasks:</p>
 <ul class="simple">
-<li><p>Create a baseline model using expert features developed in the
-previous two weeks. The choice of classifier is up to you. (Note:
-you should <em>not</em> be implementing the interaction network here).</p></li>
+<li><p>Run through the notebook (05-deep-learning)[05-deep-learning]</p></li>
+<li><p>Create a baseline deep learning model with PF candidate, track, and/or secondary vertex features. The choice of input embedding and classifier is up to you. (Note: you do not need to implement the interaction network here).</p></li>
 </ul>
 </div>
 <div class="section" id="weekly-questions">
 <h2>Weekly Questions<a class="headerlink" href="#weekly-questions" title="Permalink to this headline">¶</a></h2>
 <p>Answer the following questions on Canvas:</p>
 <ul class="simple">
-<li><p>Question 1</p></li>
-<li><p>Question 2</p></li>
+<li><p>What are the different ways to encode low-level particle information that you read about to input to a deep learning model?</p></li>
+<li><p>What are the different types of neural network architectures that are commonly used for each?</p></li>
 </ul>
 <div class="toctree-wrapper compound">
 </div>
@@ -311,7 +332,7 @@ you should <em>not</em> be implementing the interaction network here).</p></li>
     <div class="container">
       <p>
         
-          By Javier Duarte and Frank Wuerthwein<br/>
+          By Javier Duarte and Frank Würthwein<br/>
         
             &copy; Copyright 2020.<br/>
       </p>
