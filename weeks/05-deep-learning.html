@@ -441,7 +441,7 @@
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Help on class DataGenerator in module DataGenerator:
 
 class DataGenerator(keras.utils.data_utils.Sequence)
- |  DataGenerator(list_files, features, labels, spectators, batch_size=1024, n_dim=60, remove_mass_pt_window=False, remove_unlabeled=True, return_spectators=False, max_entry=20000)
+ |  DataGenerator(list_files, features, labels, spectators, batch_size=1024, n_dim=60, remove_mass_pt_window=False, remove_unlabeled=True, return_spectators=False, max_entry=20000, scale_mass_pt=[1, 1])
  |  
  |  Generates data for Keras
  |  
@@ -455,7 +455,7 @@ class DataGenerator(keras.utils.data_utils.Sequence)
  |  __getitem__(self, index)
  |      Generate one batch of data
  |  
- |  __init__(self, list_files, features, labels, spectators, batch_size=1024, n_dim=60, remove_mass_pt_window=False, remove_unlabeled=True, return_spectators=False, max_entry=20000)
+ |  __init__(self, list_files, features, labels, spectators, batch_size=1024, n_dim=60, remove_mass_pt_window=False, remove_unlabeled=True, return_spectators=False, max_entry=20000, scale_mass_pt=[1, 1])
  |      Initialization
  |  
  |  __len__(self)
