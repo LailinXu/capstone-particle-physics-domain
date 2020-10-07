@@ -1,0 +1,3780 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Week 8 Notebook: Extending the Model &#8212; Particle Physics and Machine Learning</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.2d2078699c18a0efb88233928e1cf6ed.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.be0a4a0c39cd630af62a2fcf693f3f06.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Week 9: Application to Real Data" href="09.html" />
+    <link rel="prev" title="Week 8: Extending the Model" href="08.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Particle Physics and Machine Learning</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../README.html">
+   Particle Physics and Machine Learning
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01.html">
+   Week 1: Introduction to Particle Physics and Jets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02.html">
+   Week 2: Data Formats and Exploration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03.html">
+   Week 3: Feature Engineering
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04.html">
+   Week 4: Simple Classifiers
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05.html">
+   Week 5: Building a Deep Learning Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06.html">
+   Week 6: Evalulating Model Performance and Robustness
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07.html">
+   Week 7: Optimizing Other Objectives
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="reference internal" href="08.html">
+   Week 8: Extending the Model
+  </a>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Week 8 Notebook: Extending the Model
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09.html">
+   Week 9: Application to Real Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../zreferences.html">
+   References
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/weeks/08-extending.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/jmduarte/capstone-particle-physics-domain"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/jmduarte/capstone-particle-physics-domain/issues/new?title=Issue%20on%20page%20%2Fweeks/08-extending.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/jmduarte/capstone-particle-physics-domain/edit/master/weeks/08-extending.ipynb"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/jmduarte/capstone-particle-physics-domain/master?urlpath=tree/weeks/08-extending.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        <a class="jupyterhub-button" href="https://datahub.ucsd.edu/hub/user-redirect/git-pull?repo=https://github.com/jmduarte/capstone-particle-physics-domain&urlpath=tree/capstone-particle-physics-domain/weeks/08-extending.ipynb&branch=master"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch JupyterHub" data-toggle="tooltip"
+                data-placement="left"><img class="jupyterhub-button-logo"
+                    src="../_static/images/logo_jupyterhub.svg"
+                    alt="Interact on JupyterHub">JupyterHub</button></a>
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/jmduarte/capstone-particle-physics-domain/blob/master/weeks/08-extending.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="week-8-notebook-extending-the-model">
+<h1>Week 8 Notebook: Extending the Model<a class="headerlink" href="#week-8-notebook-extending-the-model" title="Permalink to this headline">¶</a></h1>
+<p>This week, we will look at graph neural networks using the PyTorch Geometric library: <a class="reference external" href="https://pytorch-geometric.readthedocs.io/">https://pytorch-geometric.readthedocs.io/</a>. See <a class="bibtex reference internal" href="../zreferences.html#pytorchgeometric" id="id1">[21]</a> for more details.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch_geometric</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">OSError</span><span class="g g-Whitespace">                                   </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">c36e13293883</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">torch_geometric</span>
+
+<span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">miniconda</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">torch_geometric</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">.debug</span> <span class="kn">import</span> <span class="n">is_debug_enabled</span><span class="p">,</span> <span class="n">debug</span><span class="p">,</span> <span class="n">set_debug</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">torch_geometric.nn</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">torch_geometric.data</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">import</span> <span class="nn">torch_geometric.datasets</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">import</span> <span class="nn">torch_geometric.transforms</span>
+
+<span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">miniconda</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">torch_geometric</span><span class="o">/</span><span class="n">nn</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">.meta</span> <span class="kn">import</span> <span class="n">MetaLayer</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">from</span> <span class="nn">.data_parallel</span> <span class="kn">import</span> <span class="n">DataParallel</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span> <span class="nn">.reshape</span> <span class="kn">import</span> <span class="n">Reshape</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">from</span> <span class="nn">.conv</span> <span class="kn">import</span> <span class="o">*</span>  <span class="c1"># noqa</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">from</span> <span class="nn">.norm</span> <span class="kn">import</span> <span class="o">*</span>  <span class="c1"># noqa</span>
+
+<span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">miniconda</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">torch_geometric</span><span class="o">/</span><span class="n">nn</span><span class="o">/</span><span class="n">data_parallel</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> 
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">import</span> <span class="nn">torch</span>
+<span class="ne">----&gt; </span><span class="mi">5</span> <span class="kn">from</span> <span class="nn">torch_geometric.data</span> <span class="kn">import</span> <span class="n">Batch</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> 
+<span class="g g-Whitespace">      </span><span class="mi">7</span> 
+
+<span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">miniconda</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">torch_geometric</span><span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">.data</span> <span class="kn">import</span> <span class="n">Data</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">from</span> <span class="nn">.batch</span> <span class="kn">import</span> <span class="n">Batch</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span> <span class="nn">.dataset</span> <span class="kn">import</span> <span class="n">Dataset</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">from</span> <span class="nn">.in_memory_dataset</span> <span class="kn">import</span> <span class="n">InMemoryDataset</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">from</span> <span class="nn">.dataloader</span> <span class="kn">import</span> <span class="n">DataLoader</span><span class="p">,</span> <span class="n">DataListLoader</span><span class="p">,</span> <span class="n">DenseDataLoader</span>
+
+<span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">miniconda</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">torch_geometric</span><span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">data</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">import</span> <span class="nn">torch</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="kn">import</span> <span class="nn">torch_geometric</span>
+<span class="ne">----&gt; </span><span class="mi">7</span> <span class="kn">from</span> <span class="nn">torch_sparse</span> <span class="kn">import</span> <span class="n">coalesce</span><span class="p">,</span> <span class="n">SparseTensor</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="kn">from</span> <span class="nn">torch_geometric.utils</span> <span class="kn">import</span> <span class="p">(</span><span class="n">contains_isolated_nodes</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span>                                    <span class="n">contains_self_loops</span><span class="p">,</span> <span class="n">is_undirected</span><span class="p">)</span>
+
+<span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">miniconda</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">torch_sparse</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="p">]:</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span>     <span class="n">torch</span><span class="o">.</span><span class="n">ops</span><span class="o">.</span><span class="n">load_library</span><span class="p">(</span><span class="n">importlib</span><span class="o">.</span><span class="n">machinery</span><span class="o">.</span><span class="n">PathFinder</span><span class="p">()</span><span class="o">.</span><span class="n">find_spec</span><span class="p">(</span>
+<span class="ne">---&gt; </span><span class="mi">13</span>         <span class="n">library</span><span class="p">,</span> <span class="p">[</span><span class="n">osp</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)])</span><span class="o">.</span><span class="n">origin</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span> 
+<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="ow">and</span> <span class="n">torch</span><span class="o">.</span><span class="n">version</span><span class="o">.</span><span class="n">cuda</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+
+<span class="nn">/usr/share/miniconda/envs/analysis/lib/python3.7/site-packages/torch/_ops.py</span> in <span class="ni">load_library</span><span class="nt">(self, path)</span>
+<span class="g g-Whitespace">    </span><span class="mi">103</span>             <span class="c1"># static (global) initialization code in order to register custom</span>
+<span class="g g-Whitespace">    </span><span class="mi">104</span>             <span class="c1"># operators with the JIT.</span>
+<span class="ne">--&gt; </span><span class="mi">105</span>             <span class="n">ctypes</span><span class="o">.</span><span class="n">CDLL</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">106</span>         <span class="bp">self</span><span class="o">.</span><span class="n">loaded_libraries</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">107</span> 
+
+<span class="nn">/usr/share/miniconda/envs/analysis/lib/python3.7/ctypes/__init__.py</span> in <span class="ni">__init__</span><span class="nt">(self, name, mode, handle, use_errno, use_last_error)</span>
+<span class="g g-Whitespace">    </span><span class="mi">362</span> 
+<span class="g g-Whitespace">    </span><span class="mi">363</span>         <span class="k">if</span> <span class="n">handle</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">364</span>             <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span> <span class="o">=</span> <span class="n">_dlopen</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">365</span>         <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">366</span>             <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span> <span class="o">=</span> <span class="n">handle</span>
+
+<span class="ne">OSError</span>: libcusparse.so.10: cannot open shared object file: No such file or directory
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 48 track-level features</span>
+<span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;track_pt&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_ptrel&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;trackBTag_Eta&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;trackBTag_DeltaR&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;trackBTag_EtaRel&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;trackBTag_JetDistVal&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;trackBTag_Momentum&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;trackBTag_PPar&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;trackBTag_PParRatio&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;trackBTag_PtRatio&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;trackBTag_PtRel&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;trackBTag_Sip2dSig&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;trackBTag_Sip2dVal&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;trackBTag_Sip3dSig&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;trackBTag_Sip3dVal&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_VTX_ass&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_charge&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_deltaR&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_detadeta&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_dlambdadz&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_dlambdadz&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_dphidphi&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_dphidxy&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_dptdpt&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_drminsv&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_drsubjet1&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_drsubjet2&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_dxy&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_dxydxy&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_dxydz&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_dxysig&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_dz&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_dzdz&#39;</span><span class="p">,</span>        
+            <span class="s1">&#39;track_dzsig&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_erel&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_etarel&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_fromPV&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_isChargedHad&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_isEl&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_isMu&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_lostInnerHits&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_mass&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_normchi2&#39;</span><span class="p">,</span>            
+            <span class="s1">&#39;track_phirel&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_pt&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_ptrel&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_puppiw&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;track_quality&#39;</span><span class="p">]</span>
+
+<span class="c1"># spectators to define mass/pT window</span>
+<span class="n">spectators</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;fj_sdmass&#39;</span><span class="p">,</span>
+              <span class="s1">&#39;fj_pt&#39;</span><span class="p">]</span>
+
+<span class="c1"># 2 labels: QCD or Hbb (we&#39;ll reduce the following labels)</span>
+<span class="n">labels</span> <span class="o">=</span>  <span class="p">[</span><span class="s1">&#39;label_QCD_b&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;label_QCD_bb&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;label_QCD_c&#39;</span><span class="p">,</span> 
+           <span class="s1">&#39;label_QCD_cc&#39;</span><span class="p">,</span> 
+           <span class="s1">&#39;label_QCD_others&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;sample_isQCD&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;label_H_bb&#39;</span><span class="p">]</span>
+
+<span class="n">nfeatures</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">features</span><span class="p">)</span>
+<span class="n">nspectators</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">spectators</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">GraphDataset</span> <span class="kn">import</span> <span class="n">GraphDataset</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">graph_dataset</span> <span class="o">=</span> <span class="n">GraphDataset</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">spectators</span><span class="p">,</span> <span class="n">n_events</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">n_events_merge</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Processing...
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0%|          | 15/10000 [00:00&lt;01:09, 144.56it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>21
+35
+24
+32
+28
+24
+25
+32
+49
+31
+40
+42
+16
+34
+25
+42
+25
+21
+32
+39
+12
+31
+31
+29
+15
+18
+37
+16
+17
+15
+16
+32
+32
+26
+19
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1%|          | 54/10000 [00:00&lt;01:00, 164.06it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10
+19
+10
+27
+30
+27
+26
+37
+11
+29
+11
+14
+43
+39
+27
+42
+41
+31
+27
+12
+21
+31
+40
+16
+15
+39
+25
+24
+33
+25
+29
+31
+36
+12
+40
+23
+42
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1%|          | 72/10000 [00:00&lt;00:59, 166.51it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15
+30
+22
+25
+18
+20
+45
+36
+18
+84
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1%|          | 102/10000 [00:00&lt;01:26, 114.17it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9
+9
+23
+32
+25
+28
+21
+27
+21
+27
+22
+49
+31
+35
+29
+24
+21
+24
+57
+16
+62
+21
+37
+17
+31
+35
+22
+55
+42
+35
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1%|▏         | 129/10000 [00:00&lt;01:22, 119.12it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>25
+51
+9
+26
+32
+36
+22
+33
+21
+13
+75
+33
+15
+26
+12
+27
+41
+13
+31
+14
+32
+24
+15
+21
+24
+23
+19
+26
+42
+21
+32
+27
+45
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  2%|▏         | 162/10000 [00:01&lt;01:17, 126.20it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12
+15
+70
+49
+35
+18
+31
+19
+28
+18
+29
+73
+22
+33
+55
+35
+19
+11
+54
+17
+22
+39
+48
+28
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  2%|▏         | 195/10000 [00:01&lt;01:11, 137.02it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>29
+23
+32
+16
+18
+12
+20
+32
+21
+26
+28
+15
+11
+66
+32
+21
+15
+49
+38
+38
+30
+22
+33
+26
+27
+38
+17
+22
+12
+25
+26
+21
+25
+38
+22
+29
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  2%|▏         | 229/10000 [00:01&lt;01:04, 151.47it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>54
+20
+30
+60
+19
+22
+35
+12
+9
+26
+34
+22
+29
+31
+7
+30
+34
+32
+38
+32
+18
+16
+32
+13
+38
+29
+18
+37
+27
+16
+21
+81
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3%|▎         | 264/10000 [00:01&lt;01:02, 155.83it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>26
+39
+25
+27
+23
+18
+26
+39
+22
+23
+21
+52
+16
+9
+25
+24
+19
+30
+54
+22
+22
+12
+29
+23
+18
+23
+23
+33
+23
+29
+11
+23
+20
+63
+28
+41
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3%|▎         | 297/10000 [00:02&lt;01:03, 153.17it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>17
+55
+19
+32
+25
+30
+23
+19
+43
+18
+30
+22
+22
+35
+26
+29
+28
+20
+48
+17
+4
+51
+33
+26
+20
+11
+36
+51
+23
+21
+26
+33
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3%|▎         | 316/10000 [00:02&lt;01:09, 139.32it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>23
+9
+21
+16
+42
+19
+5
+23
+14
+33
+118
+26
+14
+16
+19
+27
+26
+37
+23
+40
+72
+17
+30
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3%|▎         | 347/10000 [00:02&lt;01:06, 144.25it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>34
+21
+9
+39
+31
+35
+24
+26
+16
+32
+22
+17
+37
+4
+56
+42
+13
+17
+20
+39
+57
+21
+43
+35
+7
+68
+24
+25
+28
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  4%|▍         | 377/10000 [00:02&lt;01:12, 132.86it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19
+25
+21
+34
+27
+18
+26
+13
+46
+28
+11
+7
+24
+25
+43
+26
+41
+6
+17
+91
+46
+27
+19
+41
+25
+16
+15
+33
+11
+27
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  4%|▍         | 417/10000 [00:02&lt;01:02, 153.49it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>30
+25
+32
+36
+26
+20
+12
+73
+18
+34
+30
+20
+43
+18
+28
+20
+5
+25
+31
+20
+24
+39
+25
+11
+25
+24
+36
+34
+15
+26
+15
+23
+53
+31
+17
+21
+43
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  5%|▍         | 458/10000 [00:03&lt;00:55, 173.26it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>23
+18
+33
+26
+36
+25
+28
+16
+18
+30
+27
+27
+31
+9
+37
+32
+27
+16
+22
+75
+26
+10
+28
+32
+21
+18
+28
+17
+15
+7
+27
+15
+14
+28
+15
+17
+37
+22
+31
+43
+15
+12
+24
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  5%|▌         | 507/10000 [00:03&lt;00:47, 200.74it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10
+17
+19
+17
+26
+24
+17
+14
+32
+29
+21
+21
+24
+20
+27
+25
+37
+22
+8
+26
+33
+10
+31
+26
+21
+37
+17
+28
+20
+18
+20
+10
+25
+36
+30
+37
+30
+18
+39
+15
+13
+6
+32
+27
+35
+28
+30
+23
+18
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  5%|▌         | 548/10000 [00:03&lt;00:50, 188.50it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>56
+34
+19
+32
+21
+30
+43
+32
+27
+24
+36
+36
+11
+7
+43
+23
+24
+35
+22
+23
+23
+18
+33
+21
+19
+17
+69
+38
+7
+20
+16
+46
+22
+26
+35
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  6%|▌         | 594/10000 [00:03&lt;00:47, 196.30it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12
+22
+17
+20
+29
+7
+26
+23
+27
+11
+23
+19
+38
+15
+39
+28
+12
+28
+32
+14
+20
+33
+25
+12
+23
+41
+57
+37
+29
+15
+25
+23
+17
+46
+23
+33
+26
+23
+17
+27
+20
+33
+23
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  6%|▌         | 615/10000 [00:03&lt;00:51, 181.29it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19
+16
+24
+32
+33
+18
+57
+29
+22
+18
+32
+30
+39
+14
+30
+47
+14
+38
+21
+52
+46
+26
+50
+27
+25
+19
+17
+30
+61
+20
+55
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  7%|▋         | 652/10000 [00:04&lt;00:56, 165.07it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>25
+18
+46
+20
+38
+17
+14
+30
+16
+15
+25
+12
+49
+28
+25
+46
+46
+32
+23
+35
+27
+20
+38
+19
+30
+19
+56
+66
+27
+23
+22
+26
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  7%|▋         | 669/10000 [00:04&lt;01:06, 139.94it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>23
+22
+8
+32
+58
+23
+26
+14
+25
+43
+27
+104
+23
+10
+32
+18
+41
+31
+26
+38
+32
+29
+20
+22
+25
+31
+46
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  7%|▋         | 708/10000 [00:04&lt;00:57, 161.51it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>21
+27
+14
+16
+35
+28
+24
+34
+24
+27
+10
+45
+23
+8
+45
+28
+37
+10
+18
+10
+35
+11
+17
+56
+14
+25
+21
+60
+17
+51
+25
+19
+25
+19
+28
+30
+28
+25
+16
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  7%|▋         | 748/10000 [00:04&lt;00:52, 177.56it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>24
+44
+13
+21
+22
+16
+26
+47
+30
+22
+24
+38
+44
+25
+25
+30
+16
+19
+28
+21
+32
+16
+27
+9
+28
+23
+23
+80
+32
+28
+21
+16
+19
+14
+39
+26
+17
+12
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  8%|▊         | 787/10000 [00:04&lt;00:51, 180.53it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19
+8
+17
+27
+14
+46
+13
+32
+52
+15
+34
+12
+14
+21
+29
+20
+16
+9
+25
+29
+45
+13
+26
+14
+44
+35
+22
+37
+20
+29
+44
+28
+23
+15
+21
+22
+24
+29
+19
+29
+32
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  8%|▊         | 827/10000 [00:05&lt;00:50, 181.40it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>13
+22
+29
+8
+50
+41
+32
+32
+32
+41
+19
+10
+37
+30
+31
+26
+33
+14
+24
+37
+26
+24
+54
+30
+9
+10
+36
+17
+22
+27
+23
+23
+11
+21
+15
+22
+23
+40
+16
+31
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  9%|▊         | 872/10000 [00:05&lt;00:47, 191.75it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>32
+30
+11
+30
+16
+30
+31
+24
+19
+36
+46
+25
+24
+33
+31
+28
+20
+16
+17
+19
+46
+16
+25
+22
+13
+14
+70
+17
+23
+6
+28
+20
+13
+14
+25
+15
+61
+26
+12
+33
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  9%|▉         | 911/10000 [00:05&lt;00:53, 170.81it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>26
+19
+19
+23
+20
+40
+50
+60
+12
+12
+38
+55
+44
+27
+48
+22
+6
+10
+34
+22
+19
+45
+17
+19
+32
+34
+29
+54
+16
+26
+15
+37
+44
+13
+55
+8
+14
+37
+21
+47
+16
+11
+11
+13
+16
+34
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  9%|▉         | 948/10000 [00:05&lt;01:05, 138.19it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>25
+21
+35
+15
+42
+27
+17
+37
+18
+28
+15
+25
+14
+15
+19
+36
+8
+67
+26
+31
+19
+58
+24
+21
+22
+15
+14
+10
+33
+29
+66
+19
+26
+23
+21
+21
+38
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 10%|▉         | 986/10000 [00:06&lt;00:57, 156.81it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>48
+35
+12
+30
+34
+24
+26
+35
+22
+25
+18
+19
+40
+30
+34
+24
+14
+25
+38
+35
+23
+20
+16
+22
+29
+43
+11
+22
+50
+21
+17
+28
+30
+24
+22
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 10%|█         | 1024/10000 [00:06&lt;01:11, 125.11it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>26
+18
+13
+20
+27
+27
+14
+18
+26
+48
+30
+19
+32
+25
+14
+37
+37
+24
+23
+19
+8
+50
+14
+50
+41
+17
+16
+24
+15
+31
+36
+27
+17
+33
+22
+16
+77
+56
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 11%|█         | 1058/10000 [00:06&lt;01:03, 140.39it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11
+39
+22
+25
+23
+31
+31
+21
+18
+46
+37
+28
+12
+37
+39
+34
+30
+30
+26
+34
+15
+35
+39
+31
+15
+17
+19
+25
+14
+19
+12
+26
+27
+21
+35
+34
+36
+33
+39
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 11%|█         | 1100/10000 [00:06&lt;00:52, 168.52it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>30
+24
+13
+43
+19
+23
+26
+22
+25
+26
+16
+20
+26
+38
+22
+63
+21
+12
+6
+10
+19
+30
+36
+19
+67
+12
+31
+76
+26
+32
+37
+19
+34
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 11%|█▏        | 1143/10000 [00:07&lt;00:50, 176.82it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19
+28
+9
+19
+18
+31
+17
+36
+4
+16
+13
+50
+23
+7
+23
+36
+20
+23
+25
+20
+9
+19
+23
+33
+21
+20
+15
+26
+26
+29
+21
+29
+57
+38
+34
+36
+26
+16
+15
+12
+30
+50
+19
+16
+22
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 12%|█▏        | 1189/10000 [00:07&lt;00:44, 199.81it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>32
+21
+12
+16
+18
+48
+15
+24
+21
+44
+41
+11
+15
+18
+23
+28
+39
+12
+19
+12
+21
+20
+35
+14
+17
+20
+18
+30
+21
+16
+31
+27
+12
+18
+14
+28
+41
+35
+28
+37
+37
+35
+19
+22
+29
+33
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 12%|█▏        | 1230/10000 [00:07&lt;00:45, 190.97it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14
+24
+20
+24
+48
+32
+26
+25
+50
+22
+19
+21
+21
+60
+27
+40
+14
+25
+22
+43
+14
+28
+35
+23
+22
+30
+20
+17
+24
+26
+26
+28
+37
+21
+23
+22
+40
+27
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 13%|█▎        | 1271/10000 [00:07&lt;00:48, 178.27it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19
+25
+13
+52
+32
+15
+24
+19
+24
+12
+37
+42
+18
+21
+27
+40
+42
+27
+62
+22
+17
+25
+17
+25
+12
+13
+50
+26
+18
+33
+27
+31
+23
+51
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 13%|█▎        | 1290/10000 [00:08&lt;00:54, 159.99it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>25
+33
+35
+23
+37
+45
+31
+19
+45
+37
+35
+21
+31
+11
+57
+10
+33
+18
+56
+20
+52
+45
+24
+25
+12
+24
+30
+51
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 13%|█▎        | 1325/10000 [00:08&lt;00:58, 148.18it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>30
+21
+66
+21
+5
+41
+15
+24
+24
+25
+29
+30
+11
+40
+20
+34
+48
+25
+17
+11
+10
+34
+6
+62
+24
+33
+20
+32
+21
+19
+18
+25
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 14%|█▎        | 1357/10000 [00:08&lt;00:57, 149.11it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>37
+45
+25
+49
+25
+21
+32
+14
+36
+22
+27
+32
+39
+8
+23
+27
+24
+22
+26
+15
+17
+39
+16
+69
+35
+37
+17
+19
+18
+21
+19
+38
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 14%|█▍        | 1398/10000 [00:08&lt;00:50, 171.88it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19
+17
+22
+24
+32
+24
+12
+12
+23
+29
+12
+40
+24
+14
+37
+23
+53
+11
+32
+13
+40
+23
+7
+21
+33
+19
+7
+15
+26
+24
+10
+24
+29
+6
+14
+15
+13
+15
+15
+36
+27
+23
+22
+51
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 14%|█▍        | 1437/10000 [00:08&lt;00:52, 162.12it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>29
+23
+16
+23
+22
+17
+34
+28
+38
+52
+15
+26
+20
+33
+27
+26
+18
+29
+10
+23
+31
+33
+30
+25
+67
+48
+14
+37
+44
+25
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 15%|█▍        | 1454/10000 [00:09&lt;00:56, 151.74it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>17
+32
+32
+31
+49
+55
+16
+35
+35
+38
+23
+27
+23
+19
+31
+17
+13
+32
+10
+39
+6
+13
+41
+14
+34
+44
+29
+18
+41
+18
+64
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 15%|█▍        | 1489/10000 [00:09&lt;00:55, 154.52it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>21
+10
+39
+14
+30
+22
+50
+30
+23
+9
+30
+25
+24
+29
+14
+20
+43
+16
+51
+24
+23
+46
+17
+31
+25
+23
+11
+18
+30
+30
+22
+48
+46
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 15%|█▌        | 1522/10000 [00:09&lt;00:54, 156.11it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12
+19
+20
+17
+23
+24
+9
+21
+25
+30
+33
+22
+18
+25
+22
+42
+33
+72
+24
+16
+32
+44
+23
+30
+22
+21
+11
+16
+20
+11
+30
+25
+18
+16
+52
+29
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 16%|█▌        | 1562/10000 [00:09&lt;00:50, 167.15it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>28
+30
+25
+23
+8
+23
+8
+38
+19
+29
+25
+15
+19
+28
+15
+41
+30
+12
+26
+18
+15
+30
+69
+40
+23
+7
+36
+30
+34
+32
+27
+41
+18
+8
+24
+26
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 16%|█▌        | 1596/10000 [00:09&lt;00:51, 161.89it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15
+43
+21
+27
+17
+22
+47
+22
+54
+36
+30
+22
+19
+33
+28
+13
+21
+30
+13
+32
+36
+15
+40
+8
+26
+26
+38
+13
+35
+22
+24
+24
+27
+10
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 16%|█▋        | 1634/10000 [00:10&lt;00:52, 158.89it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>35
+43
+6
+14
+18
+8
+38
+23
+15
+16
+27
+31
+16
+14
+22
+33
+28
+50
+25
+66
+17
+60
+22
+29
+36
+28
+28
+30
+32
+19
+22
+62
+23
+93
+22
+17
+30
+17
+73
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 17%|█▋        | 1670/10000 [00:10&lt;01:14, 111.27it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10
+32
+27
+18
+27
+36
+35
+29
+33
+29
+19
+17
+12
+24
+21
+20
+12
+25
+20
+15
+53
+32
+21
+27
+20
+39
+21
+28
+28
+21
+38
+25
+19
+26
+28
+42
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 17%|█▋        | 1703/10000 [00:10&lt;01:05, 126.33it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>24
+23
+21
+34
+28
+19
+29
+35
+28
+16
+16
+74
+41
+16
+25
+34
+22
+39
+12
+28
+28
+23
+34
+17
+39
+27
+25
+42
+23
+8
+31
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 17%|█▋        | 1741/10000 [00:11&lt;00:56, 145.60it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14
+38
+16
+39
+24
+25
+16
+26
+17
+25
+8
+26
+7
+30
+18
+13
+18
+37
+25
+31
+12
+29
+33
+6
+18
+77
+38
+19
+23
+32
+26
+35
+43
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 18%|█▊        | 1772/10000 [00:11&lt;01:00, 135.07it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>26
+45
+17
+33
+14
+21
+25
+91
+17
+33
+25
+15
+33
+40
+36
+22
+12
+41
+17
+26
+42
+26
+42
+41
+24
+21
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 18%|█▊        | 1791/10000 [00:11&lt;00:57, 142.33it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>23
+27
+44
+15
+35
+24
+33
+21
+11
+42
+4
+10
+37
+25
+21
+21
+49
+37
+43
+38
+26
+26
+32
+12
+27
+24
+23
+20
+21
+13
+41
+27
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 18%|█▊        | 1824/10000 [00:11&lt;00:55, 146.14it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>60
+15
+11
+28
+33
+36
+30
+30
+53
+22
+33
+18
+25
+40
+11
+14
+10
+37
+33
+29
+43
+5
+32
+30
+42
+14
+28
+20
+39
+27
+33
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 19%|█▊        | 1857/10000 [00:11&lt;00:57, 140.76it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7
+20
+29
+28
+31
+25
+21
+14
+15
+13
+65
+28
+24
+30
+40
+59
+43
+24
+33
+35
+57
+22
+14
+31
+31
+21
+13
+29
+31
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 19%|█▉        | 1887/10000 [00:12&lt;01:02, 129.38it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>17
+55
+21
+39
+18
+25
+60
+47
+21
+53
+19
+28
+23
+26
+5
+23
+58
+39
+42
+15
+33
+24
+32
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 19%|█▉        | 1915/10000 [00:12&lt;01:02, 128.71it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>69
+13
+32
+26
+71
+34
+23
+25
+13
+33
+31
+26
+43
+21
+24
+12
+12
+19
+15
+50
+45
+21
+59
+28
+57
+21
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 20%|█▉        | 1952/10000 [00:12&lt;00:53, 149.33it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18
+35
+52
+17
+19
+27
+15
+29
+35
+16
+37
+31
+31
+21
+11
+8
+19
+26
+55
+53
+34
+31
+8
+22
+23
+23
+19
+35
+34
+35
+29
+12
+32
+21
+32
+23
+33
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 20%|█▉        | 1986/10000 [00:12&lt;00:50, 158.92it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>21
+18
+30
+9
+21
+38
+23
+16
+33
+30
+60
+52
+27
+7
+22
+48
+34
+40
+34
+20
+36
+17
+10
+17
+21
+32
+17
+29
+26
+29
+53
+24
+24
+36
+4
+65
+21
+17
+40
+12
+53
+43
+31
+54
+25
+19
+14
+35
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 20%|██        | 2026/10000 [00:13&lt;01:05, 122.38it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>17
+16
+5
+24
+35
+18
+49
+36
+21
+27
+28
+18
+20
+29
+28
+21
+23
+28
+26
+18
+12
+20
+26
+23
+27
+24
+27
+23
+20
+14
+26
+23
+16
+14
+17
+9
+51
+26
+14
+46
+33
+15
+15
+48
+31
+40
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 21%|██        | 2064/10000 [00:13&lt;00:55, 143.79it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>36
+39
+11
+25
+22
+24
+39
+63
+11
+32
+23
+16
+37
+29
+50
+32
+23
+26
+25
+27
+29
+27
+31
+27
+43
+37
+4
+59
+23
+24
+13
+42
+21
+10
+27
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 21%|██        | 2099/10000 [00:13&lt;00:53, 148.59it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>29
+25
+52
+18
+21
+29
+76
+54
+41
+14
+18
+30
+36
+19
+34
+17
+25
+12
+33
+11
+19
+20
+48
+20
+25
+35
+16
+37
+28
+21
+34
+14
+68
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 21%|██▏       | 2135/10000 [00:13&lt;00:49, 159.46it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>22
+34
+23
+12
+24
+66
+16
+15
+30
+19
+25
+22
+43
+43
+38
+29
+11
+20
+23
+24
+38
+36
+21
+40
+21
+18
+18
+29
+52
+34
+7
+38
+24
+30
+25
+19
+22
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 22%|██▏       | 2175/10000 [00:14&lt;00:44, 175.63it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>16
+31
+35
+12
+18
+15
+35
+42
+16
+20
+28
+15
+31
+13
+42
+26
+11
+31
+30
+30
+46
+27
+33
+27
+13
+16
+12
+41
+34
+27
+31
+32
+92
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 22%|██▏       | 2217/10000 [00:14&lt;00:42, 181.06it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19
+23
+21
+26
+20
+20
+28
+32
+17
+38
+29
+11
+33
+29
+28
+19
+34
+27
+36
+33
+9
+18
+22
+24
+32
+33
+10
+15
+27
+30
+15
+22
+39
+13
+23
+30
+17
+24
+40
+19
+28
+29
+29
+11
+31
+38
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 23%|██▎       | 2261/10000 [00:14&lt;00:39, 198.23it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>34
+34
+48
+14
+19
+17
+33
+29
+16
+23
+31
+26
+9
+23
+26
+28
+8
+26
+22
+20
+16
+24
+12
+16
+24
+29
+56
+14
+35
+22
+14
+27
+17
+23
+16
+16
+23
+14
+17
+32
+13
+34
+39
+32
+14
+26
+25
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 23%|██▎       | 2304/10000 [00:14&lt;00:38, 197.48it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>44
+29
+35
+13
+38
+26
+27
+34
+25
+22
+22
+17
+9
+31
+32
+17
+11
+23
+22
+16
+30
+28
+43
+13
+27
+63
+40
+35
+29
+26
+22
+28
+19
+21
+22
+23
+28
+52
+35
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 23%|██▎       | 2345/10000 [00:14&lt;00:42, 182.04it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>27
+34
+16
+16
+16
+32
+12
+54
+30
+31
+52
+19
+40
+31
+35
+19
+37
+20
+22
+28
+40
+24
+24
+13
+36
+40
+14
+24
+31
+26
+35
+20
+10
+42
+25
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 24%|██▍       | 2388/10000 [00:15&lt;00:39, 191.41it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19
+19
+21
+13
+41
+35
+36
+17
+11
+35
+18
+25
+12
+12
+21
+9
+37
+22
+17
+15
+28
+30
+34
+17
+15
+14
+23
+18
+32
+5
+11
+41
+36
+11
+83
+16
+18
+15
+11
+6
+25
+40
+16
+35
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 24%|██▍       | 2413/10000 [00:15&lt;00:36, 205.28it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>31
+20
+26
+24
+34
+22
+22
+34
+33
+26
+16
+31
+13
+20
+14
+17
+28
+19
+31
+15
+55
+10
+17
+70
+35
+37
+48
+32
+38
+46
+42
+28
+12
+19
+17
+21
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 25%|██▍       | 2455/10000 [00:15&lt;00:40, 184.37it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10
+28
+35
+5
+35
+12
+22
+24
+37
+13
+30
+21
+35
+13
+46
+26
+41
+11
+15
+36
+13
+26
+33
+44
+77
+20
+15
+24
+23
+16
+31
+33
+44
+39
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 25%|██▍       | 2498/10000 [00:15&lt;00:38, 192.79it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>41
+15
+19
+23
+27
+21
+8
+19
+27
+22
+15
+17
+34
+11
+40
+31
+30
+35
+32
+12
+5
+13
+21
+11
+18
+45
+18
+20
+32
+15
+29
+22
+21
+21
+26
+10
+31
+22
+35
+28
+25
+9
+29
+26
+14
+35
+15
+17
+18
+17
+32
+20
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 25%|██▌       | 2545/10000 [00:15&lt;00:38, 193.12it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>45
+23
+11
+21
+21
+12
+48
+23
+24
+13
+24
+29
+36
+23
+41
+18
+43
+24
+28
+34
+31
+37
+44
+17
+29
+27
+20
+42
+32
+27
+68
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 26%|██▌       | 2565/10000 [00:16&lt;00:58, 126.59it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>21
+68
+35
+23
+14
+15
+19
+29
+7
+24
+8
+34
+20
+58
+44
+31
+20
+34
+14
+16
+29
+10
+20
+11
+26
+28
+14
+30
+23
+45
+28
+18
+7
+42
+14
+20
+46
+16
+40
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 26%|██▌       | 2605/10000 [00:16&lt;00:50, 147.44it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19
+17
+29
+19
+37
+38
+42
+24
+20
+28
+42
+31
+18
+33
+59
+47
+10
+32
+16
+37
+26
+32
+44
+35
+27
+36
+45
+21
+23
+11
+38
+24
+29
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 26%|██▋       | 2646/10000 [00:16&lt;00:44, 165.64it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>30
+24
+43
+17
+52
+14
+23
+23
+23
+25
+15
+28
+24
+21
+19
+12
+21
+34
+28
+12
+23
+13
+31
+25
+40
+40
+22
+56
+36
+35
+25
+22
+20
+27
+22
+45
+34
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 27%|██▋       | 2683/10000 [00:16&lt;00:44, 163.09it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>46
+31
+10
+27
+20
+11
+18
+31
+39
+37
+43
+28
+32
+14
+26
+36
+37
+31
+35
+21
+26
+41
+16
+32
+24
+38
+14
+28
+29
+33
+25
+70
+35
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 27%|██▋       | 2720/10000 [00:17&lt;00:45, 161.75it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>60
+9
+28
+11
+20
+28
+22
+33
+46
+62
+14
+30
+28
+15
+6
+55
+14
+17
+21
+26
+25
+12
+37
+22
+15
+15
+9
+51
+19
+31
+23
+16
+37
+20
+26
+14
+22
+33
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 28%|██▊       | 2757/10000 [00:17&lt;00:44, 161.92it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>21
+19
+27
+13
+33
+39
+27
+20
+15
+13
+47
+11
+15
+27
+14
+28
+34
+8
+44
+32
+31
+23
+46
+14
+71
+33
+22
+18
+10
+55
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 28%|██▊       | 2774/10000 [00:17&lt;00:44, 160.70it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12
+32
+36
+23
+14
+58
+23
+31
+14
+20
+19
+19
+19
+16
+33
+18
+24
+21
+27
+28
+40
+41
+29
+24
+68
+45
+19
+27
+14
+51
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 28%|██▊       | 2806/10000 [00:17&lt;00:50, 142.10it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11
+23
+58
+28
+18
+33
+22
+32
+63
+19
+35
+36
+19
+23
+18
+40
+26
+29
+26
+37
+14
+14
+31
+16
+27
+17
+19
+47
+14
+22
+18
+21
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 28%|██▊       | 2828/10000 [00:17&lt;00:45, 158.46it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>41
+24
+22
+10
+24
+6
+35
+19
+0
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">4</span><span class="o">-</span><span class="mi">0</span><span class="n">be35a8ad693</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">graph_dataset</span> <span class="o">=</span> <span class="n">GraphDataset</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">spectators</span><span class="p">,</span> <span class="n">n_events</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">n_events_merge</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+
+<span class="nn">~/work/capstone-particle-physics-domain/weeks/GraphDataset.py</span> in <span class="ni">__init__</span><span class="nt">(self, root, features, labels, spectators, transform, pre_transform, n_events, n_events_merge)</span>
+<span class="g g-Whitespace">     </span><span class="mi">25</span>         <span class="bp">self</span><span class="o">.</span><span class="n">n_events</span> <span class="o">=</span> <span class="n">n_events</span>
+<span class="g g-Whitespace">     </span><span class="mi">26</span>         <span class="bp">self</span><span class="o">.</span><span class="n">n_events_merge</span> <span class="o">=</span> <span class="n">n_events_merge</span>
+<span class="ne">---&gt; </span><span class="mi">27</span>         <span class="nb">super</span><span class="p">(</span><span class="n">GraphDataset</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">transform</span><span class="p">,</span> <span class="n">pre_transform</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">28</span> 
+<span class="g g-Whitespace">     </span><span class="mi">29</span>     <span class="nd">@property</span>
+
+<span class="nn">/opt/conda/lib/python3.7/site-packages/torch_geometric/data/dataset.py</span> in <span class="ni">__init__</span><span class="nt">(self, root, transform, pre_transform, pre_filter)</span>
+<span class="g g-Whitespace">     </span><span class="mi">90</span> 
+<span class="g g-Whitespace">     </span><span class="mi">91</span>         <span class="k">if</span> <span class="s1">&#39;process&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+<span class="ne">---&gt; </span><span class="mi">92</span>             <span class="bp">self</span><span class="o">.</span><span class="n">_process</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">93</span> 
+<span class="g g-Whitespace">     </span><span class="mi">94</span>     <span class="k">def</span> <span class="nf">indices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<span class="nn">/opt/conda/lib/python3.7/site-packages/torch_geometric/data/dataset.py</span> in <span class="ni">_process</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">163</span> 
+<span class="g g-Whitespace">    </span><span class="mi">164</span>         <span class="n">makedirs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">processed_dir</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">165</span>         <span class="bp">self</span><span class="o">.</span><span class="n">process</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">166</span> 
+<span class="g g-Whitespace">    </span><span class="mi">167</span>         <span class="n">path</span> <span class="o">=</span> <span class="n">osp</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">processed_dir</span><span class="p">,</span> <span class="s1">&#39;pre_transform.pt&#39;</span><span class="p">)</span>
+
+<span class="nn">~/work/capstone-particle-physics-domain/weeks/GraphDataset.py</span> in <span class="ni">process</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">     </span><span class="mi">95</span>                 <span class="n">n_particles</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">feature_array</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">features</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">i</span><span class="p">])</span>
+<span class="g g-Whitespace">     </span><span class="mi">96</span>                 <span class="nb">print</span><span class="p">(</span><span class="n">n_particles</span><span class="p">)</span>
+<span class="nn">---&gt; 97                 pairs = np.stack([[m, n] for (m, n)</span> in <span class="ni">itertools.product(range(n_particles),range</span><span class="nt">(n_particles)) if m!=n])</span>
+<span class="g g-Whitespace">     </span><span class="mi">98</span>                 <span class="n">edge_index</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">pairs</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">99</span>                 <span class="n">edge_index</span><span class="o">=</span><span class="n">edge_index</span><span class="o">.</span><span class="n">t</span><span class="p">()</span><span class="o">.</span><span class="n">contiguous</span><span class="p">()</span>
+
+<span class="nn">&lt;__array_function__ internals&gt;</span> in <span class="ni">stack</span><span class="nt">(*args, **kwargs)</span>
+
+<span class="nn">/opt/conda/lib/python3.7/site-packages/numpy/core/shape_base.py</span> in <span class="ni">stack</span><span class="nt">(arrays, axis, out)</span>
+<span class="g g-Whitespace">    </span><span class="mi">421</span>     <span class="n">arrays</span> <span class="o">=</span> <span class="p">[</span><span class="n">asanyarray</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="k">for</span> <span class="n">arr</span> <span class="ow">in</span> <span class="n">arrays</span><span class="p">]</span>
+<span class="g g-Whitespace">    </span><span class="mi">422</span>     <span class="k">if</span> <span class="ow">not</span> <span class="n">arrays</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">423</span>         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;need at least one array to stack&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">424</span> 
+<span class="g g-Whitespace">    </span><span class="mi">425</span>     <span class="n">shapes</span> <span class="o">=</span> <span class="p">{</span><span class="n">arr</span><span class="o">.</span><span class="n">shape</span> <span class="k">for</span> <span class="n">arr</span> <span class="ow">in</span> <span class="n">arrays</span><span class="p">}</span>
+
+<span class="ne">ValueError</span>: need at least one array to stack
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./weeks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="08.html" title="previous page">Week 8: Extending the Model</a>
+    <a class='right-next' id="next-link" href="09.html" title="next page">Week 9: Application to Real Data</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Javier Duarte and Frank Würthwein<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>
