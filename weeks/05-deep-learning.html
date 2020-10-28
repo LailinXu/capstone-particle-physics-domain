@@ -478,9 +478,7 @@ output (Dense)               (None, 2)                 66
 =================================================================
 Total params: 187,778
 Trainable params: 187,682
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Non-trainable params: 96
+Non-trainable params: 96
 _________________________________________________________________
 None
 </pre></div>
@@ -547,7 +545,7 @@ Then the <code class="docutils literal notranslate"><span class="pre">Lambda</sp
 <span class="n">x</span> <span class="o">=</span> <span class="n">Conv1D</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">strides</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;conv1d_2&#39;</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">Conv1D</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">strides</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;conv1d_3&#39;</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
 <span class="c1"># sum over tracks</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">GlobalAveragePooling1D</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;pool_1&#39;</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">GlobalAveragePooling1D</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;pool_1&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;dense_1&#39;</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
 <span class="n">outputs</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="n">nlabels</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;output&#39;</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
 <span class="n">keras_model_conv1d</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="n">outputs</span><span class="p">)</span>
@@ -557,37 +555,31 @@ Then the <code class="docutils literal notranslate"><span class="pre">Lambda</sp
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">9</span><span class="o">-</span><span class="n">a9edf016d46f</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="n">x</span> <span class="o">=</span> <span class="n">Conv1D</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">strides</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;conv1d_3&#39;</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="c1"># sum over tracks</span>
-<span class="ne">---&gt; </span><span class="mi">12</span> <span class="n">x</span> <span class="o">=</span> <span class="n">GlobalAveragePooling1D</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;pool_1&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="n">x</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;dense_1&#39;</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="n">outputs</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="n">nlabels</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;output&#39;</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
-
-<span class="nn">/usr/share/miniconda/envs/ml-latest/lib/python3.7/site-packages/tensorflow/python/keras/layers/pooling.py</span> in <span class="ni">__init__</span><span class="nt">(self, data_format, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">632</span>   <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_format</span><span class="o">=</span><span class="s1">&#39;channels_last&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">633</span>     <span class="nb">super</span><span class="p">(</span><span class="n">GlobalAveragePooling1D</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">data_format</span><span class="o">=</span><span class="n">data_format</span><span class="p">,</span>
-<span class="ne">--&gt; </span><span class="mi">634</span>                                                  <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">635</span>     <span class="bp">self</span><span class="o">.</span><span class="n">supports_masking</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="g g-Whitespace">    </span><span class="mi">636</span> 
-
-<span class="nn">/usr/share/miniconda/envs/ml-latest/lib/python3.7/site-packages/tensorflow/python/keras/layers/pooling.py</span> in <span class="ni">__init__</span><span class="nt">(self, data_format, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">581</span>     <span class="nb">super</span><span class="p">(</span><span class="n">GlobalPooling1D</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">582</span>     <span class="bp">self</span><span class="o">.</span><span class="n">input_spec</span> <span class="o">=</span> <span class="n">InputSpec</span><span class="p">(</span><span class="n">ndim</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">583</span>     <span class="bp">self</span><span class="o">.</span><span class="n">data_format</span> <span class="o">=</span> <span class="n">conv_utils</span><span class="o">.</span><span class="n">normalize_data_format</span><span class="p">(</span><span class="n">data_format</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">584</span> 
-<span class="g g-Whitespace">    </span><span class="mi">585</span>   <span class="k">def</span> <span class="nf">compute_output_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_shape</span><span class="p">):</span>
-
-<span class="nn">/usr/share/miniconda/envs/ml-latest/lib/python3.7/site-packages/tensorflow/python/keras/utils/conv_utils.py</span> in <span class="ni">normalize_data_format</span><span class="nt">(value)</span>
-<span class="g g-Whitespace">    </span><span class="mi">186</span>   <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">187</span>     <span class="n">value</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">image_data_format</span><span class="p">()</span>
-<span class="ne">--&gt; </span><span class="mi">188</span>   <span class="n">data_format</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">189</span>   <span class="k">if</span> <span class="n">data_format</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">{</span><span class="s1">&#39;channels_first&#39;</span><span class="p">,</span> <span class="s1">&#39;channels_last&#39;</span><span class="p">}:</span>
-<span class="g g-Whitespace">    </span><span class="mi">190</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;The `data_format` argument must be one of &#39;</span>
-
-<span class="ne">AttributeError</span>: &#39;Tensor&#39; object has no attribute &#39;lower&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;model_1&quot;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+input (InputLayer)           [(None, 60, 48)]          0         
+_________________________________________________________________
+bn_1 (BatchNormalization)    (None, 60, 48)            192       
+_________________________________________________________________
+conv1d_1 (Conv1D)            (None, 60, 64)            3136      
+_________________________________________________________________
+conv1d_2 (Conv1D)            (None, 60, 32)            2080      
+_________________________________________________________________
+conv1d_3 (Conv1D)            (None, 60, 32)            1056      
+_________________________________________________________________
+pool_1 (GlobalAveragePooling (None, 32)                0         
+_________________________________________________________________
+dense_1 (Dense)              (None, 100)               3300      
+_________________________________________________________________
+output (Dense)               (None, 2)                 202       
+=================================================================
+Total params: 9,966
+Trainable params: 9,870
+Non-trainable params: 96
+_________________________________________________________________
+None
 </pre></div>
 </div>
 </div>
@@ -628,6 +620,9 @@ Then the <code class="docutils literal notranslate"><span class="pre">Lambda</sp
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/05-deep-learning_16_0.png" src="../_images/05-deep-learning_16_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -677,6 +672,9 @@ Then the <code class="docutils literal notranslate"><span class="pre">Lambda</sp
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/05-deep-learning_18_0.png" src="../_images/05-deep-learning_18_0.png" />
 </div>
 </div>
 <p>We see the more structurally-aware Conv1D/Deep Sets model does better than a simple fully conneted neural network appraoch.</p>
