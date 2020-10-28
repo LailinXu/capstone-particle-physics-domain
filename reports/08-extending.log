@@ -26,11 +26,11 @@ graph_dataset = GraphDataset('data', features, labels, spectators, n_events=1000
 [0;32m----> 1[0;31m [0mgraph_dataset[0m [0;34m=[0m [0mGraphDataset[0m[0;34m([0m[0;34m'data'[0m[0;34m,[0m [0mfeatures[0m[0;34m,[0m [0mlabels[0m[0;34m,[0m [0mspectators[0m[0;34m,[0m [0mn_events[0m[0;34m=[0m[0;36m10000[0m[0;34m,[0m [0mn_events_merge[0m[0;34m=[0m[0;36m1000[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [0m
 [0;32m~/work/capstone-particle-physics-domain/capstone-particle-physics-domain/weeks/GraphDataset.py[0m in [0;36m__init__[0;34m(self, root, features, labels, spectators, transform, pre_transform, n_events, n_events_merge)[0m
-[1;32m     25[0m         [0mself[0m[0;34m.[0m[0mn_events[0m [0;34m=[0m [0mn_events[0m[0;34m[0m[0;34m[0m[0m
-[1;32m     26[0m         [0mself[0m[0;34m.[0m[0mn_events_merge[0m [0;34m=[0m [0mn_events_merge[0m[0;34m[0m[0;34m[0m[0m
-[0;32m---> 27[0;31m         [0msuper[0m[0;34m([0m[0mGraphDataset[0m[0;34m,[0m [0mself[0m[0;34m)[0m[0;34m.[0m[0m__init__[0m[0;34m([0m[0mroot[0m[0;34m,[0m [0mtransform[0m[0;34m,[0m [0mpre_transform[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m     28[0m [0;34m[0m[0m
-[1;32m     29[0m     [0;34m@[0m[0mproperty[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     26[0m         [0mself[0m[0;34m.[0m[0mn_events[0m [0;34m=[0m [0mn_events[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     27[0m         [0mself[0m[0;34m.[0m[0mn_events_merge[0m [0;34m=[0m [0mn_events_merge[0m[0;34m[0m[0;34m[0m[0m
+[0;32m---> 28[0;31m         [0msuper[0m[0;34m([0m[0mGraphDataset[0m[0;34m,[0m [0mself[0m[0;34m)[0m[0;34m.[0m[0m__init__[0m[0;34m([0m[0mroot[0m[0;34m,[0m [0mtransform[0m[0;34m,[0m [0mpre_transform[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m     29[0m [0;34m[0m[0m
+[1;32m     30[0m     [0;34m@[0m[0mproperty[0m[0;34m[0m[0;34m[0m[0m
 
 [0;32m/usr/share/miniconda/envs/ml-latest/lib/python3.7/site-packages/torch_geometric/data/dataset.py[0m in [0;36m__init__[0;34m(self, root, transform, pre_transform, pre_filter)[0m
 [1;32m     90[0m [0;34m[0m[0m
@@ -47,11 +47,11 @@ graph_dataset = GraphDataset('data', features, labels, spectators, n_events=1000
 [1;32m    167[0m         [0mpath[0m [0;34m=[0m [0mosp[0m[0;34m.[0m[0mjoin[0m[0;34m([0m[0mself[0m[0;34m.[0m[0mprocessed_dir[0m[0;34m,[0m [0;34m'pre_transform.pt'[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 
 [0;32m~/work/capstone-particle-physics-domain/capstone-particle-physics-domain/weeks/GraphDataset.py[0m in [0;36mprocess[0;34m(self)[0m
-[1;32m     95[0m                 [0mn_particles[0m [0;34m=[0m [0mlen[0m[0;34m([0m[0mfeature_array[0m[0;34m[[0m[0mself[0m[0;34m.[0m[0mfeatures[0m[0;34m[[0m[0;36m0[0m[0;34m][0m[0;34m][0m[0;34m[[0m[0mi[0m[0;34m][0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[1;32m     96[0m                 [0;32mif[0m [0mn_particles[0m[0;34m==[0m[0;36m0[0m[0;34m:[0m [0;32mcontinue[0m[0;34m[0m[0;34m[0m[0m
-[0;32m---> 97[0;31m                 [0mpairs[0m [0;34m=[0m [0mnp[0m[0;34m.[0m[0mstack[0m[0;34m([0m[0;34m[[0m[0;34m[[0m[0mm[0m[0;34m,[0m [0mn[0m[0;34m][0m [0;32mfor[0m [0;34m([0m[0mm[0m[0;34m,[0m [0mn[0m[0;34m)[0m [0;32min[0m [0mitertools[0m[0;34m.[0m[0mproduct[0m[0;34m([0m[0mrange[0m[0;34m([0m[0mn_particles[0m[0;34m)[0m[0;34m,[0m[0mrange[0m[0;34m([0m[0mn_particles[0m[0;34m)[0m[0;34m)[0m [0;32mif[0m [0mm[0m[0;34m!=[0m[0mn[0m[0;34m][0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m     98[0m                 [0medge_index[0m [0;34m=[0m [0mtorch[0m[0;34m.[0m[0mtensor[0m[0;34m([0m[0mpairs[0m[0;34m,[0m [0mdtype[0m[0;34m=[0m[0mtorch[0m[0;34m.[0m[0mlong[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[1;32m     99[0m                 [0medge_index[0m[0;34m=[0m[0medge_index[0m[0;34m.[0m[0mt[0m[0;34m([0m[0;34m)[0m[0;34m.[0m[0mcontiguous[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     96[0m                 [0mn_particles[0m [0;34m=[0m [0mlen[0m[0;34m([0m[0mfeature_array[0m[0;34m[[0m[0mself[0m[0;34m.[0m[0mfeatures[0m[0;34m[[0m[0;36m0[0m[0;34m][0m[0;34m][0m[0;34m[[0m[0mi[0m[0;34m][0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     97[0m                 [0;32mif[0m [0mn_particles[0m[0;34m==[0m[0;36m0[0m[0;34m:[0m [0;32mcontinue[0m[0;34m[0m[0;34m[0m[0m
+[0;32m---> 98[0;31m                 [0mpairs[0m [0;34m=[0m [0mnp[0m[0;34m.[0m[0mstack[0m[0;34m([0m[0;34m[[0m[0;34m[[0m[0mm[0m[0;34m,[0m [0mn[0m[0;34m][0m [0;32mfor[0m [0;34m([0m[0mm[0m[0;34m,[0m [0mn[0m[0;34m)[0m [0;32min[0m [0mitertools[0m[0;34m.[0m[0mproduct[0m[0;34m([0m[0mrange[0m[0;34m([0m[0mn_particles[0m[0;34m)[0m[0;34m,[0m[0mrange[0m[0;34m([0m[0mn_particles[0m[0;34m)[0m[0;34m)[0m [0;32mif[0m [0mm[0m[0;34m!=[0m[0mn[0m[0;34m][0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m     99[0m                 [0medge_index[0m [0;34m=[0m [0mtorch[0m[0;34m.[0m[0mtensor[0m[0;34m([0m[0mpairs[0m[0;34m,[0m [0mdtype[0m[0;34m=[0m[0mtorch[0m[0;34m.[0m[0mlong[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    100[0m                 [0medge_index[0m[0;34m=[0m[0medge_index[0m[0;34m.[0m[0mt[0m[0;34m([0m[0;34m)[0m[0;34m.[0m[0mcontiguous[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 
 [0;32m/usr/share/miniconda/envs/ml-latest/lib/python3.7/site-packages/numpy/core/shape_base.py[0m in [0;36mstack[0;34m(arrays, axis, out)[0m
 [1;32m    410[0m     [0marrays[0m [0;34m=[0m [0;34m[[0m[0masanyarray[0m[0;34m([0m[0marr[0m[0;34m)[0m [0;32mfor[0m [0marr[0m [0;32min[0m [0marrays[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
