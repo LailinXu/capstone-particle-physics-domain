@@ -290,6 +290,11 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-is-the-signal-and-background">
+   What is the signal and background?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#jagged-arrys">
    Jagged arrys
   </a>
@@ -664,6 +669,18 @@ The latter means there may a variable number per jet.</p>
 </div>
 </div>
 </div>
+</div>
+<div class="section" id="what-is-the-signal-and-background">
+<h2>What is the signal and background?<a class="headerlink" href="#what-is-the-signal-and-background" title="Permalink to this headline">¶</a></h2>
+<p>Signal (Higgs) events for this task look like this:</p>
+<div class="math notranslate nohighlight">
+\[gg \to X\to HH \to b\bar{b}b\bar{b}\]</div>
+<img width = 400px src="http://cms-results.web.cern.ch/cms-results/public-results/publications/B2G-17-006/CMS-B2G-17-006_Figure_001-a.png"/>
+<p>Background (QCD) events for this task look like this:</p>
+<div class="math notranslate nohighlight">
+\[gg \to q \bar{q} / gg / b\bar{b} / gb\bar{b} / ggg / \cdots\]</div>
+<img width = 400px src="https://www.physik.uzh.ch/~che/FeynDiag/diagrams/1_pp_scattering/10000013.png"/>
+<p>We will look at differentiating signal and background at the “jet” level.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># number of overlap jets</span>
@@ -727,8 +744,8 @@ The latter means there may a variable number per jet.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02-dataset_14_0.png" src="../_images/02-dataset_14_0.png" />
-<img alt="../_images/02-dataset_14_1.png" src="../_images/02-dataset_14_1.png" />
+<img alt="../_images/02-dataset_15_0.png" src="../_images/02-dataset_15_0.png" />
+<img alt="../_images/02-dataset_15_1.png" src="../_images/02-dataset_15_1.png" />
 </div>
 </div>
 </div>
@@ -746,7 +763,7 @@ The latter means there may a variable number per jet.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;track_pt&#39;: &lt;JaggedArray [[1.0537109 0.95654297 1.4570312 ... 18.171875 1.6171875 1.234375] [2.7832031 3.5253906 49.09375 ... 3.8613281 1.4599609 1.4306641] [1.5302734 6.8164062 2.9257812 ... 25.6875 36.3125 1.1513672] ... [1.0810547 2.5234375 10.265625 ... 1.25 24.453125 8.4921875] [4.8125 2.6796875 3.9824219 ... 4.3359375 23.375 6.3242188] [2.4101562 1.4345703 2.4628906 ... 57.59375 1.0419922 2.9726562]] at 0x7f04d2448990&gt;,
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;track_pt&#39;: &lt;JaggedArray [[1.0537109 0.95654297 1.4570312 ... 18.171875 1.6171875 1.234375] [2.7832031 3.5253906 49.09375 ... 3.8613281 1.4599609 1.4306641] [1.5302734 6.8164062 2.9257812 ... 25.6875 36.3125 1.1513672] ... [1.0810547 2.5234375 10.265625 ... 1.25 24.453125 8.4921875] [4.8125 2.6796875 3.9824219 ... 4.3359375 23.375 6.3242188] [2.4101562 1.4345703 2.4628906 ... 57.59375 1.0419922 2.9726562]] at 0x7f99b3521510&gt;,
  &#39;label_H_bb&#39;: array([0, 0, 0, ..., 0, 0, 0], dtype=int32)}
 </pre></div>
 </div>
@@ -837,7 +854,7 @@ The latter means there may a variable number per jet.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02-dataset_25_0.png" src="../_images/02-dataset_25_0.png" />
+<img alt="../_images/02-dataset_26_0.png" src="../_images/02-dataset_26_0.png" />
 </div>
 </div>
 </div>
@@ -858,7 +875,7 @@ The simplest way to do this is to use zero-padding and truncation to “cap” t
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02-dataset_27_0.png" src="../_images/02-dataset_27_0.png" />
+<img alt="../_images/02-dataset_28_0.png" src="../_images/02-dataset_28_0.png" />
 </div>
 </div>
 <p>In this case, 60 seems to be a reasonable number.</p>
