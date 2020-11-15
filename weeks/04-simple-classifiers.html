@@ -153,6 +153,11 @@
      Week 5 Notebook: Building a Deep Learning Model
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="05-jet-images.html">
+     Week 5 Notebook: Deep Learning from Jet Images
+    </a>
+   </li>
   </ul>
   <i class="fas fa-chevron-down">
   </i>
@@ -356,57 +361,27 @@
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">roc_curve</span><span class="p">,</span> <span class="n">auc</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">uproot</span>
+<span class="kn">import</span> <span class="nn">utils</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 27 jet-level features</span>
-<span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;fj_jetNTracks&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;fj_nSV&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;fj_tau0_trackEtaRel_0&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;fj_tau0_trackEtaRel_1&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;fj_tau0_trackEtaRel_2&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;fj_tau1_trackEtaRel_0&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;fj_tau1_trackEtaRel_1&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;fj_tau1_trackEtaRel_2&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;fj_tau_flightDistance2dSig_0&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;fj_tau_flightDistance2dSig_1&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;fj_tau_vertexDeltaR_0&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;fj_tau_vertexEnergyRatio_0&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;fj_tau_vertexEnergyRatio_1&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;fj_tau_vertexMass_0&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;fj_tau_vertexMass_1&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;fj_trackSip2dSigAboveBottom_0&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;fj_trackSip2dSigAboveBottom_1&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;fj_trackSip2dSigAboveCharm_0&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;fj_trackSipdSig_0&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;fj_trackSipdSig_0_0&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;fj_trackSipdSig_0_1&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;fj_trackSipdSig_1&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;fj_trackSipdSig_1_0&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;fj_trackSipdSig_1_1&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;fj_trackSipdSig_2&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;fj_trackSipdSig_3&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;fj_z_ratio&#39;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">yaml</span>
 
-<span class="c1"># spectators to define mass/pT window</span>
-<span class="n">spectators</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;fj_sdmass&#39;</span><span class="p">,</span>
-              <span class="s1">&#39;fj_pt&#39;</span><span class="p">]</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;definitions_simple.yml&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="c1"># The FullLoader parameter handles the conversion from YAML</span>
+    <span class="c1"># scalar values to Python the dictionary format</span>
+    <span class="n">definitions</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">Loader</span><span class="o">=</span><span class="n">yaml</span><span class="o">.</span><span class="n">FullLoader</span><span class="p">)</span>
+    
+<span class="n">features</span> <span class="o">=</span> <span class="n">definitions</span><span class="p">[</span><span class="s1">&#39;features&#39;</span><span class="p">]</span>
+<span class="n">spectators</span> <span class="o">=</span> <span class="n">definitions</span><span class="p">[</span><span class="s1">&#39;spectators&#39;</span><span class="p">]</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="n">definitions</span><span class="p">[</span><span class="s1">&#39;labels&#39;</span><span class="p">]</span>
 
-<span class="c1"># 2 labels: QCD or Hbb (we&#39;ll reduce the following labels)</span>
-<span class="n">labels</span> <span class="o">=</span>  <span class="p">[</span><span class="s1">&#39;label_QCD_b&#39;</span><span class="p">,</span>
-           <span class="s1">&#39;label_QCD_bb&#39;</span><span class="p">,</span>
-           <span class="s1">&#39;label_QCD_c&#39;</span><span class="p">,</span> 
-           <span class="s1">&#39;label_QCD_cc&#39;</span><span class="p">,</span> 
-           <span class="s1">&#39;label_QCD_others&#39;</span><span class="p">,</span>
-           <span class="s1">&#39;sample_isQCD&#39;</span><span class="p">,</span>
-           <span class="s1">&#39;label_H_bb&#39;</span><span class="p">]</span>
-
-<span class="n">nfeatures</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">features</span><span class="p">)</span>
-<span class="n">nspectators</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">spectators</span><span class="p">)</span>
-<span class="n">nlabels</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">nfeatures</span> <span class="o">=</span> <span class="n">definitions</span><span class="p">[</span><span class="s1">&#39;nfeatures&#39;</span><span class="p">]</span>
+<span class="n">nspectators</span> <span class="o">=</span> <span class="n">definitions</span><span class="p">[</span><span class="s1">&#39;nspectators&#39;</span><span class="p">]</span>
+<span class="n">nlabels</span> <span class="o">=</span> <span class="n">definitions</span><span class="p">[</span><span class="s1">&#39;nlabels&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -414,53 +389,9 @@
 <p>Let’s set up a function to get features and labels.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_features_labels</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">remove_mass_pt_window</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">entrystop</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="c1"># load file</span>
-    <span class="n">root_file</span> <span class="o">=</span> <span class="n">uproot</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
-    <span class="n">tree</span> <span class="o">=</span> <span class="n">root_file</span><span class="p">[</span><span class="s1">&#39;deepntuplizer/tree&#39;</span><span class="p">]</span>
-    <span class="n">feature_array</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">arrays</span><span class="p">(</span><span class="n">branches</span><span class="o">=</span><span class="n">features</span><span class="p">,</span> 
-                                <span class="n">entrystop</span><span class="o">=</span><span class="n">entrystop</span><span class="p">,</span>
-                                <span class="n">namedecode</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
-    <span class="n">spec_array</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">arrays</span><span class="p">(</span><span class="n">branches</span><span class="o">=</span><span class="n">spectators</span><span class="p">,</span> 
-                             <span class="n">entrystop</span><span class="o">=</span><span class="n">entrystop</span><span class="p">,</span>
-                             <span class="n">namedecode</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
-    <span class="n">label_array_all</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">arrays</span><span class="p">(</span><span class="n">branches</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> 
-                                  <span class="n">entrystop</span><span class="o">=</span><span class="n">entrystop</span><span class="p">,</span>
-                                  <span class="n">namedecode</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
-
-    <span class="n">feature_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">feature_array</span><span class="p">[</span><span class="n">feat</span><span class="p">]</span> <span class="k">for</span> <span class="n">feat</span> <span class="ow">in</span> <span class="n">features</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">spec_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">spec_array</span><span class="p">[</span><span class="n">spec</span><span class="p">]</span> <span class="k">for</span> <span class="n">spec</span> <span class="ow">in</span> <span class="n">spectators</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    
-    <span class="n">njets</span> <span class="o">=</span> <span class="n">feature_array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    
-    <span class="n">label_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">njets</span><span class="p">,</span><span class="n">nlabels</span><span class="p">))</span>
-    <span class="n">label_array</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">label_array_all</span><span class="p">[</span><span class="s1">&#39;sample_isQCD&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">label_array_all</span><span class="p">[</span><span class="s1">&#39;label_QCD_b&#39;</span><span class="p">]</span> <span class="o">+</span> \
-                                                          <span class="n">label_array_all</span><span class="p">[</span><span class="s1">&#39;label_QCD_bb&#39;</span><span class="p">]</span> <span class="o">+</span> \
-                                                          <span class="n">label_array_all</span><span class="p">[</span><span class="s1">&#39;label_QCD_c&#39;</span><span class="p">]</span> <span class="o">+</span> \
-                                                          <span class="n">label_array_all</span><span class="p">[</span><span class="s1">&#39;label_QCD_cc&#39;</span><span class="p">]</span> <span class="o">+</span> \
-                                                          <span class="n">label_array_all</span><span class="p">[</span><span class="s1">&#39;label_QCD_others&#39;</span><span class="p">])</span>
-    <span class="n">label_array</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">label_array_all</span><span class="p">[</span><span class="s1">&#39;label_H_bb&#39;</span><span class="p">]</span>
-
-    <span class="c1"># remove samples outside mass/pT window</span>
-    <span class="k">if</span> <span class="n">remove_mass_pt_window</span><span class="p">:</span>
-        <span class="n">feature_array</span> <span class="o">=</span> <span class="n">feature_array</span><span class="p">[(</span><span class="n">spec_array</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">40</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">spec_array</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">200</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">spec_array</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">300</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">spec_array</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">2000</span><span class="p">)]</span>
-        <span class="n">label_array</span> <span class="o">=</span> <span class="n">label_array</span><span class="p">[(</span><span class="n">spec_array</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">40</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">spec_array</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">200</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">spec_array</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">300</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">spec_array</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">2000</span><span class="p">)]</span>
-        <span class="n">spec_array</span> <span class="o">=</span> <span class="n">spec_array</span><span class="p">[(</span><span class="n">spec_array</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">40</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">spec_array</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">200</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">spec_array</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">300</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">spec_array</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">2000</span><span class="p">)]</span>
-    
-    <span class="c1"># remove unlabeled data</span>
-    <span class="n">feature_array</span> <span class="o">=</span> <span class="n">feature_array</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">label_array</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">==</span><span class="mi">1</span><span class="p">]</span>
-    <span class="n">spec_array</span> <span class="o">=</span> <span class="n">spec_array</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">label_array</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">==</span><span class="mi">1</span><span class="p">]</span>
-    <span class="n">label_array</span> <span class="o">=</span> <span class="n">label_array</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">label_array</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">==</span><span class="mi">1</span><span class="p">]</span>
-
-    <span class="k">return</span> <span class="n">feature_array</span><span class="p">,</span> <span class="n">label_array</span><span class="p">,</span> <span class="n">spec_array</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load training file</span>
-<span class="n">feature_array</span><span class="p">,</span> <span class="n">label_array</span><span class="p">,</span> <span class="n">spec_array</span> <span class="o">=</span> <span class="n">get_features_labels</span><span class="p">(</span><span class="s1">&#39;root://eospublic.cern.ch//eos/opendata/cms/datascience/HiggsToBBNtupleProducerTool/HiggsToBBNTuple_HiggsToBB_QCD_RunII_13TeV_MC/train/ntuple_merged_10.root&#39;</span><span class="p">,</span> 
+<span class="n">feature_array</span><span class="p">,</span> <span class="n">label_array</span><span class="p">,</span> <span class="n">spec_array</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">get_features_labels</span><span class="p">(</span><span class="s1">&#39;root://eospublic.cern.ch//eos/opendata/cms/datascience/HiggsToBBNtupleProducerTool/HiggsToBBNTuple_HiggsToBB_QCD_RunII_13TeV_MC/train/ntuple_merged_10.root&#39;</span><span class="p">,</span> 
+                                                                   <span class="n">features</span><span class="p">,</span> <span class="n">spectators</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span>
                                                              <span class="n">remove_mass_pt_window</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                                              <span class="n">entrystop</span><span class="o">=</span><span class="mi">20000</span><span class="p">)</span>
 </pre></div>
@@ -579,13 +510,14 @@ None
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/04-simple-classifiers_13_0.png" src="../_images/04-simple-classifiers_13_0.png" />
+<img alt="../_images/04-simple-classifiers_12_0.png" src="../_images/04-simple-classifiers_12_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load testing file</span>
-<span class="n">feature_array_test</span><span class="p">,</span> <span class="n">label_array_test</span><span class="p">,</span> <span class="n">spec_array_test</span> <span class="o">=</span> <span class="n">get_features_labels</span><span class="p">(</span><span class="s1">&#39;root://eospublic.cern.ch//eos/opendata/cms/datascience/HiggsToBBNtupleProducerTool/HiggsToBBNTuple_HiggsToBB_QCD_RunII_13TeV_MC/test/ntuple_merged_0.root&#39;</span><span class="p">,</span> 
+<span class="n">feature_array_test</span><span class="p">,</span> <span class="n">label_array_test</span><span class="p">,</span> <span class="n">spec_array_test</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">get_features_labels</span><span class="p">(</span><span class="s1">&#39;root://eospublic.cern.ch//eos/opendata/cms/datascience/HiggsToBBNtupleProducerTool/HiggsToBBNTuple_HiggsToBB_QCD_RunII_13TeV_MC/test/ntuple_merged_0.root&#39;</span><span class="p">,</span> 
+                                                                                  <span class="n">features</span><span class="p">,</span> <span class="n">spectators</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span>
                                                                             <span class="n">remove_mass_pt_window</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                                                             <span class="n">entrystop</span><span class="o">=</span><span class="mi">30000</span><span class="p">)</span>
 </pre></div>
@@ -621,7 +553,7 @@ None
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/04-simple-classifiers_15_0.png" src="../_images/04-simple-classifiers_15_0.png" />
+<img alt="../_images/04-simple-classifiers_14_0.png" src="../_images/04-simple-classifiers_14_0.png" />
 </div>
 </div>
 </div>

@@ -57,7 +57,7 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Week 6: Evalulating Model Performance and Robustness" href="06.html" />
+    <link rel="next" title="Week 5 Notebook: Deep Learning from Jet Images" href="05-jet-images.html" />
     <link rel="prev" title="Week 5: Building a Deep Learning Model" href="05.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -151,6 +151,11 @@
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
      Week 5 Notebook: Building a Deep Learning Model
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="05-jet-images.html">
+     Week 5 Notebook: Deep Learning from Jet Images
     </a>
    </li>
   </ul>
@@ -451,11 +456,11 @@ class DataGenerator(tensorflow.python.keras.utils.data_utils.Sequence)
 
 <span class="n">train_generator</span> <span class="o">=</span> <span class="n">DataGenerator</span><span class="p">(</span><span class="n">train_files</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">spectators</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">n_dim</span><span class="o">=</span><span class="n">ntracks</span><span class="p">,</span> 
                                 <span class="n">remove_mass_pt_window</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> 
-                                <span class="n">remove_unlabeled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">max_entry</span><span class="o">=</span><span class="mi">5000</span><span class="p">)</span>
+                                <span class="n">remove_unlabeled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">max_entry</span><span class="o">=</span><span class="mi">8000</span><span class="p">)</span>
 
 <span class="n">val_generator</span> <span class="o">=</span> <span class="n">DataGenerator</span><span class="p">(</span><span class="n">val_files</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">spectators</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">n_dim</span><span class="o">=</span><span class="n">ntracks</span><span class="p">,</span> 
                                 <span class="n">remove_mass_pt_window</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> 
-                                <span class="n">remove_unlabeled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">max_entry</span><span class="o">=</span><span class="mi">5000</span><span class="p">)</span>
+                                <span class="n">remove_unlabeled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">max_entry</span><span class="o">=</span><span class="mi">2000</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -541,7 +546,7 @@ None
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define callbacks</span>
 <span class="kn">from</span> <span class="nn">tensorflow.keras.callbacks</span> <span class="kn">import</span> <span class="n">ModelCheckpoint</span><span class="p">,</span> <span class="n">EarlyStopping</span><span class="p">,</span> <span class="n">ReduceLROnPlateau</span>
 
-<span class="n">early_stopping</span> <span class="o">=</span> <span class="n">EarlyStopping</span><span class="p">(</span><span class="n">monitor</span><span class="o">=</span><span class="s1">&#39;val_loss&#39;</span><span class="p">,</span> <span class="n">patience</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">early_stopping</span> <span class="o">=</span> <span class="n">EarlyStopping</span><span class="p">(</span><span class="n">monitor</span><span class="o">=</span><span class="s1">&#39;val_loss&#39;</span><span class="p">,</span> <span class="n">patience</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 <span class="n">reduce_lr</span> <span class="o">=</span> <span class="n">ReduceLROnPlateau</span><span class="p">(</span><span class="n">patience</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">factor</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 <span class="n">model_checkpoint</span> <span class="o">=</span> <span class="n">ModelCheckpoint</span><span class="p">(</span><span class="s1">&#39;keras_model_dense_best.h5&#39;</span><span class="p">,</span> <span class="n">monitor</span><span class="o">=</span><span class="s1">&#39;val_loss&#39;</span><span class="p">,</span> <span class="n">save_best_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">callbacks</span> <span class="o">=</span> <span class="p">[</span><span class="n">early_stopping</span><span class="p">,</span> <span class="n">model_checkpoint</span><span class="p">,</span> <span class="n">reduce_lr</span><span class="p">]</span>
@@ -552,7 +557,7 @@ None
                                                 <span class="n">steps_per_epoch</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">train_generator</span><span class="p">),</span> 
                                                 <span class="n">validation_steps</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">val_generator</span><span class="p">),</span>
                                                 <span class="n">max_queue_size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-                                                <span class="n">epochs</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> 
+                                                <span class="n">epochs</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> 
                                                 <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                                 <span class="n">callbacks</span> <span class="o">=</span> <span class="n">callbacks</span><span class="p">,</span> 
                                                 <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
@@ -640,7 +645,7 @@ None
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define callbacks</span>
 <span class="kn">from</span> <span class="nn">tensorflow.keras.callbacks</span> <span class="kn">import</span> <span class="n">ModelCheckpoint</span><span class="p">,</span> <span class="n">EarlyStopping</span><span class="p">,</span> <span class="n">ReduceLROnPlateau</span>
 
-<span class="n">early_stopping</span> <span class="o">=</span> <span class="n">EarlyStopping</span><span class="p">(</span><span class="n">monitor</span><span class="o">=</span><span class="s1">&#39;val_loss&#39;</span><span class="p">,</span> <span class="n">patience</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">early_stopping</span> <span class="o">=</span> <span class="n">EarlyStopping</span><span class="p">(</span><span class="n">monitor</span><span class="o">=</span><span class="s1">&#39;val_loss&#39;</span><span class="p">,</span> <span class="n">patience</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 <span class="n">reduce_lr</span> <span class="o">=</span> <span class="n">ReduceLROnPlateau</span><span class="p">(</span><span class="n">patience</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">factor</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 <span class="n">model_checkpoint</span> <span class="o">=</span> <span class="n">ModelCheckpoint</span><span class="p">(</span><span class="s1">&#39;keras_model_conv1d_best.h5&#39;</span><span class="p">,</span> <span class="n">monitor</span><span class="o">=</span><span class="s1">&#39;val_loss&#39;</span><span class="p">,</span> <span class="n">save_best_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">callbacks</span> <span class="o">=</span> <span class="p">[</span><span class="n">early_stopping</span><span class="p">,</span> <span class="n">model_checkpoint</span><span class="p">,</span> <span class="n">reduce_lr</span><span class="p">]</span>
@@ -651,7 +656,7 @@ None
                                         <span class="n">steps_per_epoch</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">train_generator</span><span class="p">),</span> 
                                         <span class="n">validation_steps</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">val_generator</span><span class="p">),</span>
                                         <span class="n">max_queue_size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-                                        <span class="n">epochs</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> 
+                                        <span class="n">epochs</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> 
                                         <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                         <span class="n">callbacks</span> <span class="o">=</span> <span class="n">callbacks</span><span class="p">,</span> 
                                         <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
@@ -761,7 +766,7 @@ None
     <div class='prev-next-bottom'>
         
     <a class='left-prev' id="prev-link" href="05.html" title="previous page">Week 5: Building a Deep Learning Model</a>
-    <a class='right-next' id="next-link" href="06.html" title="next page">Week 6: Evalulating Model Performance and Robustness</a>
+    <a class='right-next' id="next-link" href="05-jet-images.html" title="next page">Week 5 Notebook: Deep Learning from Jet Images</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

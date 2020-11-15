@@ -1,0 +1,45 @@
+Traceback (most recent call last):
+  File "/usr/share/miniconda/envs/ml-latest/lib/python3.7/site-packages/jupyter_cache/executors/utils.py", line 56, in single_nb_execution
+    record_timing=False,
+  File "/usr/share/miniconda/envs/ml-latest/lib/python3.7/site-packages/nbclient/client.py", line 1087, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/usr/share/miniconda/envs/ml-latest/lib/python3.7/site-packages/nbclient/util.py", line 74, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/usr/share/miniconda/envs/ml-latest/lib/python3.7/site-packages/nbclient/util.py", line 53, in just_run
+    return loop.run_until_complete(coro)
+  File "/usr/share/miniconda/envs/ml-latest/lib/python3.7/asyncio/base_events.py", line 587, in run_until_complete
+    return future.result()
+  File "/usr/share/miniconda/envs/ml-latest/lib/python3.7/site-packages/nbclient/client.py", line 541, in async_execute
+    cell, index, execution_count=self.code_cells_executed + 1
+  File "/usr/share/miniconda/envs/ml-latest/lib/python3.7/site-packages/nbclient/client.py", line 832, in async_execute_cell
+    self._check_raise_for_error(cell, exec_reply)
+  File "/usr/share/miniconda/envs/ml-latest/lib/python3.7/site-packages/nbclient/client.py", line 740, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply['content'])
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+# load testing file
+feature_array_test, label_array_test, spec_array_test = utils.get_features_labels('root://eospublic.cern.ch//eos/opendata/cms/datascience/HiggsToBBNtupleProducerTool/HiggsToBBNTuple_HiggsToBB_QCD_RunII_13TeV_MC/test/ntuple_merged_0.root', 
+                                                         features, spectators, labels,
+                                                         remove_mass_pt_window=False)
+                      
+# make image
+X_test = utils.make_image(feature_array_test)
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mMemoryError[0m                               Traceback (most recent call last)
+[0;32m<ipython-input-8-78d3addc0ca0>[0m in [0;36m<module>[0;34m[0m
+[1;32m      5[0m [0;34m[0m[0m
+[1;32m      6[0m [0;31m# make image[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[0;32m----> 7[0;31m [0mX_test[0m [0;34m=[0m [0mutils[0m[0;34m.[0m[0mmake_image[0m[0;34m([0m[0mfeature_array_test[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m
+[0;32m~/work/capstone-particle-physics-domain/capstone-particle-physics-domain/weeks/utils.py[0m in [0;36mmake_image[0;34m(feature_array, n_pixels, img_ranges)[0m
+[1;32m     47[0m     [0mx[0m [0;34m=[0m [0mfeature_array[0m[0;34m[[0m[0;34m:[0m[0;34m,[0m[0;36m1[0m[0;34m][0m [0;31m# etarel[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     48[0m     [0my[0m [0;34m=[0m [0mfeature_array[0m[0;34m[[0m[0;34m:[0m[0;34m,[0m[0;36m2[0m[0;34m][0m [0;31m# phirel[0m[0;34m[0m[0;34m[0m[0m
+[0;32m---> 49[0;31m     [0mimg[0m [0;34m=[0m [0mnp[0m[0;34m.[0m[0mzeros[0m[0;34m([0m[0mshape[0m[0;34m=[0m[0;34m([0m[0mlen[0m[0;34m([0m[0mwgt[0m[0;34m)[0m[0;34m,[0m [0mn_pixels[0m[0;34m,[0m [0mn_pixels[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m     50[0m     [0;32mfor[0m [0mi[0m [0;32min[0m [0mrange[0m[0;34m([0m[0mlen[0m[0;34m([0m[0mwgt[0m[0;34m)[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     51[0m         hist2d, xedges, yedges = np.histogram2d(x[i], y[i], 
+
+[0;31mMemoryError[0m: 
+MemoryError: 
+
