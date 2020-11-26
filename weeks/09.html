@@ -48,6 +48,8 @@
     <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
@@ -350,19 +352,27 @@
 <li><p>Read about the CMS event data model (EDM): <a class="reference external" href="https://twiki.cern.ch/twiki/bin/view/CMSPublic/WorkBookCMSSWFramework">https://twiki.cern.ch/twiki/bin/view/CMSPublic/WorkBookCMSSWFramework</a></p></li>
 <li><p>Learn about the CMS software stack (CMSSW): <a class="reference external" href="https://cms-sw.github.io/index.html">https://cms-sw.github.io/index.html</a></p></li>
 <li><p>Browse an example pull request to CMSSW: <a class="reference external" href="https://github.com/cms-sw/cmssw/pull/30072">https://github.com/cms-sw/cmssw/pull/30072</a></p></li>
-<li><p>Skim some papers on the framework and multithreading: <a class="reference external" href="https://indico.cern.ch/event/408139/contributions/979800/attachments/815724/1117731/FrameworkPaper.pdf">https://indico.cern.ch/event/408139/contributions/979800/attachments/815724/1117731/FrameworkPaper.pdf</a>, <a class="bibtex reference internal" href="../zreferences.html#jones-2014uza" id="id1">[22]</a></p></li>
+<li><p>Skim some papers on the framework and multithreading: <a class="reference external" href="https://indico.cern.ch/event/408139/contributions/979800/attachments/815724/1117731/FrameworkPaper.pdf">https://indico.cern.ch/event/408139/contributions/979800/attachments/815724/1117731/FrameworkPaper.pdf</a>, <a class="bibtex reference internal" href="../zreferences.html#jones-2014uza" id="id1">[24]</a></p></li>
 </ul>
 </div>
 <div class="section" id="tasks">
 <h2>Tasks<a class="headerlink" href="#tasks" title="Permalink to this headline">¶</a></h2>
-<p>No tasks this week.</p>
+<p>Propose a project for Quarter 2. Possible extensions include:</p>
+<ul class="simple">
+<li><p>Explore other model architectures for the same H(bb) identification task, like transformers, tensor networks, equivariant neural networks.</p></li>
+<li><p>Expand the model to do multiclass classification (classifying all flavors of QCD quarks, gluons, H(bb) present in the dataset).</p></li>
+<li><p>Try an unsupervised learning approach like (variational) autoencoders for anomaly detection.</p></li>
+<li><p>Explore model compression, knowledge distillation, or other techniques to reduce the model size or complexity; Can it be made more efficient?</p></li>
+<li><p>Perform a regression task, like correcting the energy or mass of the particle jet based on generator-level “truth” information.</p></li>
+<li><p>Apply concepts you learned to a new dataset like the TrackML Particle Tracking Challenge: <a class="reference external" href="https://www.kaggle.com/c/trackml-particle-identification/overview">https://www.kaggle.com/c/trackml-particle-identification/overview</a>.</p></li>
+<li><p>Apply your algorithm to real data.</p></li>
+</ul>
 </div>
 <div class="section" id="weekly-questions">
 <h2>Weekly Questions<a class="headerlink" href="#weekly-questions" title="Permalink to this headline">¶</a></h2>
 <p>Answer the following questions</p>
 <ul class="simple">
 <li><p>What are some differences between the CMS event data model and other processing frameworks</p></li>
-<li><p>Question 2</p></li>
 </ul>
 </div>
 </div>
