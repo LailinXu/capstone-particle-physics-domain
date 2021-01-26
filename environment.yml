@@ -5,7 +5,7 @@ channels:
 dependencies:
     - python=3.7
     - numpy=1.16.4
-    - uproot
+    - uproot<4
     - tensorflow
     - xrootd
     - scikit-learn
