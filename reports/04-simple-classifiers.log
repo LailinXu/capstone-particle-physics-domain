@@ -17,24 +17,20 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply['content'])
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-feature_array, y, spec_array = utils.get_features_labels('root://eospublic.cern.ch//eos/opendata/cms/datascience/HiggsToBBNtupleProducerTool/HiggsToBBNTuple_HiggsToBB_QCD_RunII_13TeV_MC/train/ntuple_merged_10.root', 
-                                                         features, spectators, labels,
-                                                         remove_mass_pt_window=False,
-                                                         entrystop=10000)
-# make image
-X = utils.make_image(feature_array)
-print(X.shape) # image is a 4D tensor (n_samples, n_pixels_x, n_pixels_y, n_channels)
+# load training file
+feature_array, label_array, spec_array = utils.get_features_labels('root://eospublic.cern.ch//eos/opendata/cms/datascience/HiggsToBBNtupleProducerTool/HiggsToBBNTuple_HiggsToBB_QCD_RunII_13TeV_MC/train/ntuple_merged_10.root', 
+                                                                   features, spectators, labels,
+                                                             remove_mass_pt_window=False,
+                                                             entrystop=20000)
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mTypeError[0m                                 Traceback (most recent call last)
-[0;32m<ipython-input-3-058e3a412778>[0m in [0;36m<module>[0;34m[0m
-[1;32m      2[0m                                                          [0mfeatures[0m[0;34m,[0m [0mspectators[0m[0;34m,[0m [0mlabels[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
-[1;32m      3[0m                                                          [0mremove_mass_pt_window[0m[0;34m=[0m[0;32mFalse[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
-[0;32m----> 4[0;31m                                                          entrystop=10000)
-[0m[1;32m      5[0m [0;31m# make image[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
-[1;32m      6[0m [0mX[0m [0;34m=[0m [0mutils[0m[0;34m.[0m[0mmake_image[0m[0;34m([0m[0mfeature_array[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-
+[0;32m<ipython-input-3-beec054d16fa>[0m in [0;36m<module>[0;34m[0m
+[1;32m      3[0m                                                                    [0mfeatures[0m[0;34m,[0m [0mspectators[0m[0;34m,[0m [0mlabels[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      4[0m                                                              [0mremove_mass_pt_window[0m[0;34m=[0m[0;32mFalse[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+[0;32m----> 5[0;31m                                                              entrystop=20000)
+[0m
 [0;32m~/work/capstone-particle-physics-domain/capstone-particle-physics-domain/weeks/utils.py[0m in [0;36mget_features_labels[0;34m(file_name, features, spectators, labels, remove_mass_pt_window, entrystop)[0m
 [1;32m      8[0m     feature_array = tree.arrays(branches=features, 
 [1;32m      9[0m                                 [0mentrystop[0m[0;34m=[0m[0mentrystop[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m

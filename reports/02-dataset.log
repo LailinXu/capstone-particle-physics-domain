@@ -1,0 +1,43 @@
+Traceback (most recent call last):
+  File "/usr/share/miniconda/envs/ml-latest/lib/python3.7/site-packages/jupyter_cache/executors/utils.py", line 56, in single_nb_execution
+    record_timing=False,
+  File "/usr/share/miniconda/envs/ml-latest/lib/python3.7/site-packages/nbclient/client.py", line 1087, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/usr/share/miniconda/envs/ml-latest/lib/python3.7/site-packages/nbclient/util.py", line 74, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/usr/share/miniconda/envs/ml-latest/lib/python3.7/site-packages/nbclient/util.py", line 53, in just_run
+    return loop.run_until_complete(coro)
+  File "/usr/share/miniconda/envs/ml-latest/lib/python3.7/asyncio/base_events.py", line 587, in run_until_complete
+    return future.result()
+  File "/usr/share/miniconda/envs/ml-latest/lib/python3.7/site-packages/nbclient/client.py", line 541, in async_execute
+    cell, index, execution_count=self.code_cells_executed + 1
+  File "/usr/share/miniconda/envs/ml-latest/lib/python3.7/site-packages/nbclient/client.py", line 832, in async_execute_cell
+    self._check_raise_for_error(cell, exec_reply)
+  File "/usr/share/miniconda/envs/ml-latest/lib/python3.7/site-packages/nbclient/client.py", line 740, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply['content'])
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+# Returns a dictionary
+labels = tree.arrays(branches=['label_QCD_b', 
+                               'label_QCD_bb', 
+                               'label_QCD_c', 
+                               'label_QCD_cc', 
+                               'label_QCD_others', 
+                               'label_H_bb', 
+                               'sample_isQCD'], 
+                     entrystop=20000,
+                     namedecode='utf-8')
+labels
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mTypeError[0m                                 Traceback (most recent call last)
+[0;32m<ipython-input-5-ecfdc5e5b8e9>[0m in [0;36m<module>[0;34m[0m
+[1;32m      8[0m                                'sample_isQCD'], 
+[1;32m      9[0m                      [0mentrystop[0m[0;34m=[0m[0;36m20000[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+[0;32m---> 10[0;31m                      namedecode='utf-8')
+[0m[1;32m     11[0m [0mlabels[0m[0;34m[0m[0;34m[0m[0m
+
+[0;31mTypeError[0m: arrays() got an unexpected keyword argument 'branches'
+TypeError: arrays() got an unexpected keyword argument 'branches'
+
