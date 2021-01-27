@@ -40,6 +40,6 @@ X_test = utils.make_image(feature_array_test)
 [0m[1;32m     50[0m     [0;32mfor[0m [0mi[0m [0;32min[0m [0mrange[0m[0;34m([0m[0mlen[0m[0;34m([0m[0mwgt[0m[0;34m)[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
 [1;32m     51[0m         hist2d, xedges, yedges = np.histogram2d(x[i], y[i], 
 
-[0;31mMemoryError[0m: Unable to allocate 70.3 GiB for an array with shape (188007, 224, 224) and data type float64
-MemoryError: Unable to allocate 70.3 GiB for an array with shape (188007, 224, 224) and data type float64
+[0;31mMemoryError[0m: 
+MemoryError: 
 
