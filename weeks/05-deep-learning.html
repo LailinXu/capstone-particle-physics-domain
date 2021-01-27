@@ -47,6 +47,8 @@
     <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
@@ -507,35 +509,8 @@ class DataGenerator(tensorflow.python.keras.utils.data_utils.Sequence)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">5</span><span class="o">-</span><span class="mi">575090085654</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">train_generator</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-
-<span class="nn">~/work/capstone-particle-physics-domain/capstone-particle-physics-domain/weeks/DataGenerator.py</span> in <span class="ni">__getitem__</span><span class="nt">(self, index)</span>
-<span class="g g-Whitespace">     </span><span class="mi">68</span> 
-<span class="g g-Whitespace">     </span><span class="mi">69</span>         <span class="c1"># Generate data</span>
-<span class="ne">---&gt; </span><span class="mi">70</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__data_generation</span><span class="p">(</span><span class="n">unique_files</span><span class="p">,</span> <span class="n">starts</span><span class="p">,</span> <span class="n">stops</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">71</span> 
-<span class="g g-Whitespace">     </span><span class="mi">72</span>     <span class="k">def</span> <span class="nf">on_epoch_end</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-
-<span class="nn">~/work/capstone-particle-physics-domain/capstone-particle-physics-domain/weeks/DataGenerator.py</span> in <span class="ni">__data_generation</span><span class="nt">(self, unique_files, starts, stops)</span>
-<span class="g g-Whitespace">     </span><span class="mi">88</span>                 <span class="n">zs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">89</span>             <span class="k">else</span><span class="p">:</span>
-<span class="ne">---&gt; </span><span class="mi">90</span>                 <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get_features_labels</span><span class="p">(</span><span class="n">ifile</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">91</span>             <span class="n">Xs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">92</span>             <span class="n">ys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-
-<span class="nn">~/work/capstone-particle-physics-domain/capstone-particle-physics-domain/weeks/DataGenerator.py</span> in <span class="ni">__get_features_labels</span><span class="nt">(self, ifile, entrystart, entrystop)</span>
-<span class="g g-Whitespace">    </span><span class="mi">118</span>                                     <span class="n">entrystart</span><span class="o">=</span><span class="n">entrystart</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">119</span>                                     <span class="n">entrystop</span><span class="o">=</span><span class="n">entrystop</span><span class="p">,</span>
-<span class="ne">--&gt; </span><span class="mi">120</span>                                     <span class="n">namedecode</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">121</span> 
-<span class="g g-Whitespace">    </span><span class="mi">122</span>         <span class="n">label_array_all</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">arrays</span><span class="p">(</span><span class="n">branches</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">labels</span><span class="p">,</span> 
-
-<span class="ne">TypeError</span>: arrays() got an unexpected keyword argument &#39;branches&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(943, 60, 48)
+(943, 2)
 </pre></div>
 </div>
 </div>
@@ -561,6 +536,38 @@ class DataGenerator(tensorflow.python.keras.utils.data_utils.Sequence)
 <span class="n">keras_model_dense</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="n">outputs</span><span class="p">)</span>
 <span class="n">keras_model_dense</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;adam&#39;</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">keras_model_dense</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /usr/share/miniconda/envs/ml-latest/lib/python3.7/site-packages/tensorflow/python/ops/init_ops.py:1251: calling VarianceScaling.__init__ (from tensorflow.python.ops.init_ops) with dtype is deprecated and will be removed in a future version.
+Instructions for updating:
+Call initializer instance with the dtype argument instead of passing it to the constructor
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;model&quot;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+input (InputLayer)           [(None, 60, 48)]          0         
+_________________________________________________________________
+bn_1 (BatchNormalization)    (None, 60, 48)            192       
+_________________________________________________________________
+flatten_1 (Flatten)          (None, 2880)              0         
+_________________________________________________________________
+dense_1 (Dense)              (None, 64)                184384    
+_________________________________________________________________
+dense_2 (Dense)              (None, 32)                2080      
+_________________________________________________________________
+dense_3 (Dense)              (None, 32)                1056      
+_________________________________________________________________
+output (Dense)               (None, 2)                 66        
+=================================================================
+Total params: 187,778
+Trainable params: 187,682
+Non-trainable params: 96
+_________________________________________________________________
+None
 </pre></div>
 </div>
 </div>
@@ -602,6 +609,9 @@ class DataGenerator(tensorflow.python.keras.utils.data_utils.Sequence)
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/05-deep-learning_12_0.png" src="../_images/05-deep-learning_12_0.png" />
+</div>
 </div>
 </div>
 <div class="section" id="deep-sets-classifier">
@@ -628,6 +638,35 @@ Then the <code class="docutils literal notranslate"><span class="pre">Lambda</sp
 <span class="n">keras_model_conv1d</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="n">outputs</span><span class="p">)</span>
 <span class="n">keras_model_conv1d</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;adam&#39;</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">keras_model_conv1d</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;model_1&quot;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+input (InputLayer)           [(None, 60, 48)]          0         
+_________________________________________________________________
+bn_1 (BatchNormalization)    (None, 60, 48)            192       
+_________________________________________________________________
+conv1d_1 (Conv1D)            (None, 60, 64)            3136      
+_________________________________________________________________
+conv1d_2 (Conv1D)            (None, 60, 32)            2080      
+_________________________________________________________________
+conv1d_3 (Conv1D)            (None, 60, 32)            1056      
+_________________________________________________________________
+pool_1 (GlobalAveragePooling (None, 32)                0         
+_________________________________________________________________
+dense_1 (Dense)              (None, 100)               3300      
+_________________________________________________________________
+output (Dense)               (None, 2)                 202       
+=================================================================
+Total params: 9,966
+Trainable params: 9,870
+Non-trainable params: 96
+_________________________________________________________________
+None
 </pre></div>
 </div>
 </div>
@@ -668,6 +707,9 @@ Then the <code class="docutils literal notranslate"><span class="pre">Lambda</sp
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/05-deep-learning_16_0.png" src="../_images/05-deep-learning_16_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -717,6 +759,9 @@ Then the <code class="docutils literal notranslate"><span class="pre">Lambda</sp
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/05-deep-learning_18_0.png" src="../_images/05-deep-learning_18_0.png" />
 </div>
 </div>
 <p>We see the more structurally-aware Conv1D/Deep Sets model does better than a simple fully conneted neural network appraoch.</p>
