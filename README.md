@@ -9,6 +9,8 @@ UCSD Data Science Capstone (<https://dsc-capstone.github.io/>) particle physics 
 Developed by Javier Duarte <https://orcid.org/0000-0002-5076-7096>, Frank Würthwein <https://orcid.org/0000-0001-5912-6124>.
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/jmduarte/capstone-particle-physics-domain/master)
+[![DOI](https://zenodo.org/badge/292683876.svg)](https://zenodo.org/badge/latestdoi/292683876)
+![deploy-book](https://github.com/jmduarte/capstone-particle-physics-domain/actions/workflows/deploy.yml/badge.svg)
 
 ## Introduction
 
