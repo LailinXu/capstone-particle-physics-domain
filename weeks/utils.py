@@ -1,19 +1,16 @@
 import uproot
 import numpy as np
 
-def get_features_labels(file_name, features, spectators, labels, remove_mass_pt_window=True, entrystop=None):
+def get_features_labels(file_name, features, spectators, labels, remove_mass_pt_window=True, entry_stop=None):
     # load file
     root_file = uproot.open(file_name)
     tree = root_file['deepntuplizer/tree']
-    feature_array = tree.arrays(branches=features, 
-                                entrystop=entrystop,
-                                namedecode='utf-8')
+    feature_array = tree.arrays(features, 
+                                entry_stop=entry_stop)
     spec_array = tree.arrays(branches=spectators, 
-                             entrystop=entrystop,
-                             namedecode='utf-8')
+                             entry_stop=entry_stop)
     label_array_all = tree.arrays(branches=labels, 
-                                  entrystop=entrystop,
-                                  namedecode='utf-8')
+                                  entry_stop=entry_stop)
 
     feature_array = np.stack([feature_array[feat] for feat in features],axis=1)
     spec_array = np.stack([spec_array[spec] for spec in spectators],axis=1)
