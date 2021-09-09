@@ -1,0 +1,74 @@
+Traceback (most recent call last):
+  File "/usr/share/miniconda/envs/ml-latest/lib/python3.9/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
+    executenb(
+  File "/usr/share/miniconda/envs/ml-latest/lib/python3.9/site-packages/nbclient/client.py", line 1117, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/usr/share/miniconda/envs/ml-latest/lib/python3.9/site-packages/nbclient/util.py", line 78, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/usr/share/miniconda/envs/ml-latest/lib/python3.9/site-packages/nbclient/util.py", line 57, in just_run
+    return loop.run_until_complete(coro)
+  File "/usr/share/miniconda/envs/ml-latest/lib/python3.9/asyncio/base_events.py", line 642, in run_until_complete
+    return future.result()
+  File "/usr/share/miniconda/envs/ml-latest/lib/python3.9/site-packages/nbclient/client.py", line 558, in async_execute
+    await self.async_execute_cell(
+  File "/usr/share/miniconda/envs/ml-latest/lib/python3.9/site-packages/nbclient/client.py", line 862, in async_execute_cell
+    self._check_raise_for_error(cell, exec_reply)
+  File "/usr/share/miniconda/envs/ml-latest/lib/python3.9/site-packages/nbclient/client.py", line 765, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+from GraphDataset import GraphDataset
+if local:
+    file_names = ['/teams/DSC180A_FA20_A00/b06particlephysics/train/ntuple_merged_10.root']
+    file_names_test = ['/teams/DSC180A_FA20_A00/b06particlephysics/test/ntuple_merged_0.root']
+else:
+    file_names = ['root://eospublic.cern.ch//eos/opendata/cms/datascience/HiggsToBBNtupleProducerTool/HiggsToBBNTuple_HiggsToBB_QCD_RunII_13TeV_MC/train/ntuple_merged_10.root']
+    file_names_test = ['root://eospublic.cern.ch//eos/opendata/cms/datascience/HiggsToBBNtupleProducerTool/HiggsToBBNTuple_HiggsToBB_QCD_RunII_13TeV_MC/test/ntuple_merged_0.root']
+
+graph_dataset = GraphDataset('gdata_train', features, labels, spectators, n_events=1000, n_events_merge=1, 
+                             file_names=file_names)
+
+test_dataset = GraphDataset('gdata_test', features, labels, spectators, n_events=2000, n_events_merge=1, 
+                             file_names=file_names_test)
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mTypeError[0m                                 Traceback (most recent call last)
+[0;32m/tmp/ipykernel_3800/2481067679.py[0m in [0;36m<module>[0;34m[0m
+[1;32m      7[0m     [0mfile_names_test[0m [0;34m=[0m [0;34m[[0m[0;34m'root://eospublic.cern.ch//eos/opendata/cms/datascience/HiggsToBBNtupleProducerTool/HiggsToBBNTuple_HiggsToBB_QCD_RunII_13TeV_MC/test/ntuple_merged_0.root'[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
+[1;32m      8[0m [0;34m[0m[0m
+[0;32m----> 9[0;31m graph_dataset = GraphDataset('gdata_train', features, labels, spectators, n_events=1000, n_events_merge=1, 
+[0m[1;32m     10[0m                              file_names=file_names)
+[1;32m     11[0m [0;34m[0m[0m
+
+[0;32m~/work/capstone-particle-physics-domain/capstone-particle-physics-domain/weeks/GraphDataset.py[0m in [0;36m__init__[0;34m(self, root, features, labels, spectators, transform, pre_transform, n_events, n_events_merge, file_names, remove_unlabeled)[0m
+[1;32m     30[0m         [0mself[0m[0;34m.[0m[0mfile_names[0m [0;34m=[0m [0mfile_names[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     31[0m         [0mself[0m[0;34m.[0m[0mremove_unlabeled[0m [0;34m=[0m [0mremove_unlabeled[0m[0;34m[0m[0;34m[0m[0m
+[0;32m---> 32[0;31m         [0msuper[0m[0;34m([0m[0mGraphDataset[0m[0;34m,[0m [0mself[0m[0;34m)[0m[0;34m.[0m[0m__init__[0m[0;34m([0m[0mroot[0m[0;34m,[0m [0mtransform[0m[0;34m,[0m [0mpre_transform[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m     33[0m [0;34m[0m[0m
+[1;32m     34[0m     [0;34m@[0m[0mproperty[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m/usr/share/miniconda/envs/ml-latest/lib/python3.9/site-packages/torch_geometric/data/dataset.py[0m in [0;36m__init__[0;34m(self, root, transform, pre_transform, pre_filter)[0m
+[1;32m     84[0m [0;34m[0m[0m
+[1;32m     85[0m         [0;32mif[0m [0;34m'process'[0m [0;32min[0m [0mself[0m[0;34m.[0m[0m__class__[0m[0;34m.[0m[0m__dict__[0m[0;34m.[0m[0mkeys[0m[0;34m([0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m---> 86[0;31m             [0mself[0m[0;34m.[0m[0m_process[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m     87[0m [0;34m[0m[0m
+[1;32m     88[0m     [0;32mdef[0m [0mindices[0m[0;34m([0m[0mself[0m[0;34m)[0m [0;34m->[0m [0mSequence[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m/usr/share/miniconda/envs/ml-latest/lib/python3.9/site-packages/torch_geometric/data/dataset.py[0m in [0;36m_process[0;34m(self)[0m
+[1;32m    163[0m [0;34m[0m[0m
+[1;32m    164[0m         [0mmakedirs[0m[0;34m([0m[0mself[0m[0;34m.[0m[0mprocessed_dir[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 165[0;31m         [0mself[0m[0;34m.[0m[0mprocess[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    166[0m [0;34m[0m[0m
+[1;32m    167[0m         [0mpath[0m [0;34m=[0m [0mosp[0m[0;34m.[0m[0mjoin[0m[0;34m([0m[0mself[0m[0;34m.[0m[0mprocessed_dir[0m[0;34m,[0m [0;34m'pre_transform.pt'[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/work/capstone-particle-physics-domain/capstone-particle-physics-domain/weeks/GraphDataset.py[0m in [0;36mprocess[0;34m(self)[0m
+[1;32m     71[0m             [0mtree[0m [0;34m=[0m [0mroot_file[0m[0;34m[[0m[0;34m'deepntuplizer/tree'[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
+[1;32m     72[0m [0;34m[0m[0m
+[0;32m---> 73[0;31m             feature_array = tree.arrays(branches=self.features,
+[0m[1;32m     74[0m                                         [0mentrystop[0m[0;34m=[0m[0mself[0m[0;34m.[0m[0mn_events[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     75[0m                                         namedecode='utf-8')
+
+[0;31mTypeError[0m: arrays() got an unexpected keyword argument 'branches'
+TypeError: arrays() got an unexpected keyword argument 'branches'
+

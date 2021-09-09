@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>References &#8212; Particle Physics and Machine Learning</title>
     
-  <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
 
     
   <link rel="stylesheet"
@@ -19,14 +20,10 @@
 
     
       
-  <link rel="stylesheet"
-    href="_static/vendor/open-sans_all/1.44.1/index.css">
-  <link rel="stylesheet"
-    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
 
     
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
@@ -34,7 +31,7 @@
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="_static/js/index.d3f166471bb80abb5163.js">
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
 
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
@@ -44,12 +41,8 @@
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
-    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
         const thebe_selector_input = "pre"
@@ -59,14 +52,14 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="Week 9: Application to Real Data" href="weeks/09.html" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
-
-
-
+    
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
     
 
     <div class="container-xl">
@@ -75,79 +68,93 @@
 <div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
     
         <div class="navbar-brand-box">
-<a class="navbar-brand text-wrap" href="index.html">
-  
-  <img src="_static/logo.png" class="logo" alt="logo">
-  
-  
-  <h1 class="site-logo" id="site-title">Particle Physics and Machine Learning</h1>
-  
-</a>
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Particle Physics and Machine Learning</h1>
+      
+    </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form>
-<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
-    <ul class="nav sidenav_l1">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="README.html">
    Particle Physics and Machine Learning
   </a>
  </li>
 </ul>
-<ul class="current nav sidenav_l1">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="weeks/01.html">
    Week 1: Introduction to Particle Physics and Jets
   </a>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="weeks/02.html">
    Week 2: Data Formats and Exploration
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="weeks/02-dataset.html">
      Week 2 Notebook: Data Formats and Exploration
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="weeks/03.html">
    Week 3: Feature Engineering
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="weeks/03-features.html">
      Week 3 Notebook: Feature Engineering
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="weeks/04.html">
    Week 4: Simple Classifiers
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="weeks/04-simple-classifiers.html">
      Week 4 Notebook: Simple Classifiers
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="weeks/05.html">
    Week 5: Building a Deep Learning Model
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="weeks/05-deep-learning.html">
      Week 5 Notebook: Building a Deep Learning Model
@@ -159,50 +166,57 @@
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="weeks/06.html">
    Week 6: Evalulating Model Performance and Robustness
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="weeks/06-evaluate.html">
      Week 6 Notebook: Evalulating Model Performance and Robustness
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="weeks/07.html">
    Week 7: Optimizing Other Objectives
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="weeks/07-objectives.html">
      Week 7 Notebook: Optimizing Other Objectives
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="weeks/08.html">
    Week 8: Extending the Model
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="weeks/08-extending.html">
      Week 8 Notebook: Extending the Model
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="weeks/09.html">
@@ -216,6 +230,7 @@
  </li>
 </ul>
 
+    </div>
 </nav> <!-- To handle the deprecated key -->
 
 <div class="navbar_extra_footer">
@@ -231,21 +246,21 @@
           
 <main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
     
-    <div class="row topbar fixed-top container-xl">
-    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
-    </div>
-    <div class="col pl-2 topbar-main">
-        
-        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-            <i class="fas fa-bars"></i>
-            <i class="fas fa-arrow-left"></i>
-            <i class="fas fa-arrow-up"></i>
-        </button>
-        
-        
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
 <div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
             class="fas fa-download"></i></button>
@@ -263,7 +278,7 @@
     </div>
 </div>
 
-        <!-- Source interaction buttons -->
+            <!-- Source interaction buttons -->
 
 <div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
@@ -283,20 +298,21 @@
     </div>
 </div>
 
+            <!-- Full screen (wrap in <a> to have style consistency -->
 
-        <!-- Full screen (wrap in <a> to have style consistency -->
-        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-                title="Fullscreen mode"><i
-                    class="fas fa-expand"></i></button></a>
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
 
-        <!-- Launch buttons -->
+            <!-- Launch buttons -->
 
-    </div>
+        </div>
 
-    <!-- Table of contents -->
-    <div class="d-none d-md-block col-md-2 bd-toc show">
-        
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        </div>
     </div>
 </div>
     <div id="main-content" class="row">
@@ -306,77 +322,77 @@
                 
   <div class="section" id="references">
 <h1>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h1>
-<p id="bibtex-bibliography-zreferences-0"><dl class="citation">
-<dt class="bibtex label" id="moreno-2019neq"><span class="brackets">1</span></dt>
+<p id="id1"><dl class="citation">
+<dt class="label" id="id2"><span class="brackets">1</span></dt>
 <dd><p>Eric A. Moreno, Thong Q. Nguyen, Jean-Roch Vlimant, Olmo Cerri, Harvey B. Newman, Avikar Periwal, Maria Spiropulu, Javier M. Duarte, and Maurizio Pierini. Interaction networks for the identification of boosted $H \rightarrow b\overline b$ decays. <em>Phys. Rev. D</em>, 102:012010, 2020. <a class="reference external" href="https://arxiv.org/abs/1909.12285">arXiv:1909.12285</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevD.102.012010">doi:10.1103/PhysRevD.102.012010</a>.</p>
 </dd>
-<dt class="bibtex label" id="asquith-2018igt"><span class="brackets">2</span></dt>
+<dt class="label" id="id5"><span class="brackets">2</span></dt>
 <dd><p>Roman Kogler and others. Jet Substructure at the Large Hadron Collider: Experimental Review. <em>Rev. Mod. Phys.</em>, 91(4):045003, 2019. <a class="reference external" href="https://arxiv.org/abs/1803.06991">arXiv:1803.06991</a>, <a class="reference external" href="https://doi.org/10.1103/RevModPhys.91.045003">doi:10.1103/RevModPhys.91.045003</a>.</p>
 </dd>
-<dt class="bibtex label" id="opendata"><span class="brackets">3</span></dt>
+<dt class="label" id="id9"><span class="brackets">3</span></dt>
 <dd><p>Javier Duarte. Sample with jet, track and secondary vertex properties for Hbb tagging ML studies \texttt HiggsToBBNTuple_HiggsToBB_QCD_RunII_13TeV_MC. 2019. CERN Open Data Portal. URL: <a class="reference external" href="http://opendata.cern.ch/record/12102">http://opendata.cern.ch/record/12102</a>, <a class="reference external" href="https://doi.org/10.7483/OPENDATA.CMS.JGJX.MS7Q">doi:10.7483/OPENDATA.CMS.JGJX.MS7Q</a>.</p>
 </dd>
-<dt class="bibtex label" id="pivarski-2020qcb"><span class="brackets">4</span></dt>
+<dt class="label" id="id8"><span class="brackets">4</span></dt>
 <dd><p>Jim Pivarski, Peter Elmer, and David Lange. Awkward Arrays in Python, C++, and Numba. In <em>24th International Conference on Computing in High Energy and Nuclear Physics</em>. 1 2020. <a class="reference external" href="https://arxiv.org/abs/2001.06307">arXiv:2001.06307</a>.</p>
 </dd>
-<dt class="bibtex label" id="sirunyan-2017ezt"><span class="brackets">5</span></dt>
+<dt class="label" id="id3"><span class="brackets">5</span></dt>
 <dd><p>A.M. Sirunyan and others. Identification of heavy-flavour jets with the CMS detector in pp collisions at 13 TeV. <em>J. Instrum.</em>, 13(05):P05011, 2018. <a class="reference external" href="https://arxiv.org/abs/1712.07158">arXiv:1712.07158</a>, <a class="reference external" href="https://doi.org/10.1088/1748-0221/13/05/P05011">doi:10.1088/1748-0221/13/05/P05011</a>.</p>
 </dd>
-<dt class="bibtex label" id="marzani-2019hun"><span class="brackets">6</span></dt>
+<dt class="label" id="id4"><span class="brackets">6</span></dt>
 <dd><p>Simone Marzani, Gregory Soyez, and Michael Spannowsky. <em>Looking inside jets: an introduction to jet substructure and boosted-object phenomenology</em>. Volume 958. Springer, 2019. <a class="reference external" href="https://arxiv.org/abs/1901.10342">arXiv:1901.10342</a>, <a class="reference external" href="https://doi.org/10.1007/978-3-030-15709-8">doi:10.1007/978-3-030-15709-8</a>.</p>
 </dd>
-<dt class="bibtex label" id="chatrchyan-2012jua"><span class="brackets">7</span></dt>
+<dt class="label" id="id16"><span class="brackets">7</span></dt>
 <dd><p>Serguei Chatrchyan and others. Identification of b-Quark Jets with the CMS Experiment. <em>J. Instrum.</em>, 8:P04013, 2013. <a class="reference external" href="https://arxiv.org/abs/1211.4462">arXiv:1211.4462</a>, <a class="reference external" href="https://doi.org/10.1088/1748-0221/8/04/P04013">doi:10.1088/1748-0221/8/04/P04013</a>.</p>
 </dd>
-<dt class="bibtex label" id="cms-pas-jme-13-002"><span class="brackets">8</span></dt>
+<dt class="label" id="id17"><span class="brackets">8</span></dt>
 <dd><p>CMS Collaboration. Performance of quark/gluon discrimination in 8 TeV pp data. CMS Physics Analysis Summary CMS-PAS-JME-13-002, CERN, 2013. URL: <a class="reference external" href="https://cds.cern.ch/record/1599732">https://cds.cern.ch/record/1599732</a>.</p>
 </dd>
-<dt class="bibtex label" id="deoliveira-2015xxd"><span class="brackets">9</span></dt>
+<dt class="label" id="id12"><span class="brackets">9</span></dt>
 <dd><p>Luke de Oliveira, Michael Kagan, Lester Mackey, Benjamin Nachman, and Ariel Schwartzman. Jet-images — deep learning edition. <em>J. High Energy Phys.</em>, 07:069, 2016. <a class="reference external" href="https://arxiv.org/abs/1511.05190">arXiv:1511.05190</a>, <a class="reference external" href="https://doi.org/10.1007/JHEP07(2016)069">doi:10.1007/JHEP07(2016)069</a>.</p>
 </dd>
-<dt class="bibtex label" id="deepjet"><span class="brackets">10</span></dt>
+<dt class="label" id="id10"><span class="brackets">10</span></dt>
 <dd><p>Markus Stoye, Jan Kieseler, Mauro Verzetti, Huilin Qu, Loukas Gouskos, and Anna Stakia. DeepJet: generic physics object based jet multiclass classification for LHC experiments. In <em>Deep Learning for Physical Sciences Workshop at the 31st Conference on Neural Information Processing Systems (NeurIPS)</em>. 2017. URL: <a class="reference external" href="https://dl4physicalsciences.github.io/files/nips_dlps_2017_10.pdf">https://dl4physicalsciences.github.io/files/nips_dlps_2017_10.pdf</a>.</p>
 </dd>
-<dt class="bibtex label" id="komiske-2018cqr"><span class="brackets">11</span></dt>
+<dt class="label" id="id6"><span class="brackets">11</span></dt>
 <dd><p>Patrick T. Komiske, Eric M. Metodiev, and Jesse Thaler. Energy Flow Networks: Deep Sets for Particle Jets. <em>J. High Energy Phys.</em>, 01:121, 2019. <a class="reference external" href="https://arxiv.org/abs/1810.05165">arXiv:1810.05165</a>, <a class="reference external" href="https://doi.org/10.1007/JHEP01(2019)121">doi:10.1007/JHEP01(2019)121</a>.</p>
 </dd>
-<dt class="bibtex label" id="moreno-2019bmu"><span class="brackets">12</span></dt>
+<dt class="label" id="id13"><span class="brackets">12</span></dt>
 <dd><p>Eric A. Moreno, Olmo Cerri, Javier M. Duarte, Harvey B. Newman, Thong Q. Nguyen, Avikar Periwal, Maurizio Pierini, Aidana Serikova, Maria Spiropulu, and Jean-Roch Vlimant. JEDI-net: a jet identification algorithm based on interaction networks. <em>Eur. Phys. J. C</em>, 80(1):58, 2020. <a class="reference external" href="https://arxiv.org/abs/1908.05318">arXiv:1908.05318</a>, <a class="reference external" href="https://doi.org/10.1140/epjc/s10052-020-7608-4">doi:10.1140/epjc/s10052-020-7608-4</a>.</p>
 </dd>
-<dt class="bibtex label" id="qu-2019gqs"><span class="brackets">13</span></dt>
+<dt class="label" id="id11"><span class="brackets">13</span></dt>
 <dd><p>Huilin Qu and Loukas Gouskos. ParticleNet: Jet Tagging via Particle Clouds. <em>Phys. Rev. D</em>, 101(5):056019, 2020. <a class="reference external" href="https://arxiv.org/abs/1902.08570">arXiv:1902.08570</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevD.101.056019">doi:10.1103/PhysRevD.101.056019</a>.</p>
 </dd>
-<dt class="bibtex label" id="nips2017-6931"><span class="brackets">14</span></dt>
+<dt class="label" id="id7"><span class="brackets">14</span></dt>
 <dd><p>Manzil Zaheer, Satwik Kottur, Siamak Ravanbakhsh, Barnabas Poczos, Russ R Salakhutdinov, and Alexander J Smola. Deep sets. In I. Guyon, U. V. Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, editors, <em>Advances in Neural Information Processing Systems 30</em>, 3391. Curran Associates, Inc., 2017. URL: <a class="reference external" href="http://papers.nips.cc/paper/6931-deep-sets.pdf">http://papers.nips.cc/paper/6931-deep-sets.pdf</a>, <a class="reference external" href="https://arxiv.org/abs/1703.06114">arXiv:1703.06114</a>.</p>
 </dd>
-<dt class="bibtex label" id="dolen-2016kst"><span class="brackets">15</span></dt>
+<dt class="label" id="id14"><span class="brackets">15</span></dt>
 <dd><p>James Dolen, Philip Harris, Simone Marzani, Salvatore Rappoccio, and Nhan Tran. Thinking outside the ROCs: Designing Decorrelated Taggers (DDT) for jet substructure. <em>J. High Energy Phys.</em>, 05:156, 2016. <a class="reference external" href="https://arxiv.org/abs/1603.00027">arXiv:1603.00027</a>, <a class="reference external" href="https://doi.org/10.1007/JHEP05(2016)156">doi:10.1007/JHEP05(2016)156</a>.</p>
 </dd>
-<dt class="bibtex label" id="atl-phys-pub-2018-014"><span class="brackets">16</span></dt>
+<dt class="label" id="id15"><span class="brackets">16</span></dt>
 <dd><p>ATLAS Collaboration. Performance of mass-decorrelated jet substructure observables for hadronic two-body decay tagging in ATLAS. ATLAS Public Note ATL-PHYS-PUB-2018-014, CERN, 2018. URL: <a class="reference external" href="http://cds.cern.ch/record/2630973">http://cds.cern.ch/record/2630973</a>.</p>
 </dd>
-<dt class="bibtex label" id="louppe-2016ylz"><span class="brackets">17</span></dt>
+<dt class="label" id="id18"><span class="brackets">17</span></dt>
 <dd><p>Gilles Louppe, Michael Kagan, and Kyle Cranmer. Learning to Pivot with Adversarial Networks. In I. Guyon, U. V. Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, editors, <em>Advances in Neural Information Processing Systems 30</em>, 981. Curran Associates, Inc., 2017. URL: <a class="reference external" href="http://papers.nips.cc/paper/6699-learning-to-pivot-with-adversarial-networks.pdf">http://papers.nips.cc/paper/6699-learning-to-pivot-with-adversarial-networks.pdf</a>, <a class="reference external" href="https://arxiv.org/abs/1611.01046">arXiv:1611.01046</a>.</p>
 </dd>
-<dt class="bibtex label" id="ganin2014unsupervised"><span class="brackets">18</span></dt>
+<dt class="label" id="id19"><span class="brackets">18</span></dt>
 <dd><p>Yaroslav Ganin and Victor Lempitsky. Unsupervised domain adaptation by backpropagation. In Francis Bach and David Blei, editors, <em>Proceedings of the 32nd International Conference on Machine Learning</em>, volume 37 of Proceedings of Machine Learning Research, 1180. Lille, France, 2015. PMLR. URL: <a class="reference external" href="http://proceedings.mlr.press/v37/ganin15.html">http://proceedings.mlr.press/v37/ganin15.html</a>, <a class="reference external" href="https://arxiv.org/abs/1409.7495">arXiv:1409.7495</a>.</p>
 </dd>
-<dt class="bibtex label" id="sirunyan-2019nfw"><span class="brackets">19</span></dt>
+<dt class="label" id="id20"><span class="brackets">19</span></dt>
 <dd><p>Albert M Sirunyan and others. A deep neural network to search for new long-lived particles decaying to jets. <em>Mach. Learn.: Sci. Technol.</em>, 1:035012, 2020. <a class="reference external" href="https://arxiv.org/abs/1912.12238">arXiv:1912.12238</a>, <a class="reference external" href="https://doi.org/10.1088/2632-2153/ab9023">doi:10.1088/2632-2153/ab9023</a>.</p>
 </dd>
-<dt class="bibtex label" id="shlomi-2020gdn"><span class="brackets">20</span></dt>
+<dt class="label" id="id21"><span class="brackets">20</span></dt>
 <dd><p>Jonathan Shlomi, Peter Battaglia, and Jean-Roch Vlimant. Graph Neural Networks in Particle Physics. Accepted by \emph Mach. Learn.: Sci. Technol., 2020. <a class="reference external" href="https://arxiv.org/abs/2007.13681">arXiv:2007.13681</a>, <a class="reference external" href="https://doi.org/10.1088/2632-2153/abbf9a">doi:10.1088/2632-2153/abbf9a</a>.</p>
 </dd>
-<dt class="bibtex label" id="pytorchgeometric"><span class="brackets">21</span></dt>
+<dt class="label" id="id22"><span class="brackets">21</span></dt>
 <dd><p>Matthias Fey and Jan E. Lenssen. Fast graph representation learning with PyTorch Geometric. In <em>ICLR Workshop on Representation Learning on Graphs and Manifolds</em>. 2019. URL: <a class="reference external" href="https://pytorch-geometric.readthedocs.io/">https://pytorch-geometric.readthedocs.io/</a>, <a class="reference external" href="https://arxiv.org/abs/1903.02428">arXiv:1903.02428</a>.</p>
 </dd>
-<dt class="bibtex label" id="battaglia2018relational"><span class="brackets">22</span></dt>
+<dt class="label" id="id25"><span class="brackets">22</span></dt>
 <dd><p>Peter W. Battaglia, Jessica B. Hamrick, Victor Bapst, Alvaro Sanchez-Gonzalez, Vinicius Zambaldi, Mateusz Malinowski, Andrea Tacchetti, David Raposo, Adam Santoro, Ryan Faulkner, Caglar Gulcehre, Francis Song, Andrew Ballard, Justin Gilmer, George Dahl, Ashish Vaswani, Kelsey Allen, Charles Nash, Victoria Langston, Chris Dyer, Nicolas Heess, Daan Wierstra, Pushmeet Kohli, Matt Botvinick, Oriol Vinyals, Yujia Li, and Razvan Pascanu. Relational inductive biases, deep learning, and graph networks. Preprint, 2018. <a class="reference external" href="https://arxiv.org/abs/1806.01261">arXiv:1806.01261</a>.</p>
 </dd>
-<dt class="bibtex label" id="bn"><span class="brackets">23</span></dt>
+<dt class="label" id="id26"><span class="brackets">23</span></dt>
 <dd><p>Sergey Ioffe and Christian Szegedy. Batch normalization: accelerating deep network training by reducing internal covariate shift. In Francis Bach and David Blei, editors, <em>32nd International Conference on Machine Learning</em>, volume 37, 448. Lille, France, 07 2015. PMLR. URL: <a class="reference external" href="http://proceedings.mlr.press/v37/ioffe15.html">http://proceedings.mlr.press/v37/ioffe15.html</a>, <a class="reference external" href="https://arxiv.org/abs/1502.03167">arXiv:1502.03167</a>.</p>
 </dd>
-<dt class="bibtex label" id="jones-2014uza"><span class="brackets">24</span></dt>
+<dt class="label" id="id23"><span class="brackets">24</span></dt>
 <dd><p>C.D. Jones and E. Sexton-Kennedy. Stitched Together: Transitioning CMS to a Hierarchical Threaded Framework. <em>J. Phys. Conf. Ser.</em>, 513:022034, 2014. <a class="reference external" href="https://doi.org/10.1088/1742-6596/513/2/022034">doi:10.1088/1742-6596/513/2/022034</a>.</p>
 </dd>
 </dl>
@@ -405,14 +421,26 @@
 
               </div>
               
-        </div>
-    </div>
-    
-    
-    <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="weeks/09.html" title="previous page">Week 9: Application to Real Data</a>
+            
 
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="weeks/09.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Week 9: Application to Real Data</p>
+            </div>
+        </a>
+    </div>
+
+</div>
+        
+        </div>
     </div>
     <footer class="footer mt-5 mt-md-0">
     <div class="container">
@@ -420,7 +448,7 @@
         
           By Javier Duarte and Frank Würthwein<br/>
         
-            &copy; Copyright 2020.<br/>
+            &copy; Copyright 2021.<br/>
       </p>
     </div>
   </footer>
@@ -429,11 +457,9 @@
 
       </div>
     </div>
+  
+  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
 
-    
-  <script src="_static/js/index.d3f166471bb80abb5163.js"></script>
-
-
-    
+  
   </body>
 </html>

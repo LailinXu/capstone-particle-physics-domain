@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Week 2 Notebook: Data Formats and Exploration &#8212; Particle Physics and Machine Learning</title>
     
-  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
 
     
   <link rel="stylesheet"
@@ -19,14 +20,10 @@
 
     
       
-  <link rel="stylesheet"
-    href="../_static/vendor/open-sans_all/1.44.1/index.css">
-  <link rel="stylesheet"
-    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
 
     
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -34,7 +31,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
 
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -44,12 +41,10 @@
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
-    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
         const thebe_selector_input = "pre"
@@ -60,14 +55,14 @@
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Week 3: Feature Engineering" href="03.html" />
     <link rel="prev" title="Week 2: Data Formats and Exploration" href="02.html" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
-
-
-
+    
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
     
 
     <div class="container-xl">
@@ -76,79 +71,93 @@
 <div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
     
         <div class="navbar-brand-box">
-<a class="navbar-brand text-wrap" href="../index.html">
-  
-  <img src="../_static/logo.png" class="logo" alt="logo">
-  
-  
-  <h1 class="site-logo" id="site-title">Particle Physics and Machine Learning</h1>
-  
-</a>
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Particle Physics and Machine Learning</h1>
+      
+    </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form>
-<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
-    <ul class="nav sidenav_l1">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../README.html">
    Particle Physics and Machine Learning
   </a>
  </li>
 </ul>
-<ul class="current nav sidenav_l1">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="01.html">
    Week 1: Introduction to Particle Physics and Jets
   </a>
  </li>
- <li class="toctree-l1 current active collapsible-parent">
+ <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="02.html">
    Week 2: Data Formats and Exploration
   </a>
-  <ul class="current collapse-ul">
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
      Week 2 Notebook: Data Formats and Exploration
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="03.html">
    Week 3: Feature Engineering
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="03-features.html">
      Week 3 Notebook: Feature Engineering
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="04.html">
    Week 4: Simple Classifiers
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="04-simple-classifiers.html">
      Week 4 Notebook: Simple Classifiers
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="05.html">
    Week 5: Building a Deep Learning Model
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="05-deep-learning.html">
      Week 5 Notebook: Building a Deep Learning Model
@@ -160,50 +169,57 @@
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="06.html">
    Week 6: Evalulating Model Performance and Robustness
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="06-evaluate.html">
      Week 6 Notebook: Evalulating Model Performance and Robustness
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="07.html">
    Week 7: Optimizing Other Objectives
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="07-objectives.html">
      Week 7 Notebook: Optimizing Other Objectives
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="08.html">
    Week 8: Extending the Model
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="08-extending.html">
      Week 8 Notebook: Extending the Model
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="09.html">
@@ -217,6 +233,7 @@
  </li>
 </ul>
 
+    </div>
 </nav> <!-- To handle the deprecated key -->
 
 <div class="navbar_extra_footer">
@@ -232,21 +249,21 @@
           
 <main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
     
-    <div class="row topbar fixed-top container-xl">
-    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
-    </div>
-    <div class="col pl-2 topbar-main">
-        
-        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-            <i class="fas fa-bars"></i>
-            <i class="fas fa-arrow-left"></i>
-            <i class="fas fa-arrow-up"></i>
-        </button>
-        
-        
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
 <div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
             class="fas fa-download"></i></button>
@@ -264,7 +281,7 @@
     </div>
 </div>
 
-        <!-- Source interaction buttons -->
+            <!-- Source interaction buttons -->
 
 <div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
@@ -284,14 +301,14 @@
     </div>
 </div>
 
+            <!-- Full screen (wrap in <a> to have style consistency -->
 
-        <!-- Full screen (wrap in <a> to have style consistency -->
-        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-                title="Fullscreen mode"><i
-                    class="fas fa-expand"></i></button></a>
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
 
-        <!-- Launch buttons -->
+            <!-- Launch buttons -->
 
 <div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
@@ -316,16 +333,16 @@
     </div>
 </div>
 
-    </div>
-
-    <!-- Table of contents -->
-    <div class="d-none d-md-block col-md-2 bd-toc show">
-        
-        <div class="tocsection onthispage pt-5 pb-3">
-            <i class="fas fa-list"></i> Contents
         </div>
-        <nav id="bd-toc-nav">
-            <ul class="nav section-nav flex-column">
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#remote-files">
    Remote files
@@ -368,8 +385,8 @@
  </li>
 </ul>
 
-        </nav>
-        
+            </nav>
+        </div>
     </div>
 </div>
     <div id="main-content" class="row">
@@ -379,17 +396,17 @@
                 
   <div class="section" id="week-2-notebook-data-formats-and-exploration">
 <h1>Week 2 Notebook: Data Formats and Exploration<a class="headerlink" href="#week-2-notebook-data-formats-and-exploration" title="Permalink to this headline">¶</a></h1>
-<p>Particle physics uses a data format (and analysis ecosystem) based on the <code class="docutils literal notranslate"><span class="pre">ROOT</span></code> library: https://root.cern.ch/.
+<p>Particle physics uses a data format (and analysis ecosystem) based on the <code class="docutils literal notranslate"><span class="pre">ROOT</span></code> library: <a class="reference external" href="https://root.cern.ch/">https://root.cern.ch/</a>.
 <code class="docutils literal notranslate"><span class="pre">ROOT</span></code> is a framework for data processing, born at CERN, at the heart of the research on high-energy physics.
 A <code class="docutils literal notranslate"><span class="pre">ROOT</span></code> file is a compressed binary file in which we can save objects of any type.
 There are python bindings built into <code class="docutils literal notranslate"><span class="pre">ROOT</span></code>, so called <code class="docutils literal notranslate"><span class="pre">PyROOT</span></code>, but for now we won’t discuss this.</p>
-<p>Recently, a different library called <code class="docutils literal notranslate"><span class="pre">uproot</span></code> has been developed allowing python users to do <code class="docutils literal notranslate"><span class="pre">ROOT</span></code> I/O directly: https://uproot.readthedocs.io/en/latest/.
+<p>Recently, a different library called <code class="docutils literal notranslate"><span class="pre">uproot</span></code> has been developed allowing python users to do <code class="docutils literal notranslate"><span class="pre">ROOT</span></code> I/O directly: <a class="reference external" href="https://uproot.readthedocs.io/en/latest/">https://uproot.readthedocs.io/en/latest/</a>.
 <code class="docutils literal notranslate"><span class="pre">uproot</span></code> is a reader and a writer of the <code class="docutils literal notranslate"><span class="pre">ROOT</span></code> file format using only <code class="docutils literal notranslate"><span class="pre">Python</span></code> and <code class="docutils literal notranslate"><span class="pre">Numpy</span></code>.
 Unlike the standard C++ <code class="docutils literal notranslate"><span class="pre">ROOT</span></code> implementation, uproot is only an I/O library, primarily intended to stream data into machine learning libraries in <code class="docutils literal notranslate"><span class="pre">Python</span></code>.
 Unlike <code class="docutils literal notranslate"><span class="pre">PyROOT</span></code> and <code class="docutils literal notranslate"><span class="pre">root_numpy</span></code>, uproot does not depend on C++ <code class="docutils literal notranslate"><span class="pre">ROOT</span></code>.
 Instead, it uses <code class="docutils literal notranslate"><span class="pre">Numpy</span></code> to cast blocks of data from the <code class="docutils literal notranslate"><span class="pre">ROOT</span></code> file as <code class="docutils literal notranslate"><span class="pre">Numpy</span></code> arrays.
-It can also make jagged or awkward arrays based on this library: https://github.com/scikit-hep/awkward-1.0 <a class="bibtex reference internal" href="../zreferences.html#pivarski-2020qcb" id="id1">[4]</a>.</p>
-<p>For a tutorial on <code class="docutils literal notranslate"><span class="pre">uproot</span></code>, see: https://hsf-training.github.io/hsf-training-uproot-webpage/ or here: https://github.com/jpivarski-talks/2020-07-13-pyhep2020-tutorial.</p>
+It can also make jagged or awkward arrays based on this library: <a class="reference external" href="https://github.com/scikit-hep/awkward-1.0">https://github.com/scikit-hep/awkward-1.0</a> <span id="id1">[<a class="reference internal" href="../zreferences.html#id8">4</a>]</span>.</p>
+<p>For a tutorial on <code class="docutils literal notranslate"><span class="pre">uproot</span></code>, see: <a class="reference external" href="https://hsf-training.github.io/hsf-training-uproot-webpage/">https://hsf-training.github.io/hsf-training-uproot-webpage/</a> or here: <a class="reference external" href="https://github.com/jpivarski-talks/2020-07-13-pyhep2020-tutorial">https://github.com/jpivarski-talks/2020-07-13-pyhep2020-tutorial</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">uproot</span>
@@ -400,7 +417,7 @@ It can also make jagged or awkward arrays based on this library: https://github.
 <div class="section" id="remote-files">
 <h2>Remote files<a class="headerlink" href="#remote-files" title="Permalink to this headline">¶</a></h2>
 <p>One nice feature of <code class="docutils literal notranslate"><span class="pre">ROOT</span></code> and <code class="docutils literal notranslate"><span class="pre">uproot</span></code> is the ability to read a file remotely.
-This is done using the <code class="docutils literal notranslate"><span class="pre">XRootD</span></code> library: https://xrootd.slac.stanford.edu/.
+This is done using the <code class="docutils literal notranslate"><span class="pre">XRootD</span></code> library: <a class="reference external" href="https://xrootd.slac.stanford.edu/">https://xrootd.slac.stanford.edu/</a>.
 <code class="docutils literal notranslate"><span class="pre">XRootD</span></code> is a generic suite for fast, low latency and scalable data access, which can serve natively any kind of data, organized as a hierarchical filesystem-like namespace, based on the concept of directory.</p>
 </div>
 <div class="section" id="xrootd-filenames">
@@ -433,7 +450,7 @@ We can see how many rows (jets) are contained in the tree, by checking its lengt
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>200000
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>219
 </pre></div>
 </div>
 </div>
@@ -446,232 +463,227 @@ We can see how many rows (jets) are contained in the tree, by checking its lengt
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Delta_gen_pt               (no streamer)              asdtype(&#39;&gt;f4&#39;)
-event_no                   (no streamer)              asdtype(&#39;&gt;u4&#39;)
-gen_pt                     (no streamer)              asdtype(&#39;&gt;f4&#39;)
-isB                        (no streamer)              asdtype(&#39;&gt;i4&#39;)
-isBB                       (no streamer)              asdtype(&#39;&gt;i4&#39;)
-isC                        (no streamer)              asdtype(&#39;&gt;i4&#39;)
-isG                        (no streamer)              asdtype(&#39;&gt;i4&#39;)
-isLeptonicB                (no streamer)              asdtype(&#39;&gt;i4&#39;)
-isLeptonicB_C              (no streamer)              asdtype(&#39;&gt;i4&#39;)
-isS                        (no streamer)              asdtype(&#39;&gt;i4&#39;)
-isUD                       (no streamer)              asdtype(&#39;&gt;i4&#39;)
-isUndefined                (no streamer)              asdtype(&#39;&gt;i4&#39;)
-jet_corr_pt                (no streamer)              asdtype(&#39;&gt;f4&#39;)
-jet_eta                    (no streamer)              asdtype(&#39;&gt;f4&#39;)
-jet_looseId                (no streamer)              asdtype(&#39;&gt;f4&#39;)
-jet_no                     (no streamer)              asdtype(&#39;&gt;u4&#39;)
-jet_phi                    (no streamer)              asdtype(&#39;&gt;f4&#39;)
-jet_pt                     (no streamer)              asdtype(&#39;&gt;f4&#39;)
-jet_tightId                (no streamer)              asdtype(&#39;&gt;f4&#39;)
-npv                        (no streamer)              asdtype(&#39;&gt;f4&#39;)
-ntrueInt                   (no streamer)              asdtype(&#39;&gt;f4&#39;)
-pfBoostedDoubleSecondaryVertexAK8BJetTags
-                           (no streamer)              asdtype(&#39;&gt;f4&#39;)
-pfCombinedInclusiveSecondaryVertexV2BJetTags
-                           (no streamer)              asdtype(&#39;&gt;f4&#39;)
-pfCombinedMVAV2BJetTags    (no streamer)              asdtype(&#39;&gt;f4&#39;)
-pfDeepCSVJetTags_probb     (no streamer)              asdtype(&#39;&gt;f4&#39;)
-pfDeepCSVJetTags_probbb    (no streamer)              asdtype(&#39;&gt;f4&#39;)
-pfDeepCSVJetTags_probc     (no streamer)              asdtype(&#39;&gt;f4&#39;)
-pfDeepCSVJetTags_probcc    (no streamer)              asdtype(&#39;&gt;f4&#39;)
-pfDeepCSVJetTags_probudsg  (no streamer)              asdtype(&#39;&gt;f4&#39;)
-pfJetBProbabilityBJetTags  (no streamer)              asdtype(&#39;&gt;f4&#39;)
-pfJetProbabilityBJetTags   (no streamer)              asdtype(&#39;&gt;f4&#39;)
-rho                        (no streamer)              asdtype(&#39;&gt;f4&#39;)
-softPFElectronBJetTags     (no streamer)              asdtype(&#39;&gt;f4&#39;)
-softPFMuonBJetTags         (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_doubleb                 (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_eta                     (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_gen_eta                 (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_gen_pt                  (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_isBB                    (no streamer)              asdtype(&#39;&gt;i4&#39;)
-fj_isH                     (no streamer)              asdtype(&#39;&gt;i4&#39;)
-fj_isNonBB                 (no streamer)              asdtype(&#39;&gt;i4&#39;)
-fj_isQCD                   (no streamer)              asdtype(&#39;&gt;i4&#39;)
-fj_isTop                   (no streamer)              asdtype(&#39;&gt;i4&#39;)
-fj_isW                     (no streamer)              asdtype(&#39;&gt;i4&#39;)
-fj_isZ                     (no streamer)              asdtype(&#39;&gt;i4&#39;)
-fj_jetNTracks              (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_label                   (no streamer)              asdtype(&#39;&gt;i4&#39;)
-fj_labelJMAR               (no streamer)              asdtype(&#39;&gt;i4&#39;)
-fj_labelLegacy             (no streamer)              asdtype(&#39;&gt;i4&#39;)
-fj_mass                    (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_nSV                     (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_n_sdsubjets             (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_nbHadrons               (no streamer)              asdtype(&#39;&gt;i4&#39;)
-fj_ncHadrons               (no streamer)              asdtype(&#39;&gt;i4&#39;)
-fj_phi                     (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_pt                      (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_ptDR                    (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_relptdiff               (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_sdmass                  (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_sdn2                    (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_sdsj1_axis1             (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_sdsj1_axis2             (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_sdsj1_csv               (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_sdsj1_eta               (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_sdsj1_mass              (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_sdsj1_mult              (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_sdsj1_phi               (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_sdsj1_pt                (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_sdsj1_ptD               (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_sdsj2_axis1             (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_sdsj2_axis2             (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_sdsj2_csv               (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_sdsj2_eta               (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_sdsj2_mass              (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_sdsj2_mult              (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_sdsj2_phi               (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_sdsj2_pt                (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_sdsj2_ptD               (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_tau0_trackEtaRel_0      (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_tau0_trackEtaRel_1      (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_tau0_trackEtaRel_2      (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_tau1                    (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_tau1_trackEtaRel_0      (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_tau1_trackEtaRel_1      (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_tau1_trackEtaRel_2      (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_tau2                    (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_tau21                   (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_tau3                    (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_tau32                   (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_tau_flightDistance2dSig_0
-                           (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_tau_flightDistance2dSig_1
-                           (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_tau_vertexDeltaR_0      (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_tau_vertexEnergyRatio_0 (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_tau_vertexEnergyRatio_1 (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_tau_vertexMass_0        (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_tau_vertexMass_1        (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_trackSip2dSigAboveBottom_0
-                           (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_trackSip2dSigAboveBottom_1
-                           (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_trackSip2dSigAboveCharm_0
-                           (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_trackSipdSig_0          (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_trackSipdSig_0_0        (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_trackSipdSig_0_1        (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_trackSipdSig_1          (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_trackSipdSig_1_0        (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_trackSipdSig_1_1        (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_trackSipdSig_2          (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_trackSipdSig_3          (no streamer)              asdtype(&#39;&gt;f4&#39;)
-fj_z_ratio                 (no streamer)              asdtype(&#39;&gt;f4&#39;)
-label_H_bb                 (no streamer)              asdtype(&#39;&gt;i4&#39;)
-label_H_cc                 (no streamer)              asdtype(&#39;&gt;i4&#39;)
-label_H_qqqq               (no streamer)              asdtype(&#39;&gt;i4&#39;)
-label_QCD_b                (no streamer)              asdtype(&#39;&gt;i4&#39;)
-label_QCD_bb               (no streamer)              asdtype(&#39;&gt;i4&#39;)
-label_QCD_c                (no streamer)              asdtype(&#39;&gt;i4&#39;)
-label_QCD_cc               (no streamer)              asdtype(&#39;&gt;i4&#39;)
-label_QCD_others           (no streamer)              asdtype(&#39;&gt;i4&#39;)
-label_Top_bc               (no streamer)              asdtype(&#39;&gt;i4&#39;)
-label_Top_bcq              (no streamer)              asdtype(&#39;&gt;i4&#39;)
-label_Top_bq               (no streamer)              asdtype(&#39;&gt;i4&#39;)
-label_Top_bqq              (no streamer)              asdtype(&#39;&gt;i4&#39;)
-label_W_cq                 (no streamer)              asdtype(&#39;&gt;i4&#39;)
-label_W_qq                 (no streamer)              asdtype(&#39;&gt;i4&#39;)
-label_Z_bb                 (no streamer)              asdtype(&#39;&gt;i4&#39;)
-label_Z_cc                 (no streamer)              asdtype(&#39;&gt;i4&#39;)
-label_Z_qq                 (no streamer)              asdtype(&#39;&gt;i4&#39;)
-sample_isQCD               (no streamer)              asdtype(&#39;&gt;i4&#39;)
-n_pfcands                  (no streamer)              asdtype(&#39;&gt;i4&#39;)
-npfcands                   (no streamer)              asdtype(&#39;&gt;f4&#39;)
-pfcand_VTX_ass             TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-pfcand_charge              TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-pfcand_deltaR              TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-pfcand_drminsv             TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-pfcand_drsubjet1           TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-pfcand_drsubjet2           TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-pfcand_dxy                 TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-pfcand_dxysig              TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-pfcand_dz                  TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-pfcand_dzsig               TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-pfcand_erel                TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-pfcand_etarel              TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-pfcand_fromPV              TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-pfcand_hcalFrac            TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-pfcand_isChargedHad        TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-pfcand_isEl                TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-pfcand_isGamma             TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-pfcand_isMu                TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-pfcand_isNeutralHad        TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-pfcand_lostInnerHits       TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-pfcand_mass                TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-pfcand_phirel              TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-pfcand_ptrel               TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-pfcand_puppiw              TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-n_tracks                   (no streamer)              asdtype(&#39;&gt;i4&#39;)
-ntracks                    (no streamer)              asdtype(&#39;&gt;f4&#39;)
-trackBTag_DeltaR           TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-trackBTag_Eta              TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-trackBTag_EtaRel           TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-trackBTag_JetDistVal       TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-trackBTag_Momentum         TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-trackBTag_PPar             TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-trackBTag_PParRatio        TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-trackBTag_PtRatio          TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-trackBTag_PtRel            TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-trackBTag_Sip2dSig         TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-trackBTag_Sip2dVal         TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-trackBTag_Sip3dSig         TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-trackBTag_Sip3dVal         TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-track_VTX_ass              TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-track_charge               TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-track_deltaR               TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-track_detadeta             TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-track_dlambdadz            TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-track_dphidphi             TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-track_dphidxy              TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-track_dptdpt               TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-track_drminsv              TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-track_drsubjet1            TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-track_drsubjet2            TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-track_dxy                  TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-track_dxydxy               TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-track_dxydz                TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-track_dxysig               TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-track_dz                   TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-track_dzdz                 TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-track_dzsig                TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-track_erel                 TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-track_etarel               TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-track_fromPV               TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-track_isChargedHad         TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-track_isEl                 TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-track_isMu                 TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-track_lostInnerHits        TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-track_mass                 TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-track_normchi2             TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-track_phirel               TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-track_pt                   TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-track_ptrel                TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-track_puppiw               TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-track_quality              TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-n_sv                       (no streamer)              asdtype(&#39;&gt;i4&#39;)
-nsv                        (no streamer)              asdtype(&#39;&gt;f4&#39;)
-sv_chi2                    TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-sv_costhetasvpv            TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-sv_d3d                     TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-sv_d3derr                  TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-sv_d3dsig                  TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-sv_deltaR                  TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-sv_dxy                     TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-sv_dxyerr                  TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-sv_dxysig                  TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-sv_erel                    TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-sv_etarel                  TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-sv_mass                    TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-sv_ndf                     TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-sv_normchi2                TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-sv_ntracks                 TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-sv_phirel                  TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-sv_pt                      TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
-sv_ptrel                   TStreamerSTL               asjagged(asdtype(&#39;&gt;f4&#39;), 10)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>name                 | typename                 | interpretation                
+---------------------+--------------------------+-------------------------------
+Delta_gen_pt         | float                    | AsDtype(&#39;&gt;f4&#39;)
+event_no             | uint32_t                 | AsDtype(&#39;&gt;u4&#39;)
+gen_pt               | float                    | AsDtype(&#39;&gt;f4&#39;)
+isB                  | int32_t                  | AsDtype(&#39;&gt;i4&#39;)
+isBB                 | int32_t                  | AsDtype(&#39;&gt;i4&#39;)
+isC                  | int32_t                  | AsDtype(&#39;&gt;i4&#39;)
+isG                  | int32_t                  | AsDtype(&#39;&gt;i4&#39;)
+isLeptonicB          | int32_t                  | AsDtype(&#39;&gt;i4&#39;)
+isLeptonicB_C        | int32_t                  | AsDtype(&#39;&gt;i4&#39;)
+isS                  | int32_t                  | AsDtype(&#39;&gt;i4&#39;)
+isUD                 | int32_t                  | AsDtype(&#39;&gt;i4&#39;)
+isUndefined          | int32_t                  | AsDtype(&#39;&gt;i4&#39;)
+jet_corr_pt          | float                    | AsDtype(&#39;&gt;f4&#39;)
+jet_eta              | float                    | AsDtype(&#39;&gt;f4&#39;)
+jet_looseId          | float                    | AsDtype(&#39;&gt;f4&#39;)
+jet_no               | uint32_t                 | AsDtype(&#39;&gt;u4&#39;)
+jet_phi              | float                    | AsDtype(&#39;&gt;f4&#39;)
+jet_pt               | float                    | AsDtype(&#39;&gt;f4&#39;)
+jet_tightId          | float                    | AsDtype(&#39;&gt;f4&#39;)
+npv                  | float                    | AsDtype(&#39;&gt;f4&#39;)
+ntrueInt             | float                    | AsDtype(&#39;&gt;f4&#39;)
+pfBoostedDoubleSe... | float                    | AsDtype(&#39;&gt;f4&#39;)
+pfCombinedInclusi... | float                    | AsDtype(&#39;&gt;f4&#39;)
+pfCombinedMVAV2BJ... | float                    | AsDtype(&#39;&gt;f4&#39;)
+pfDeepCSVJetTags_... | float                    | AsDtype(&#39;&gt;f4&#39;)
+pfDeepCSVJetTags_... | float                    | AsDtype(&#39;&gt;f4&#39;)
+pfDeepCSVJetTags_... | float                    | AsDtype(&#39;&gt;f4&#39;)
+pfDeepCSVJetTags_... | float                    | AsDtype(&#39;&gt;f4&#39;)
+pfDeepCSVJetTags_... | float                    | AsDtype(&#39;&gt;f4&#39;)
+pfJetBProbability... | float                    | AsDtype(&#39;&gt;f4&#39;)
+pfJetProbabilityB... | float                    | AsDtype(&#39;&gt;f4&#39;)
+rho                  | float                    | AsDtype(&#39;&gt;f4&#39;)
+softPFElectronBJe... | float                    | AsDtype(&#39;&gt;f4&#39;)
+softPFMuonBJetTags   | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_doubleb           | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_eta               | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_gen_eta           | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_gen_pt            | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_isBB              | int32_t                  | AsDtype(&#39;&gt;i4&#39;)
+fj_isH               | int32_t                  | AsDtype(&#39;&gt;i4&#39;)
+fj_isNonBB           | int32_t                  | AsDtype(&#39;&gt;i4&#39;)
+fj_isQCD             | int32_t                  | AsDtype(&#39;&gt;i4&#39;)
+fj_isTop             | int32_t                  | AsDtype(&#39;&gt;i4&#39;)
+fj_isW               | int32_t                  | AsDtype(&#39;&gt;i4&#39;)
+fj_isZ               | int32_t                  | AsDtype(&#39;&gt;i4&#39;)
+fj_jetNTracks        | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_label             | int32_t                  | AsDtype(&#39;&gt;i4&#39;)
+fj_labelJMAR         | int32_t                  | AsDtype(&#39;&gt;i4&#39;)
+fj_labelLegacy       | int32_t                  | AsDtype(&#39;&gt;i4&#39;)
+fj_mass              | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_nSV               | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_n_sdsubjets       | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_nbHadrons         | int32_t                  | AsDtype(&#39;&gt;i4&#39;)
+fj_ncHadrons         | int32_t                  | AsDtype(&#39;&gt;i4&#39;)
+fj_phi               | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_pt                | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_ptDR              | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_relptdiff         | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_sdmass            | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_sdn2              | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_sdsj1_axis1       | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_sdsj1_axis2       | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_sdsj1_csv         | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_sdsj1_eta         | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_sdsj1_mass        | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_sdsj1_mult        | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_sdsj1_phi         | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_sdsj1_pt          | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_sdsj1_ptD         | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_sdsj2_axis1       | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_sdsj2_axis2       | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_sdsj2_csv         | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_sdsj2_eta         | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_sdsj2_mass        | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_sdsj2_mult        | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_sdsj2_phi         | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_sdsj2_pt          | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_sdsj2_ptD         | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_tau0_trackEtaR... | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_tau0_trackEtaR... | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_tau0_trackEtaR... | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_tau1              | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_tau1_trackEtaR... | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_tau1_trackEtaR... | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_tau1_trackEtaR... | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_tau2              | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_tau21             | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_tau3              | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_tau32             | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_tau_flightDist... | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_tau_flightDist... | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_tau_vertexDelt... | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_tau_vertexEner... | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_tau_vertexEner... | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_tau_vertexMass_0  | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_tau_vertexMass_1  | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_trackSip2dSigA... | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_trackSip2dSigA... | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_trackSip2dSigA... | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_trackSipdSig_0    | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_trackSipdSig_0_0  | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_trackSipdSig_0_1  | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_trackSipdSig_1    | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_trackSipdSig_1_0  | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_trackSipdSig_1_1  | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_trackSipdSig_2    | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_trackSipdSig_3    | float                    | AsDtype(&#39;&gt;f4&#39;)
+fj_z_ratio           | float                    | AsDtype(&#39;&gt;f4&#39;)
+label_H_bb           | int32_t                  | AsDtype(&#39;&gt;i4&#39;)
+label_H_cc           | int32_t                  | AsDtype(&#39;&gt;i4&#39;)
+label_H_qqqq         | int32_t                  | AsDtype(&#39;&gt;i4&#39;)
+label_QCD_b          | int32_t                  | AsDtype(&#39;&gt;i4&#39;)
+label_QCD_bb         | int32_t                  | AsDtype(&#39;&gt;i4&#39;)
+label_QCD_c          | int32_t                  | AsDtype(&#39;&gt;i4&#39;)
+label_QCD_cc         | int32_t                  | AsDtype(&#39;&gt;i4&#39;)
+label_QCD_others     | int32_t                  | AsDtype(&#39;&gt;i4&#39;)
+label_Top_bc         | int32_t                  | AsDtype(&#39;&gt;i4&#39;)
+label_Top_bcq        | int32_t                  | AsDtype(&#39;&gt;i4&#39;)
+label_Top_bq         | int32_t                  | AsDtype(&#39;&gt;i4&#39;)
+label_Top_bqq        | int32_t                  | AsDtype(&#39;&gt;i4&#39;)
+label_W_cq           | int32_t                  | AsDtype(&#39;&gt;i4&#39;)
+label_W_qq           | int32_t                  | AsDtype(&#39;&gt;i4&#39;)
+label_Z_bb           | int32_t                  | AsDtype(&#39;&gt;i4&#39;)
+label_Z_cc           | int32_t                  | AsDtype(&#39;&gt;i4&#39;)
+label_Z_qq           | int32_t                  | AsDtype(&#39;&gt;i4&#39;)
+sample_isQCD         | int32_t                  | AsDtype(&#39;&gt;i4&#39;)
+n_pfcands            | int32_t                  | AsDtype(&#39;&gt;i4&#39;)
+npfcands             | float                    | AsDtype(&#39;&gt;f4&#39;)
+pfcand_VTX_ass       | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+pfcand_charge        | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+pfcand_deltaR        | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+pfcand_drminsv       | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+pfcand_drsubjet1     | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+pfcand_drsubjet2     | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+pfcand_dxy           | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+pfcand_dxysig        | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+pfcand_dz            | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+pfcand_dzsig         | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+pfcand_erel          | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+pfcand_etarel        | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+pfcand_fromPV        | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+pfcand_hcalFrac      | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+pfcand_isChargedHad  | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+pfcand_isEl          | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+pfcand_isGamma       | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+pfcand_isMu          | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+pfcand_isNeutralHad  | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+pfcand_lostInnerHits | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+pfcand_mass          | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+pfcand_phirel        | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+pfcand_ptrel         | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+pfcand_puppiw        | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+n_tracks             | int32_t                  | AsDtype(&#39;&gt;i4&#39;)
+ntracks              | float                    | AsDtype(&#39;&gt;f4&#39;)
+trackBTag_DeltaR     | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+trackBTag_Eta        | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+trackBTag_EtaRel     | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+trackBTag_JetDistVal | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+trackBTag_Momentum   | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+trackBTag_PPar       | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+trackBTag_PParRatio  | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+trackBTag_PtRatio    | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+trackBTag_PtRel      | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+trackBTag_Sip2dSig   | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+trackBTag_Sip2dVal   | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+trackBTag_Sip3dSig   | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+trackBTag_Sip3dVal   | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+track_VTX_ass        | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+track_charge         | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+track_deltaR         | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+track_detadeta       | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+track_dlambdadz      | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+track_dphidphi       | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+track_dphidxy        | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+track_dptdpt         | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+track_drminsv        | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+track_drsubjet1      | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+track_drsubjet2      | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+track_dxy            | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+track_dxydxy         | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+track_dxydz          | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+track_dxysig         | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+track_dz             | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+track_dzdz           | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+track_dzsig          | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+track_erel           | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+track_etarel         | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+track_fromPV         | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+track_isChargedHad   | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+track_isEl           | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+track_isMu           | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+track_lostInnerHits  | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+track_mass           | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+track_normchi2       | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+track_phirel         | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+track_pt             | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+track_ptrel          | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+track_puppiw         | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+track_quality        | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+n_sv                 | int32_t                  | AsDtype(&#39;&gt;i4&#39;)
+nsv                  | float                    | AsDtype(&#39;&gt;f4&#39;)
+sv_chi2              | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+sv_costhetasvpv      | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+sv_d3d               | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+sv_d3derr            | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+sv_d3dsig            | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+sv_deltaR            | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+sv_dxy               | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+sv_dxyerr            | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+sv_dxysig            | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+sv_erel              | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+sv_etarel            | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+sv_mass              | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+sv_ndf               | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+sv_normchi2          | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+sv_ntracks           | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+sv_phirel            | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+sv_pt                | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
+sv_ptrel             | std::vector&lt;float&gt;       | AsJagged(AsDtype(&#39;&gt;f4&#39;), he...
 </pre></div>
 </div>
 </div>
@@ -700,13 +712,16 @@ The latter means there may a variable number per jet.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;label_QCD_b&#39;: array([0, 0, 0, ..., 0, 0, 0], dtype=int32),
- &#39;label_QCD_bb&#39;: array([0, 0, 0, ..., 0, 0, 0], dtype=int32),
- &#39;label_QCD_c&#39;: array([0, 0, 0, ..., 0, 0, 0], dtype=int32),
- &#39;label_QCD_cc&#39;: array([0, 0, 0, ..., 0, 1, 1], dtype=int32),
- &#39;label_QCD_others&#39;: array([1, 1, 1, ..., 1, 0, 0], dtype=int32),
- &#39;label_H_bb&#39;: array([0, 0, 0, ..., 0, 0, 0], dtype=int32),
- &#39;sample_isQCD&#39;: array([1, 1, 1, ..., 1, 1, 1], dtype=int32)}
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_3595</span><span class="o">/</span><span class="mf">3380590306.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Returns a dictionary</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">arrays</span><span class="p">(</span><span class="n">branches</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;label_QCD_b&#39;</span><span class="p">,</span> 
+<span class="g g-Whitespace">      </span><span class="mi">3</span>                                <span class="s1">&#39;label_QCD_bb&#39;</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>                                <span class="s1">&#39;label_QCD_c&#39;</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>                                <span class="s1">&#39;label_QCD_cc&#39;</span><span class="p">,</span>
+
+<span class="ne">TypeError</span>: arrays() got an unexpected keyword argument &#39;branches&#39;
 </pre></div>
 </div>
 </div>
@@ -745,21 +760,11 @@ The latter means there may a variable number per jet.</p>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># fraction of jets with some truth label defined </span>
 <span class="nb">sum</span><span class="p">(</span><span class="n">label_QCD</span><span class="o">+</span><span class="n">label_Hbb</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">label_QCD</span><span class="o">+</span><span class="n">label_Hbb</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.93785
 </pre></div>
 </div>
 </div>
@@ -800,10 +805,6 @@ The latter means there may a variable number per jet.</p>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/02-dataset_15_0.png" src="../_images/02-dataset_15_0.png" />
-<img alt="../_images/02-dataset_15_1.png" src="../_images/02-dataset_15_1.png" />
-</div>
 </div>
 </div>
 <div class="section" id="jagged-arrys">
@@ -819,12 +820,6 @@ The latter means there may a variable number per jet.</p>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;track_pt&#39;: &lt;JaggedArray [[1.0537109 0.95654297 1.4570312 ... 18.171875 1.6171875 1.234375] [2.7832031 3.5253906 49.09375 ... 3.8613281 1.4599609 1.4306641] [1.5302734 6.8164062 2.9257812 ... 25.6875 36.3125 1.1513672] ... [1.0810547 2.5234375 10.265625 ... 1.25 24.453125 8.4921875] [4.8125 2.6796875 3.9824219 ... 4.3359375 23.375 6.3242188] [2.4101562 1.4345703 2.4628906 ... 57.59375 1.0419922 2.9726562]] at 0x7ff4f9fca190&gt;,
- &#39;label_H_bb&#39;: array([0, 0, 0, ..., 0, 0, 0], dtype=int32)}
-</pre></div>
-</div>
-</div>
 </div>
 <p>Note the difference between a “flat” array, where these a fixed number per jet (like 1 per jet in the case of jet properties) and a jagged array, where there are a variable number.</p>
 <p>We can demonstrate this by looking at the first jet in the dataset. As we’ll see there are 21 tracks, each with their own pt.</p>
@@ -834,24 +829,10 @@ The latter means there may a variable number per jet.</p>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>251.27692
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">track_features</span><span class="p">[</span><span class="s1">&#39;track_pt&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 1.0537109 ,  0.95654297,  1.4570312 ,  1.0917969 ,  3.1660156 ,
-        3.3886719 ,  6.8554688 ,  3.4257812 ,  1.8662109 ,  2.890625  ,
-        7.5898438 ,  1.4970703 ,  5.0117188 , 62.875     ,  7.0195312 ,
-       11.125     ,  4.5429688 , 14.125     , 18.171875  ,  1.6171875 ,
-        1.234375  ], dtype=float32)
 </pre></div>
 </div>
 </div>
@@ -863,11 +844,6 @@ The latter means there may a variable number per jet.</p>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([     0,     21,     56, ..., 542149, 542174, 542194])
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -875,20 +851,10 @@ The latter means there may a variable number per jet.</p>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([    21,     56,     80, ..., 542174, 542194, 542239])
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">track_features</span><span class="p">[</span><span class="s1">&#39;track_pt&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">counts</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([21, 35, 24, ..., 25, 20, 45])
 </pre></div>
 </div>
 </div>
@@ -910,9 +876,6 @@ The latter means there may a variable number per jet.</p>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/02-dataset_26_0.png" src="../_images/02-dataset_26_0.png" />
-</div>
 </div>
 </div>
 <div class="section" id="conversion-to-regular-array">
@@ -931,9 +894,6 @@ The simplest way to do this is to use zero-padding and truncation to “cap” t
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/02-dataset_28_0.png" src="../_images/02-dataset_28_0.png" />
-</div>
 </div>
 <p>In this case, 60 seems to be a reasonable number.</p>
 <div class="cell docutils container">
@@ -941,26 +901,6 @@ The simplest way to do this is to use zero-padding and truncation to “cap” t
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">track_features</span><span class="p">[</span><span class="s1">&#39;track_pt&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="n">clip</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">regular</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <span class="n">a</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(20000, 60)
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1.0537109 ,  0.95654297,  1.4570312 , ...,  0.        ,
-         0.        ,  0.        ],
-       [ 2.7832031 ,  3.5253906 , 49.09375   , ...,  0.        ,
-         0.        ,  0.        ],
-       [ 1.5302734 ,  6.8164062 ,  2.9257812 , ...,  0.        ,
-         0.        ,  0.        ],
-       ...,
-       [ 1.0810547 ,  2.5234375 , 10.265625  , ...,  0.        ,
-         0.        ,  0.        ],
-       [ 4.8125    ,  2.6796875 ,  3.9824219 , ...,  0.        ,
-         0.        ,  0.        ],
-       [ 2.4101562 ,  1.4345703 ,  2.4628906 , ...,  0.        ,
-         0.        ,  0.        ]], dtype=float32)
 </pre></div>
 </div>
 </div>
@@ -990,15 +930,35 @@ The simplest way to do this is to use zero-padding and truncation to “cap” t
 
               </div>
               
-        </div>
-    </div>
-    
-    
-    <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="02.html" title="previous page">Week 2: Data Formats and Exploration</a>
-    <a class='right-next' id="next-link" href="03.html" title="next page">Week 3: Feature Engineering</a>
+            
 
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="02.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Week 2: Data Formats and Exploration</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="03.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Week 3: Feature Engineering</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
     </div>
     <footer class="footer mt-5 mt-md-0">
     <div class="container">
@@ -1006,7 +966,7 @@ The simplest way to do this is to use zero-padding and truncation to “cap” t
         
           By Javier Duarte and Frank Würthwein<br/>
         
-            &copy; Copyright 2020.<br/>
+            &copy; Copyright 2021.<br/>
       </p>
     </div>
   </footer>
@@ -1015,11 +975,9 @@ The simplest way to do this is to use zero-padding and truncation to “cap” t
 
       </div>
     </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
 
-    
-  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
-
-
-    
+  
   </body>
 </html>

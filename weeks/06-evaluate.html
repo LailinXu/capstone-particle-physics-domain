@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Week 6 Notebook: Evalulating Model Performance and Robustness &#8212; Particle Physics and Machine Learning</title>
     
-  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
 
     
   <link rel="stylesheet"
@@ -19,14 +20,10 @@
 
     
       
-  <link rel="stylesheet"
-    href="../_static/vendor/open-sans_all/1.44.1/index.css">
-  <link rel="stylesheet"
-    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
 
     
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -34,7 +31,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
 
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -44,12 +41,8 @@
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
-    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
         const thebe_selector_input = "pre"
@@ -60,14 +53,14 @@
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Week 7: Optimizing Other Objectives" href="07.html" />
     <link rel="prev" title="Week 6: Evalulating Model Performance and Robustness" href="06.html" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
-
-
-
+    
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
     
 
     <div class="container-xl">
@@ -76,79 +69,93 @@
 <div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
     
         <div class="navbar-brand-box">
-<a class="navbar-brand text-wrap" href="../index.html">
-  
-  <img src="../_static/logo.png" class="logo" alt="logo">
-  
-  
-  <h1 class="site-logo" id="site-title">Particle Physics and Machine Learning</h1>
-  
-</a>
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Particle Physics and Machine Learning</h1>
+      
+    </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form>
-<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
-    <ul class="nav sidenav_l1">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../README.html">
    Particle Physics and Machine Learning
   </a>
  </li>
 </ul>
-<ul class="current nav sidenav_l1">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="01.html">
    Week 1: Introduction to Particle Physics and Jets
   </a>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="02.html">
    Week 2: Data Formats and Exploration
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="02-dataset.html">
      Week 2 Notebook: Data Formats and Exploration
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="03.html">
    Week 3: Feature Engineering
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="03-features.html">
      Week 3 Notebook: Feature Engineering
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="04.html">
    Week 4: Simple Classifiers
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="04-simple-classifiers.html">
      Week 4 Notebook: Simple Classifiers
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="05.html">
    Week 5: Building a Deep Learning Model
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="05-deep-learning.html">
      Week 5 Notebook: Building a Deep Learning Model
@@ -160,50 +167,57 @@
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 current active collapsible-parent">
+ <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="06.html">
    Week 6: Evalulating Model Performance and Robustness
   </a>
-  <ul class="current collapse-ul">
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
      Week 6 Notebook: Evalulating Model Performance and Robustness
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="07.html">
    Week 7: Optimizing Other Objectives
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="07-objectives.html">
      Week 7 Notebook: Optimizing Other Objectives
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="08.html">
    Week 8: Extending the Model
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="08-extending.html">
      Week 8 Notebook: Extending the Model
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="09.html">
@@ -217,6 +231,7 @@
  </li>
 </ul>
 
+    </div>
 </nav> <!-- To handle the deprecated key -->
 
 <div class="navbar_extra_footer">
@@ -232,21 +247,21 @@
           
 <main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
     
-    <div class="row topbar fixed-top container-xl">
-    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
-    </div>
-    <div class="col pl-2 topbar-main">
-        
-        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-            <i class="fas fa-bars"></i>
-            <i class="fas fa-arrow-left"></i>
-            <i class="fas fa-arrow-up"></i>
-        </button>
-        
-        
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
 <div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
             class="fas fa-download"></i></button>
@@ -264,7 +279,7 @@
     </div>
 </div>
 
-        <!-- Source interaction buttons -->
+            <!-- Source interaction buttons -->
 
 <div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
@@ -284,14 +299,14 @@
     </div>
 </div>
 
+            <!-- Full screen (wrap in <a> to have style consistency -->
 
-        <!-- Full screen (wrap in <a> to have style consistency -->
-        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-                title="Fullscreen mode"><i
-                    class="fas fa-expand"></i></button></a>
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
 
-        <!-- Launch buttons -->
+            <!-- Launch buttons -->
 
 <div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
@@ -316,16 +331,16 @@
     </div>
 </div>
 
-    </div>
-
-    <!-- Table of contents -->
-    <div class="d-none d-md-block col-md-2 bd-toc show">
-        
-        <div class="tocsection onthispage pt-5 pb-3">
-            <i class="fas fa-list"></i> Contents
         </div>
-        <nav id="bd-toc-nav">
-            <ul class="nav section-nav flex-column">
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#load-the-previous-model">
    Load the Previous Model
@@ -348,8 +363,8 @@
  </li>
 </ul>
 
-        </nav>
-        
+            </nav>
+        </div>
     </div>
 </div>
     <div id="main-content" class="row">
@@ -412,24 +427,112 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /usr/share/miniconda/envs/ml-latest/lib/python3.7/site-packages/tensorflow/python/ops/init_ops.py:97: calling Zeros.__init__ (from tensorflow.python.ops.init_ops) with dtype is deprecated and will be removed in a future version.
-Instructions for updating:
-Call initializer instance with the dtype argument instead of passing it to the constructor
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /usr/share/miniconda/envs/ml-latest/lib/python3.7/site-packages/tensorflow/python/ops/init_ops.py:97: calling Ones.__init__ (from tensorflow.python.ops.init_ops) with dtype is deprecated and will be removed in a future version.
-Instructions for updating:
-Call initializer instance with the dtype argument instead of passing it to the constructor
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /usr/share/miniconda/envs/ml-latest/lib/python3.7/site-packages/tensorflow/python/ops/init_ops.py:97: calling GlorotUniform.__init__ (from tensorflow.python.ops.init_ops) with dtype is deprecated and will be removed in a future version.
-Instructions for updating:
-Call initializer instance with the dtype argument instead of passing it to the constructor
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /usr/share/miniconda/envs/ml-latest/lib/python3.7/site-packages/tensorflow/python/ops/init_ops.py:1251: calling VarianceScaling.__init__ (from tensorflow.python.ops.init_ops) with dtype is deprecated and will be removed in a future version.
-Instructions for updating:
-Call initializer instance with the dtype argument instead of passing it to the constructor
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_3741</span><span class="o">/</span><span class="mf">1872006818.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">from</span> <span class="nn">tensorflow.keras.models</span> <span class="kn">import</span> <span class="n">load_model</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> 
+<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">keras_model_conv1d</span> <span class="o">=</span> <span class="n">load_model</span><span class="p">(</span><span class="s1">&#39;keras_model_conv1d_best.h5&#39;</span><span class="p">)</span>
+
+<span class="nn">/usr/share/miniconda/envs/ml-latest/lib/python3.9/site-packages/tensorflow/python/keras/saving/save.py</span> in <span class="ni">load_model</span><span class="nt">(filepath, custom_objects, compile, options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">204</span>       <span class="k">if</span> <span class="p">(</span><span class="n">h5py</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span>
+<span class="g g-Whitespace">    </span><span class="mi">205</span>           <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">)</span> <span class="ow">or</span> <span class="n">h5py</span><span class="o">.</span><span class="n">is_hdf5</span><span class="p">(</span><span class="n">filepath</span><span class="p">))):</span>
+<span class="ne">--&gt; </span><span class="mi">206</span>         <span class="k">return</span> <span class="n">hdf5_format</span><span class="o">.</span><span class="n">load_model_from_hdf5</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">custom_objects</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">207</span>                                                 <span class="nb">compile</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">208</span> 
+
+<span class="nn">/usr/share/miniconda/envs/ml-latest/lib/python3.9/site-packages/tensorflow/python/keras/saving/hdf5_format.py</span> in <span class="ni">load_model_from_hdf5</span><span class="nt">(filepath, custom_objects, compile)</span>
+<span class="g g-Whitespace">    </span><span class="mi">181</span>       <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;No model found in config file.&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">182</span>     <span class="n">model_config</span> <span class="o">=</span> <span class="n">json_utils</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">model_config</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+<span class="ne">--&gt; </span><span class="mi">183</span>     <span class="n">model</span> <span class="o">=</span> <span class="n">model_config_lib</span><span class="o">.</span><span class="n">model_from_config</span><span class="p">(</span><span class="n">model_config</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">184</span>                                                <span class="n">custom_objects</span><span class="o">=</span><span class="n">custom_objects</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">185</span> 
+
+<span class="nn">/usr/share/miniconda/envs/ml-latest/lib/python3.9/site-packages/tensorflow/python/keras/saving/model_config.py</span> in <span class="ni">model_from_config</span><span class="nt">(config, custom_objects)</span>
+<span class="g g-Whitespace">     </span><span class="mi">55</span>                     <span class="s1">&#39;`Sequential.from_config(config)`?&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">56</span>   <span class="kn">from</span> <span class="nn">tensorflow.python.keras.layers</span> <span class="kn">import</span> <span class="n">deserialize</span>  <span class="c1"># pylint: disable=g-import-not-at-top</span>
+<span class="ne">---&gt; </span><span class="mi">57</span>   <span class="k">return</span> <span class="n">deserialize</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">custom_objects</span><span class="o">=</span><span class="n">custom_objects</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">58</span> 
+<span class="g g-Whitespace">     </span><span class="mi">59</span> 
+
+<span class="nn">/usr/share/miniconda/envs/ml-latest/lib/python3.9/site-packages/tensorflow/python/keras/layers/serialization.py</span> in <span class="ni">deserialize</span><span class="nt">(config, custom_objects)</span>
+<span class="g g-Whitespace">    </span><span class="mi">171</span>   <span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">172</span><span class="sd">   populate_deserializable_objects()</span>
+<span class="ne">--&gt; </span><span class="mi">173</span><span class="sd">   return generic_utils.deserialize_keras_object(</span>
+<span class="g g-Whitespace">    </span><span class="mi">174</span><span class="sd">       config,</span>
+<span class="g g-Whitespace">    </span><span class="mi">175</span><span class="sd">       module_objects=LOCAL.ALL_OBJECTS,</span>
+
+<span class="nn">/usr/share/miniconda/envs/ml-latest/lib/python3.9/site-packages/tensorflow/python/keras/utils/generic_utils.py</span> in <span class="ni">deserialize_keras_object</span><span class="nt">(identifier, module_objects, custom_objects, printable_module_name)</span>
+<span class="g g-Whitespace">    </span><span class="mi">352</span><span class="sd"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">353</span><span class="sd">       if &#39;custom_objects&#39; in arg_spec.args:</span>
+<span class="ne">--&gt; </span><span class="mi">354</span><span class="sd">         return cls.from_config(</span>
+<span class="g g-Whitespace">    </span><span class="mi">355</span><span class="sd">             cls_config,</span>
+<span class="g g-Whitespace">    </span><span class="mi">356</span><span class="sd">             custom_objects=dict(</span>
+
+<span class="nn">/usr/share/miniconda/envs/ml-latest/lib/python3.9/site-packages/tensorflow/python/keras/engine/training.py</span> in <span class="ni">from_config</span><span class="nt">(cls, config, custom_objects)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2254</span><span class="sd">     # be constructed for FunctionalModel</span>
+<span class="g g-Whitespace">   </span><span class="mi">2255</span><span class="sd">     from tensorflow.python.keras.engine import functional  # pylint: disable=g-import-not-at-top</span>
+<span class="ne">-&gt; </span><span class="mi">2256</span><span class="sd">     return functional.Functional.from_config(</span>
+<span class="g g-Whitespace">   </span><span class="mi">2257</span><span class="sd">         config, custom_objects=custom_objects)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2258</span><span class="sd"> </span>
+
+<span class="nn">/usr/share/miniconda/envs/ml-latest/lib/python3.9/site-packages/tensorflow/python/keras/engine/functional.py</span> in <span class="ni">from_config</span><span class="nt">(cls, config, custom_objects)</span>
+<span class="g g-Whitespace">    </span><span class="mi">666</span><span class="sd">         ValueError: In case of improperly formatted config dict.</span>
+<span class="g g-Whitespace">    </span><span class="mi">667</span><span class="sd">     &quot;&quot;&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">668</span>     <span class="n">input_tensors</span><span class="p">,</span> <span class="n">output_tensors</span><span class="p">,</span> <span class="n">created_layers</span> <span class="o">=</span> <span class="n">reconstruct_from_config</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">669</span>         <span class="n">config</span><span class="p">,</span> <span class="n">custom_objects</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">670</span>     <span class="n">model</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">input_tensors</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="n">output_tensors</span><span class="p">,</span>
+
+<span class="nn">/usr/share/miniconda/envs/ml-latest/lib/python3.9/site-packages/tensorflow/python/keras/engine/functional.py</span> in <span class="ni">reconstruct_from_config</span><span class="nt">(config, custom_objects, created_layers)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1273</span>   <span class="c1"># First, we create all layers and enqueue nodes to be processed</span>
+<span class="g g-Whitespace">   </span><span class="mi">1274</span>   <span class="k">for</span> <span class="n">layer_data</span> <span class="ow">in</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;layers&#39;</span><span class="p">]:</span>
+<span class="ne">-&gt; </span><span class="mi">1275</span>     <span class="n">process_layer</span><span class="p">(</span><span class="n">layer_data</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1276</span>   <span class="c1"># Then we process nodes in order of layer depth.</span>
+<span class="g g-Whitespace">   </span><span class="mi">1277</span>   <span class="c1"># Nodes that cannot yet be processed (if the inbound node</span>
+
+<span class="nn">/usr/share/miniconda/envs/ml-latest/lib/python3.9/site-packages/tensorflow/python/keras/engine/functional.py</span> in <span class="ni">process_layer</span><span class="nt">(layer_data)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1255</span>       <span class="kn">from</span> <span class="nn">tensorflow.python.keras.layers</span> <span class="kn">import</span> <span class="n">deserialize</span> <span class="k">as</span> <span class="n">deserialize_layer</span>  <span class="c1"># pylint: disable=g-import-not-at-top</span>
+<span class="g g-Whitespace">   </span><span class="mi">1256</span> 
+<span class="ne">-&gt; </span><span class="mi">1257</span>       <span class="n">layer</span> <span class="o">=</span> <span class="n">deserialize_layer</span><span class="p">(</span><span class="n">layer_data</span><span class="p">,</span> <span class="n">custom_objects</span><span class="o">=</span><span class="n">custom_objects</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1258</span>       <span class="n">created_layers</span><span class="p">[</span><span class="n">layer_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">layer</span>
+<span class="g g-Whitespace">   </span><span class="mi">1259</span> 
+
+<span class="nn">/usr/share/miniconda/envs/ml-latest/lib/python3.9/site-packages/tensorflow/python/keras/layers/serialization.py</span> in <span class="ni">deserialize</span><span class="nt">(config, custom_objects)</span>
+<span class="g g-Whitespace">    </span><span class="mi">171</span>   <span class="s2">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">172</span><span class="s2">   populate_deserializable_objects()</span>
+<span class="ne">--&gt; </span><span class="mi">173</span><span class="s2">   return generic_utils.deserialize_keras_object(</span>
+<span class="g g-Whitespace">    </span><span class="mi">174</span><span class="s2">       config,</span>
+<span class="g g-Whitespace">    </span><span class="mi">175</span><span class="s2">       module_objects=LOCAL.ALL_OBJECTS,</span>
+
+<span class="nn">/usr/share/miniconda/envs/ml-latest/lib/python3.9/site-packages/tensorflow/python/keras/utils/generic_utils.py</span> in <span class="ni">deserialize_keras_object</span><span class="nt">(identifier, module_objects, custom_objects, printable_module_name)</span>
+<span class="g g-Whitespace">    </span><span class="mi">352</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">353</span><span class="s2">       if &#39;custom_objects&#39; in arg_spec.args:</span>
+<span class="ne">--&gt; </span><span class="mi">354</span><span class="s2">         return cls.from_config(</span>
+<span class="g g-Whitespace">    </span><span class="mi">355</span><span class="s2">             cls_config,</span>
+<span class="g g-Whitespace">    </span><span class="mi">356</span><span class="s2">             custom_objects=dict(</span>
+
+<span class="nn">/usr/share/miniconda/envs/ml-latest/lib/python3.9/site-packages/tensorflow/python/keras/layers/core.py</span> in <span class="ni">from_config</span><span class="nt">(cls, config, custom_objects)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1017</span><span class="s2">   def from_config(cls, config, custom_objects=None):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1018</span><span class="s2">     config = config.copy()</span>
+<span class="ne">-&gt; </span><span class="mi">1019</span><span class="s2">     function = cls._parse_function_from_config(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1020</span><span class="s2">         config, custom_objects, &#39;function&#39;, &#39;module&#39;, &#39;function_type&#39;)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1021</span><span class="s2"> </span>
+
+<span class="nn">/usr/share/miniconda/envs/ml-latest/lib/python3.9/site-packages/tensorflow/python/keras/layers/core.py</span> in <span class="ni">_parse_function_from_config</span><span class="nt">(cls, config, custom_objects, func_attr_name, module_attr_name, func_type_attr_name)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1069</span><span class="s2">     elif function_type == &#39;lambda&#39;:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1070</span><span class="s2">       # Unsafe deserialization from bytecode</span>
+<span class="ne">-&gt; </span><span class="mi">1071</span><span class="s2">       function = generic_utils.func_load(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1072</span><span class="s2">           config[func_attr_name], globs=globs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1073</span><span class="s2">     elif function_type == &#39;raw&#39;:</span>
+
+<span class="nn">/usr/share/miniconda/envs/ml-latest/lib/python3.9/site-packages/tensorflow/python/keras/utils/generic_utils.py</span> in <span class="ni">func_load</span><span class="nt">(code, defaults, closure, globs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">455</span><span class="s2">   except (UnicodeEncodeError, binascii.Error):</span>
+<span class="g g-Whitespace">    </span><span class="mi">456</span><span class="s2">     raw_code = code.encode(&#39;raw_unicode_escape&#39;)</span>
+<span class="ne">--&gt; </span><span class="mi">457</span><span class="s2">   code = marshal.loads(raw_code)</span>
+<span class="g g-Whitespace">    </span><span class="mi">458</span><span class="s2">   if globs is None:</span>
+<span class="g g-Whitespace">    </span><span class="mi">459</span><span class="s2">     globs = globals()</span>
+
+<span class="ne">ValueError</span>: bad marshal data (unknown type code)
 </pre></div>
 </div>
 </div>
@@ -485,90 +588,6 @@ Call initializer instance with the dtype argument instead of passing it to the c
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0%|          | 0/24 [00:00&lt;?, ?it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  4%|▍         | 1/24 [00:06&lt;02:30,  6.55s/it]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  8%|▊         | 2/24 [00:13&lt;02:31,  6.88s/it]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 12%|█▎        | 3/24 [00:20&lt;02:26,  6.97s/it]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 17%|█▋        | 4/24 [00:24&lt;01:56,  5.82s/it]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 21%|██        | 5/24 [00:31&lt;01:54,  6.03s/it]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 25%|██▌       | 6/24 [00:37&lt;01:52,  6.23s/it]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 29%|██▉       | 7/24 [00:41&lt;01:32,  5.46s/it]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 33%|███▎      | 8/24 [00:48&lt;01:32,  5.75s/it]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 38%|███▊      | 9/24 [00:54&lt;01:28,  5.93s/it]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 42%|████▏     | 10/24 [00:58&lt;01:14,  5.31s/it]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 46%|████▌     | 11/24 [01:04&lt;01:13,  5.68s/it]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 50%|█████     | 12/24 [01:11&lt;01:12,  6.00s/it]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 54%|█████▍    | 13/24 [01:15&lt;00:59,  5.43s/it]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 58%|█████▊    | 14/24 [01:22&lt;00:57,  5.71s/it]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 62%|██████▎   | 15/24 [01:28&lt;00:52,  5.85s/it]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 67%|██████▋   | 16/24 [01:31&lt;00:41,  5.20s/it]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 71%|███████   | 17/24 [01:38&lt;00:38,  5.52s/it]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 75%|███████▌  | 18/24 [01:44&lt;00:35,  5.85s/it]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 79%|███████▉  | 19/24 [01:48&lt;00:26,  5.29s/it]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 83%|████████▎ | 20/24 [02:06&lt;00:35,  8.94s/it]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 88%|████████▊ | 21/24 [02:35&lt;00:44, 14.95s/it]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 92%|█████████▏| 22/24 [02:52&lt;00:31, 15.69s/it]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 96%|█████████▌| 23/24 [03:24&lt;00:20, 20.54s/it]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 24/24 [03:47&lt;00:00, 21.36s/it]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 24/24 [03:47&lt;00:00,  9.49s/it]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<img alt="../_images/06-evaluate_8_27.png" src="../_images/06-evaluate_8_27.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -633,12 +652,6 @@ Call initializer instance with the dtype argument instead of passing it to the c
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/06-evaluate_11_0.png" src="../_images/06-evaluate_11_0.png" />
-<img alt="../_images/06-evaluate_11_1.png" src="../_images/06-evaluate_11_1.png" />
-<img alt="../_images/06-evaluate_11_2.png" src="../_images/06-evaluate_11_2.png" />
-<img alt="../_images/06-evaluate_11_3.png" src="../_images/06-evaluate_11_3.png" />
-</div>
 </div>
 </div>
 <div class="section" id="dependence-on-jet-pt">
@@ -673,10 +686,6 @@ Call initializer instance with the dtype argument instead of passing it to the c
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/06-evaluate_13_0.png" src="../_images/06-evaluate_13_0.png" />
-<img alt="../_images/06-evaluate_13_1.png" src="../_images/06-evaluate_13_1.png" />
-</div>
 </div>
 </div>
 </div>
@@ -703,15 +712,35 @@ Call initializer instance with the dtype argument instead of passing it to the c
 
               </div>
               
-        </div>
-    </div>
-    
-    
-    <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="06.html" title="previous page">Week 6: Evalulating Model Performance and Robustness</a>
-    <a class='right-next' id="next-link" href="07.html" title="next page">Week 7: Optimizing Other Objectives</a>
+            
 
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="06.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Week 6: Evalulating Model Performance and Robustness</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="07.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Week 7: Optimizing Other Objectives</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
     </div>
     <footer class="footer mt-5 mt-md-0">
     <div class="container">
@@ -719,7 +748,7 @@ Call initializer instance with the dtype argument instead of passing it to the c
         
           By Javier Duarte and Frank Würthwein<br/>
         
-            &copy; Copyright 2020.<br/>
+            &copy; Copyright 2021.<br/>
       </p>
     </div>
   </footer>
@@ -728,11 +757,9 @@ Call initializer instance with the dtype argument instead of passing it to the c
 
       </div>
     </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
 
-    
-  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
-
-
-    
+  
   </body>
 </html>
