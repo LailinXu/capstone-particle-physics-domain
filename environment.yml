@@ -2,25 +2,20 @@ name: ml-latest
 channels:
     - conda-forge
 dependencies:
-    - python=3.7
-    - numpy=1.16.4
-    - uproot<4
+    - python=3.9
+    - numpy
+    - uproot
     - tensorflow
     - xrootd
     - scikit-learn
     - matplotlib
+    - pytorch
+    - torchvision
+    - torchaudio
+    - cpuonly
+    - pytorch-geometric
+    - mplhep
     - tqdm
     - pip
     - pip:
-      - --find-links https://download.pytorch.org/whl/torch_stable.html 
-      - --find-links https://pytorch-geometric.com/whl/torch-1.5.0+cpu.html
-      - numpy==1.16.4
-      - torch==1.5.0+cpu
-      - torchvision==0.6.0+cpu
-      - torch-scatter
-      - torch-sparse
-      - torch-cluster
-      - torch-spline-conv
-      - torch-geometric
-      - mplhep
       - jupyter-book
