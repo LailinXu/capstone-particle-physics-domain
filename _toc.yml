@@ -1,4 +1,6 @@
-- file: README.md
+format: jb-article
+root: README.md
+sections:
 - file: weeks/01.md
 - file: weeks/02.md
   sections:
