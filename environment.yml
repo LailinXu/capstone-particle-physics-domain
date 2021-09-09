@@ -1,5 +1,7 @@
 name: ml-latest
 channels:
+    - rusty1s
+    - pytorch
     - conda-forge
 dependencies:
     - python=3.9
