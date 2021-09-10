@@ -8,7 +8,7 @@ class DataGenerator(tensorflow.keras.utils.Sequence):
     'Generates data for Keras'
     def __init__(self, list_files, features, labels, spectators, batch_size=1024, n_dim=60, 
                  remove_mass_pt_window=False, remove_unlabeled=True, return_spectators=False,
-                 max_entry = 20000, scale_mass_pt = [1, 1]):
+                 max_entry=20000, scale_mass_pt=[1, 1]):
         'Initialization'
         self.batch_size = batch_size
         self.labels = labels
@@ -138,7 +138,7 @@ class DataGenerator(tensorflow.keras.utils.Sequence):
         if self.remove_mass_pt_window or self.return_spectators:
             spec_array = tree.arrays(self.spectators, 
                                      entry_start=entry_start,
-                                     entry_stop=entry_stop,
+                                     entry_stop=entry_stop+1,
                                      library='np')            
             z = np.stack([spec_array[spec] for spec in self.spectators], axis=1)
             
