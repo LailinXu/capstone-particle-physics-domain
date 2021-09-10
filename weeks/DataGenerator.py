@@ -2,6 +2,7 @@ import tensorflow
 import tensorflow.keras as keras
 import numpy as np
 import uproot
+from utils import to_np_array
 
 class DataGenerator(tensorflow.keras.utils.Sequence):
     'Generates data for Keras'
@@ -17,7 +18,6 @@ class DataGenerator(tensorflow.keras.utils.Sequence):
         self.return_spectators = return_spectators
         self.scale_mass_pt = scale_mass_pt
         self.n_dim = n_dim
-        self.n_channels = len(self.features)
         self.remove_mass_pt_window = remove_mass_pt_window
         self.remove_unlabeled = remove_unlabeled
         self.global_IDs = []
@@ -30,10 +30,10 @@ class DataGenerator(tensorflow.keras.utils.Sequence):
             root_file = uproot.open(file_name)
             self.open_files.append(root_file)
             tree = root_file['deepntuplizer/tree']
-            tree_length = min(len(tree),max_entry)
+            tree_length = min(tree.num_entries, max_entry)
             self.global_IDs.append(np.arange(running_total,running_total+tree_length))
-            self.local_IDs.append(np.arange(tree_length))
-            self.file_mapping.append(np.repeat(i,tree_length))
+            self.local_IDs.append(np.arange(0, tree_length))
+            self.file_mapping.append(np.repeat([i],tree_length))
             running_total += tree_length
             root_file.close()
         self.global_IDs = np.concatenate(self.global_IDs)
@@ -43,7 +43,7 @@ class DataGenerator(tensorflow.keras.utils.Sequence):
 
     def __len__(self):
         'Denotes the number of batches per epoch'
-        return int(np.floor(len(self.global_IDs) / self.batch_size))
+        return int(np.ceil(len(self.global_IDs) / self.batch_size))
 
     def __getitem__(self, index):
         'Generate one batch of data'
@@ -103,7 +103,7 @@ class DataGenerator(tensorflow.keras.utils.Sequence):
         
         return X, y
                          
-    def __get_features_labels(self, ifile, entrystart, entrystop):
+    def __get_features_labels(self, ifile, entry_start, entry_stop):
         'Loads data from one file'
         
         # Double check that file is open
@@ -114,17 +114,17 @@ class DataGenerator(tensorflow.keras.utils.Sequence):
             
         tree = root_file['deepntuplizer/tree']
         
-        feature_array = tree.arrays(branches=self.features, 
-                                    entrystart=entrystart,
-                                    entrystop=entrystop,
-                                    namedecode='utf-8')
+        feature_array = tree.arrays(self.features, 
+                                    entry_start=entry_start,
+                                    entry_stop=entry_stop+1,
+                                    library='ak')
 
-        label_array_all = tree.arrays(branches=self.labels, 
-                                      entrystart=entrystart,
-                                      entrystop=entrystop,
-                                      namedecode='utf-8')
+        label_array_all = tree.arrays(self.labels, 
+                                      entry_start=entry_start,
+                                      entry_stop=entry_stop+1,
+                                      library='np')
 
-        X = np.stack([feature_array[feat].pad(self.n_dim, clip=True).fillna(0).regular() for feat in self.features],axis=2)
+        X = np.stack([to_np_array(feature_array[feat], max_n=self.n_dim, pad=0) for feat in self.features], axis=2)
         n_samples = X.shape[0]
     
         y = np.zeros((n_samples,2))
@@ -136,11 +136,11 @@ class DataGenerator(tensorflow.keras.utils.Sequence):
         y[:,1] = label_array_all['label_H_bb']
 
         if self.remove_mass_pt_window or self.return_spectators:
-            spec_array = tree.arrays(branches=self.spectators, 
-                                     entrystart=entrystart,
-                                     entrystop=entrystop,
-                                     namedecode='utf-8')            
-            z = np.stack([spec_array[spec] for spec in self.spectators],axis=1)
+            spec_array = tree.arrays(self.spectators, 
+                                     entry_start=entry_start,
+                                     entry_stop=entry_stop,
+                                     library='np')            
+            z = np.stack([spec_array[spec] for spec in self.spectators], axis=1)
             
         if self.remove_mass_pt_window:
             # remove data outside of mass/pT range
@@ -150,10 +150,10 @@ class DataGenerator(tensorflow.keras.utils.Sequence):
                         
         if self.remove_unlabeled:
             # remove unlabeled data
-            X = X[np.sum(y,axis=1)==1]
+            X = X[np.sum(y, axis=1)==1]
             if self.return_spectators:
-                z = z[np.sum(y,axis=1)==1]
-            y = y[np.sum(y,axis=1)==1]
+                z = z[np.sum(y, axis=1)==1]
+            y = y[np.sum(y, axis=1)==1]
             
         if self.return_spectators:
             return X, [y, z/self.scale_mass_pt]
