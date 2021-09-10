@@ -2,6 +2,10 @@ import uproot
 import numpy as np
 import awkward as ak
 
+def find_nearest(array,value):
+    idx = (np.abs(array-value)).argmin()
+    return idx, array[idx]
+
 def to_np_array(ak_array, max_n=100, pad=0):
     return ak.fill_none(ak.pad_none(ak_array, max_n, clip=True, axis=-1), pad).to_numpy()
 
