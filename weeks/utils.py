@@ -1,22 +1,26 @@
 import uproot
 import numpy as np
+import awkward as ak
 
-def get_features_labels(file_name, features, spectators, labels, remove_mass_pt_window=True, entrystop=None):
+def to_np_array(ak_array, max_n=100, pad=0):
+    return ak.fill_none(ak.pad_none(ak_array, max_n, clip=True, axis=-1), pad).to_numpy()
+
+def get_features_labels(file_name, features, spectators, labels, remove_mass_pt_window=True, entry_stop=None):
     # load file
     root_file = uproot.open(file_name)
     tree = root_file['deepntuplizer/tree']
-    feature_array = tree.arrays(branches=features, 
-                                entrystop=entrystop,
-                                namedecode='utf-8')
-    spec_array = tree.arrays(branches=spectators, 
-                             entrystop=entrystop,
-                             namedecode='utf-8')
-    label_array_all = tree.arrays(branches=labels, 
-                                  entrystop=entrystop,
-                                  namedecode='utf-8')
+    feature_array = tree.arrays(features, 
+                                entry_stop=entry_stop,
+                                library='np')
+    spec_array = tree.arrays(spectators, 
+                             entry_stop=entry_stop,
+                             library='np')
+    label_array_all = tree.arrays(labels, 
+                                  entry_stop=entry_stop,
+                                  library='np')
 
-    feature_array = np.stack([feature_array[feat] for feat in features],axis=1)
-    spec_array = np.stack([spec_array[spec] for spec in spectators],axis=1)
+    feature_array = np.stack([feature_array[feat] for feat in features], axis=1)
+    spec_array = np.stack([spec_array[spec] for spec in spectators], axis=1)
     
     njets = feature_array.shape[0]
     
