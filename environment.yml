@@ -18,6 +18,7 @@ dependencies:
     - pytorch-geometric
     - mplhep
     - tqdm
+    - autopep8
     - pip
     - pip:
       - jupyter-book

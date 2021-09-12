@@ -9,6 +9,8 @@ import multiprocessing
 from pathlib import Path
 import yaml
 from tqdm.notebook import tqdm
+import awkward as ak
+
 
 class GraphDataset(Dataset):
     def __init__(self, root, features, labels, spectators, transform=None, pre_transform=None,
@@ -50,7 +52,7 @@ class GraphDataset(Dataset):
         return_list = list(map(osp.basename, proc_list))
         return return_list
 
-    def __len__(self):
+    def len(self):
         return len(self.processed_file_names)
 
     def download(self):
@@ -70,44 +72,44 @@ class GraphDataset(Dataset):
 
             tree = root_file['deepntuplizer/tree']
 
-            feature_array = tree.arrays(branches=self.features,
-                                        entrystop=self.n_events,
-                                        namedecode='utf-8')
+            feature_array = tree.arrays(self.features,
+                                        entry_stop=self.n_events,
+                                        library='ak')
 
-            label_array_all = tree.arrays(branches=self.labels,
-                                          entrystop=self.n_events,
-                                          namedecode='utf-8')
-            
+            label_array_all = tree.arrays(self.labels,
+                                          entry_stop=self.n_events,
+                                          library='np')
+
             n_samples = label_array_all[self.labels[0]].shape[0]
 
-            y = np.zeros((n_samples,2))
-            y[:,0] = label_array_all['sample_isQCD'] * (label_array_all['label_QCD_b'] + \
-                                                        label_array_all['label_QCD_bb'] + \
-                                                        label_array_all['label_QCD_c'] + \
-                                                        label_array_all['label_QCD_cc'] + \
-                                                        label_array_all['label_QCD_others'])
-            y[:,1] = label_array_all['label_H_bb']
+            y = np.zeros((n_samples, 2))
+            y[:, 0] = label_array_all['sample_isQCD'] * (label_array_all['label_QCD_b'] +
+                                                         label_array_all['label_QCD_bb'] +
+                                                         label_array_all['label_QCD_c'] +
+                                                         label_array_all['label_QCD_cc'] +
+                                                         label_array_all['label_QCD_others'])
+            y[:, 1] = label_array_all['label_H_bb']
 
-
-            spec_array = tree.arrays(branches=self.spectators,
-                                     entrystop=self.n_events,
-                                     namedecode='utf-8')
-            z = np.stack([spec_array[spec] for spec in self.spectators],axis=1)            
+            spec_array = tree.arrays(self.spectators,
+                                     entry_stop=self.n_events,
+                                     library='np')
+            z = np.stack([spec_array[spec] for spec in self.spectators], axis=1)
 
             for i in tqdm(range(n_samples)):
-                if i%self.n_events_merge == 0:
-                    datas = []                    
+                if i % self.n_events_merge == 0:
+                    datas = []
                 if self.remove_unlabeled:
-                    if np.sum(y[i:i+1],axis=1)==0:
+                    if np.sum(y[i:i+1], axis=1) == 0:
                         continue
                 n_particles = len(feature_array[self.features[0]][i])
-                if n_particles<2: continue
-                pairs = np.stack([[m, n] for (m, n) in itertools.product(range(n_particles),range(n_particles)) if m!=n])
+                if n_particles < 2:
+                    continue
+                pairs = np.stack([[m, n] for (m, n) in itertools.product(range(n_particles), range(n_particles)) if m != n])
                 edge_index = torch.tensor(pairs, dtype=torch.long)
-                edge_index=edge_index.t().contiguous()
-                x = torch.tensor([feature_array[feat][i] for feat in self.features], dtype=torch.float).T
+                edge_index = edge_index.t().contiguous()
+                x = torch.tensor([feature_array[feat][i].to_numpy() for feat in self.features], dtype=torch.float).T
                 u = torch.tensor(z[i], dtype=torch.float)
-                data = Data(x=x, edge_index=edge_index, y=torch.tensor(y[i:i+1],dtype=torch.long))
+                data = Data(x=x, edge_index=edge_index, y=torch.tensor(y[i:i+1], dtype=torch.long))
                 data.u = torch.unsqueeze(u, 0)
                 if self.pre_filter is not None and not self.pre_filter(data):
                     continue
@@ -115,14 +117,15 @@ class GraphDataset(Dataset):
                     data = self.pre_transform(data)
                 datas.append([data])
 
-                if i%self.n_events_merge == self.n_events_merge-1:
-                    datas = sum(datas,[])
+                if i % self.n_events_merge == self.n_events_merge-1:
+                    datas = sum(datas, [])
                     torch.save(datas, osp.join(self.processed_dir, 'data_{}.pt'.format(i)))
 
     def get(self, idx):
         p = osp.join(self.processed_dir, self.processed_file_names[idx])
         data = torch.load(p)
         return data
+
 
 if __name__ == "__main__":
     import argparse
@@ -136,7 +139,7 @@ if __name__ == "__main__":
         # The FullLoader parameter handles the conversion from YAML
         # scalar values to Python the dictionary format
         definitions = yaml.load(file, Loader=yaml.FullLoader)
-    
+
     features = definitions['features']
     spectators = definitions['spectators']
     labels = definitions['labels']
