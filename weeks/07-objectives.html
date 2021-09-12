@@ -42,6 +42,8 @@
     <script src="../_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
@@ -419,21 +421,26 @@
 <div class="section" id="define-discriminator-regression-and-combined-adversarial-models">
 <h2>Define discriminator, regression, and combined adversarial models<a class="headerlink" href="#define-discriminator-regression-and-combined-adversarial-models" title="Permalink to this headline">¶</a></h2>
 <p>The combined loss function is $<span class="math notranslate nohighlight">\(L = L_\mathrm{class} - \lambda L_\mathrm{reg}\)</span>$</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(L_\mathrm{class}\)</span> is the loss function for the classification part (categorical cross entropy)</p></li>
+<li><p><span class="math notranslate nohighlight">\(L_\mathrm{reg}\)</span> is the loss function for the adversarial part (in this case a regression)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\lambda\)</span> is a hyperparamter that controls how important the adversarial part of the loss is compared to the classification part, which we nominally set to 1</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tensorflow.keras.models</span> <span class="kn">import</span> <span class="n">Model</span>
-<span class="kn">from</span> <span class="nn">tensorflow.keras.layers</span> <span class="kn">import</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">BatchNormalization</span><span class="p">,</span> <span class="n">Conv1D</span><span class="p">,</span> <span class="n">Flatten</span><span class="p">,</span> <span class="n">Lambda</span><span class="p">,</span> <span class="n">Concatenate</span><span class="p">,</span> <span class="n">GlobalAveragePooling1D</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.layers</span> <span class="kn">import</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">BatchNormalization</span><span class="p">,</span> <span class="n">Concatenate</span><span class="p">,</span> <span class="n">GlobalAveragePooling1D</span>
 <span class="kn">import</span> <span class="nn">tensorflow.keras.backend</span> <span class="k">as</span> <span class="nn">K</span>
 
-<span class="c1"># define Deep Sets model with Conv1D Keras layer</span>
-<span class="n">inputs</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">ntracks</span><span class="p">,</span><span class="n">nfeatures</span><span class="p">,),</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;input&#39;</span><span class="p">)</span>  
+<span class="c1"># define Deep Sets model with Dense Keras layer</span>
+<span class="n">inputs</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">ntracks</span><span class="p">,</span> <span class="n">nfeatures</span><span class="p">,),</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;input&#39;</span><span class="p">)</span>  
 <span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;bn_1&#39;</span><span class="p">)(</span><span class="n">inputs</span><span class="p">)</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">Conv1D</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">strides</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;conv1d_1&#39;</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">Conv1D</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">strides</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;conv1d_2&#39;</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">Conv1D</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">strides</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;conv1d_3&#39;</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;dense_1&#39;</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;dense_2&#39;</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;dense_3&#39;</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
 <span class="c1"># sum over tracks</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">GlobalAveragePooling1D</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;pool_1&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;dense_1&#39;</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;dense_4&#39;</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
 <span class="n">output</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="n">nlabels</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;output&#39;</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
     
 <span class="n">keras_model_disc</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="n">output</span><span class="p">)</span>
@@ -441,8 +448,8 @@
                         <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">)</span>
 
 <span class="c1"># regressor</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span> <span class="s1">&#39;dense_2&#39;</span><span class="p">,</span> <span class="n">activation</span> <span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">keras_model_disc</span><span class="p">(</span><span class="n">inputs</span><span class="p">))</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span> <span class="s1">&#39;dense_3&#39;</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span> <span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span> <span class="s1">&#39;dense_5&#39;</span><span class="p">,</span> <span class="n">activation</span> <span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">keras_model_disc</span><span class="p">(</span><span class="n">inputs</span><span class="p">))</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span> <span class="s1">&#39;dense_6&#39;</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span> <span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
 <span class="n">output_reg</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;mass_pt_reg&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
                                                             
 
@@ -465,6 +472,10 @@
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2021-09-12 04:49:09.645159: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE4.1 SSE4.2 AVX AVX2 AVX512F FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+</pre></div>
+</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;model&quot;
 _________________________________________________________________
 Layer (type)                 Output Shape              Param #   
@@ -473,15 +484,15 @@ input (InputLayer)           [(None, 60, 48)]          0
 _________________________________________________________________
 bn_1 (BatchNormalization)    (None, 60, 48)            192       
 _________________________________________________________________
-conv1d_1 (Conv1D)            (None, 60, 64)            3136      
+dense_1 (Dense)              (None, 60, 64)            3136      
 _________________________________________________________________
-conv1d_2 (Conv1D)            (None, 60, 32)            2080      
+dense_2 (Dense)              (None, 60, 32)            2080      
 _________________________________________________________________
-conv1d_3 (Conv1D)            (None, 60, 32)            1056      
+dense_3 (Dense)              (None, 60, 32)            1056      
 _________________________________________________________________
 pool_1 (GlobalAveragePooling (None, 32)                0         
 _________________________________________________________________
-dense_1 (Dense)              (None, 100)               3300      
+dense_4 (Dense)              (None, 100)               3300      
 _________________________________________________________________
 output (Dense)               (None, 2)                 202       
 =================================================================
@@ -498,9 +509,9 @@ input (InputLayer)           [(None, 60, 48)]          0
 _________________________________________________________________
 model (Functional)           (None, 2)                 9966      
 _________________________________________________________________
-dense_2 (Dense)              (None, 100)               300       
+dense_5 (Dense)              (None, 100)               300       
 _________________________________________________________________
-dense_3 (Dense)              (None, 100)               10100     
+dense_6 (Dense)              (None, 100)               10100     
 _________________________________________________________________
 mass_pt_reg (Dense)          (None, 2)                 202       
 =================================================================
@@ -526,10 +537,6 @@ ________________________________________________________________________________
 None
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2021-09-09 21:30:21.629595: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE4.1 SSE4.2 AVX AVX2 AVX512F FMA
-To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
-</pre></div>
-</div>
 </div>
 </div>
 </div>
@@ -546,12 +553,12 @@ To enable them in other operations, rebuild TensorFlow with the appropriate comp
 <span class="n">train_generator</span> <span class="o">=</span> <span class="n">DataGenerator</span><span class="p">(</span><span class="n">train_files</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">spectators</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">n_dim</span><span class="o">=</span><span class="n">ntracks</span><span class="p">,</span> 
                                 <span class="n">remove_mass_pt_window</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> 
                                 <span class="n">remove_unlabeled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">max_entry</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span>
-                                <span class="n">return_spectators</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">scale_mass_pt</span><span class="o">=</span><span class="p">[</span><span class="mf">100.</span><span class="p">,</span><span class="mf">10000.</span><span class="p">])</span>
+                                <span class="n">return_spectators</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">scale_mass_pt</span><span class="o">=</span><span class="p">[</span><span class="mf">100.</span><span class="p">,</span> <span class="mf">10000.</span><span class="p">])</span>
 
 <span class="n">val_generator</span> <span class="o">=</span> <span class="n">DataGenerator</span><span class="p">(</span><span class="n">val_files</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">spectators</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">n_dim</span><span class="o">=</span><span class="n">ntracks</span><span class="p">,</span> 
                               <span class="n">remove_mass_pt_window</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> 
                               <span class="n">remove_unlabeled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">max_entry</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span> 
-                              <span class="n">return_spectators</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">scale_mass_pt</span><span class="o">=</span><span class="p">[</span><span class="mf">100.</span><span class="p">,</span><span class="mf">10000.</span><span class="p">])</span>
+                              <span class="n">return_spectators</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">scale_mass_pt</span><span class="o">=</span><span class="p">[</span><span class="mf">100.</span><span class="p">,</span> <span class="mf">10000.</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -564,7 +571,7 @@ To enable them in other operations, rebuild TensorFlow with the appropriate comp
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># pretrain discriminator</span>
 <span class="n">keras_model_disc</span><span class="o">.</span><span class="n">trainable</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="n">keras_model_disc</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;adam&#39;</span><span class="p">,</span>
-                        <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">)</span>
+                         <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">n_epoch</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">)):</span>
     <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">train_generator</span><span class="p">,</span><span class="n">total</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">train_generator</span><span class="p">),</span><span class="n">leave</span><span class="o">=</span><span class="nb">bool</span><span class="p">(</span><span class="n">n_epoch</span><span class="o">==</span><span class="mi">19</span><span class="p">)):</span>
         <span class="n">keras_model_disc</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        
@@ -581,89 +588,93 @@ To enable them in other operations, rebuild TensorFlow with the appropriate comp
 </div>
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "31e9e2b086a74d6dbd69aab2b23b5a4e"}
+{"version_major": 2, "version_minor": 0, "model_id": "7d5fce55192e41debd97c28fddb5a8ae"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "803b4edd8a2842a29e5dfb73459ffcf4"}
+{"version_major": 2, "version_minor": 0, "model_id": "d62b3c2dabf34f60ab9ada847233f2f0"}
+</script><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2021-09-12 04:49:18.475587: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:116] None of the MLIR optimization passes are enabled (registered 2)
+2021-09-12 04:49:18.475956: I tensorflow/core/platform/profile_utils/cpu_utils.cc:112] CPU Frequency: 2095225000 Hz
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">
+{"version_major": 2, "version_minor": 0, "model_id": "8c1df3bd545549caa351c8bba781a6f0"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "3d62f56a551d4fed93fc3217898e8625"}
+{"version_major": 2, "version_minor": 0, "model_id": "ecf5802761dd4c2fb41b34e091c8f305"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "8fedc104325a4d638613911ded4e343e"}
+{"version_major": 2, "version_minor": 0, "model_id": "d69eb32b689148f6be9b5ffdf350cb2e"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "c7b7419f15924eaeaefd33cd4147c683"}
+{"version_major": 2, "version_minor": 0, "model_id": "28e1484ed0e140d3a3e756c3adba58d4"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "868f958d314647f890ec49e642664cd8"}
+{"version_major": 2, "version_minor": 0, "model_id": "35e0e78f332045ab8dd546ec1dac17b6"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "64b2f7dbb7704cb08ebb85831e73db00"}
+{"version_major": 2, "version_minor": 0, "model_id": "874d10a62e2245ada9516478e506e0ab"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "1039b245557349f781492b0ddb7ed57d"}
+{"version_major": 2, "version_minor": 0, "model_id": "c145b4e4b9bd4515b600a8cf132ba350"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "bb389728fafa45ee8a7a21713cecf8b4"}
+{"version_major": 2, "version_minor": 0, "model_id": "e5c393291e414ec399c966bac1a05867"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "08b95adb4a6e462b894d6b6bd8434bd9"}
+{"version_major": 2, "version_minor": 0, "model_id": "1c8d7458c6514a4f8feb49bac79da9ac"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "ffc42ec2af654c66b37c6579ef623158"}
+{"version_major": 2, "version_minor": 0, "model_id": "beaab7160ed949c4ae9dcd3d354badd3"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "4e0f69051a6947589f551ab8612b62c1"}
+{"version_major": 2, "version_minor": 0, "model_id": "9de3d04bee5a4e51b8604d192f8e8741"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "03dac1e6f1ea4ccb853b49f2cbaf9fe0"}
+{"version_major": 2, "version_minor": 0, "model_id": "fcf6dd7ebaa4401b852e10b83ccd9c5e"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "ce3421fb07a04847a0c0b7ecc8559703"}
+{"version_major": 2, "version_minor": 0, "model_id": "ef107913a9c74c21aa60a52e7cc3e13f"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "9afa5d2213274c698bd5e52e499c052b"}
+{"version_major": 2, "version_minor": 0, "model_id": "2f1c8fca0e544fc4b316eb495926596e"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "f91433027bf6405d9d943147a8763a31"}
+{"version_major": 2, "version_minor": 0, "model_id": "25468d9b1ccc4f029d6fe9306bc59c4f"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "15f10266f3a94651921974363eff457e"}
+{"version_major": 2, "version_minor": 0, "model_id": "690974446de240a2aa14a0a14eb6a0a6"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "0dd7018474ba4d77bfd6b0028680cc02"}
+{"version_major": 2, "version_minor": 0, "model_id": "fe82dc8fb3ca459b8b6568a177e2cd1a"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "b3d066c4ad7547e4b1e7b5535027ddb2"}
+{"version_major": 2, "version_minor": 0, "model_id": "86c6c7d10ccc421a80159a4a079f8de7"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "18e3defc736540179c7d9c9834bb84e1"}
+{"version_major": 2, "version_minor": 0, "model_id": "0647030f6c1c484b84f384e847a7e2be"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "e84565ee3b734a6bae53d0dae5b60b92"}
+{"version_major": 2, "version_minor": 0, "model_id": "2c9933cad46a42ef945c6999a31ede76"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "32ba6e8f68fe40c2aab16ba4f234d570"}
+{"version_major": 2, "version_minor": 0, "model_id": "a1c781eecd3943668250e00e690b62a1"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "815775931d1148cca4fc2edf3f20e432"}
+{"version_major": 2, "version_minor": 0, "model_id": "8dc63d0c30c84c8d8b45845bf6d87974"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "7343dc6d0cd248fa9d1ae2f07dd868f4"}
+{"version_major": 2, "version_minor": 0, "model_id": "4ea4ac2bbcb6437b83029ec7b6d43081"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "c5234f6314e84fcab80a231a3c72a315"}
+{"version_major": 2, "version_minor": 0, "model_id": "e25750b555254efbad08821ef433afbb"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "2ae47b07f4af4b88932a5b426749cc5d"}
+{"version_major": 2, "version_minor": 0, "model_id": "4375713cba534b0f82337748762f72d3"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "6d387ad1b4ca4abd983f0f709d11834b"}
+{"version_major": 2, "version_minor": 0, "model_id": "4777891cdac34a30a6e2fe155287051a"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "3d0b10f529ff4c728ad0340af1308ea9"}
+{"version_major": 2, "version_minor": 0, "model_id": "4334f221736346d696026ea7391db8f6"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "c05c41d4038645bda21a7b0ed66914c1"}
+{"version_major": 2, "version_minor": 0, "model_id": "3c086960a29a4c4a8c700a8521fab920"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "9aabd59863f547d5a356070e5f371fff"}
+{"version_major": 2, "version_minor": 0, "model_id": "370ef031426240dda562c39e6227c6ba"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "0a41604aedc14d00869493d2c570f02f"}
+{"version_major": 2, "version_minor": 0, "model_id": "f9dfff621fd941ddba9efe7c43f00134"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "75a15752a45848f6a4905fa0031ed56a"}
+{"version_major": 2, "version_minor": 0, "model_id": "f4bd0dbb7bdc4ea392bf2b0cda388974"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "2c25e5f218204a6b9bb05b6813f4a036"}
+{"version_major": 2, "version_minor": 0, "model_id": "74eb752d2e844b54a1a5174905d2b7de"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "3def2a7fa27848e8a23723a6d8c3ce24"}
+{"version_major": 2, "version_minor": 0, "model_id": "5cba251178344b058f23d520efe1d2c1"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "ebb63f8334c5464486e9d20ddb2e1096"}
+{"version_major": 2, "version_minor": 0, "model_id": "d19c94a449ba4cbdb12debe92b3c37db"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "db82adbcff0d46d99bcf49485d711717"}
+{"version_major": 2, "version_minor": 0, "model_id": "55bf6c5afc2f489e84fef21ab7d2e180"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "dbdc82687b444b8f8534ee566e50f0f5"}
+{"version_major": 2, "version_minor": 0, "model_id": "205fe07471c348358119a6ebca3d9ba1"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "5b4621a4ccee46af95e85c23494f7291"}
+{"version_major": 2, "version_minor": 0, "model_id": "b34a9bdf9f8944e1aa94b98f56d3e546"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "36c208cbebda4b2a93d9b781cd2a1211"}
+{"version_major": 2, "version_minor": 0, "model_id": "5a39be922d2d43c8bd45b3b6458d8ddf"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "bae8d3c85271424b9d3f2afb168bbd95"}
+{"version_major": 2, "version_minor": 0, "model_id": "a5882bd5cfba4baea79453ce572204ba"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "a1b751030ebe40ee848b2543cabbb65f"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "1a30574d2a3e480b9a0a18e31f8ff32f"}
+{"version_major": 2, "version_minor": 0, "model_id": "7b7e670feab742ddb5b88362a6b27504"}
 </script></div>
 </div>
 </div>
@@ -684,7 +695,7 @@ To enable them in other operations, rebuild TensorFlow with the appropriate comp
         <span class="n">keras_model_disc</span><span class="o">.</span><span class="n">trainable</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="n">keras_model_adv</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="n">sgd_opt</span><span class="p">,</span> 
                         <span class="n">loss</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span> <span class="s1">&#39;mse&#39;</span><span class="p">],</span>
-                        <span class="n">loss_weights</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="n">lam</span><span class="p">])</span>    
+                        <span class="n">loss_weights</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="n">lam</span><span class="p">])</span>    
         <span class="n">keras_model_adv</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
         <span class="c1"># train regressor</span>
@@ -698,87 +709,87 @@ To enable them in other operations, rebuild TensorFlow with the appropriate comp
 </div>
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "11799b03bddd40ba8beee1fd973a9d00"}
+{"version_major": 2, "version_minor": 0, "model_id": "27e930b535ec452bbbdf6ea6aad1783b"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "d27ee9b5bc4b435782356c6f1487c86b"}
+{"version_major": 2, "version_minor": 0, "model_id": "db086090fe8e4c078dcc3168cc31b2c2"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "dc390292eb3e40b8bde6ca3c91d430b1"}
+{"version_major": 2, "version_minor": 0, "model_id": "8319e43711e74d3d976ece431e33d4af"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "b9c5ad0a291a44dfb80ee24202d23549"}
+{"version_major": 2, "version_minor": 0, "model_id": "4d3ec26957e6425a9cacc76be2bd87ac"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "ab2f1fc6d42644e5bd25a4c556533905"}
+{"version_major": 2, "version_minor": 0, "model_id": "36f25cdc152346a0944806f08bc47c03"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "3ea655544c47437197c58f6399467086"}
+{"version_major": 2, "version_minor": 0, "model_id": "80b7585e9fd64a3fac6a5919274fa26b"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "16e460f1c655492ca77762d5574d1cf7"}
+{"version_major": 2, "version_minor": 0, "model_id": "0527048643924879bbb9a77455db3c55"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "66e7804c74da4ea38c038e0a98a9285a"}
+{"version_major": 2, "version_minor": 0, "model_id": "0979a4fea20f41ba956f6ae697bcac0b"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "87d46d31953a45d4b35348b4cd9c4b3b"}
+{"version_major": 2, "version_minor": 0, "model_id": "9f5ee67f512b40aab36926f222a4e68d"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "3e0eff2b93894f1889e842930535331d"}
+{"version_major": 2, "version_minor": 0, "model_id": "fb8d010df76d49e2920f9ddb609c2259"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "7d4ae5e31eb6400aa93ccd0692d26978"}
+{"version_major": 2, "version_minor": 0, "model_id": "5eef89bd21d0400a8e909c0c605374c7"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "ce52dc5e300b4e7d9379e8aa67366b6e"}
+{"version_major": 2, "version_minor": 0, "model_id": "a3f1137171ce487bb984aeaa1e952fe8"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "51be4c75d40d4e3fa01ab550adf8f73f"}
+{"version_major": 2, "version_minor": 0, "model_id": "33f063673230484d8e1c01bffdfcca8b"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "cdd0f6601fba49f388985cedacd9c58f"}
+{"version_major": 2, "version_minor": 0, "model_id": "83fdceb508e64d30ab9ec486ce7c467d"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "1a041fc6cb3e42019c3dcdbcd730c99e"}
+{"version_major": 2, "version_minor": 0, "model_id": "21c4e38982084a739c611de6220637ef"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "efddcc83503e48d9ada232c31064beda"}
+{"version_major": 2, "version_minor": 0, "model_id": "303141f592384016a297d85c15367349"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "b9a25a23577548e89af688c5d50c7d90"}
+{"version_major": 2, "version_minor": 0, "model_id": "55b84f39073f4dffb6cdaf29a0497566"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "0835dba74b664d7e8a0541e9bd6d0b89"}
+{"version_major": 2, "version_minor": 0, "model_id": "3d8a05f994b24d39a3c82edb47a9ff9c"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "e0bea73bd9be49eb8d8b1561a1bc5fbc"}
+{"version_major": 2, "version_minor": 0, "model_id": "b62acb91b2df4e62adfa67f3c54cad47"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "8a9e4f3089b74bb6915c694566e030ab"}
+{"version_major": 2, "version_minor": 0, "model_id": "42069dfb106c4f54a06769d38b511bbb"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "916f26b28a5e42dba97b346137e6c377"}
+{"version_major": 2, "version_minor": 0, "model_id": "3348169b32a64664b4e86b8940d52cac"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "a88660dc991b47ec9095411fb2b35a29"}
+{"version_major": 2, "version_minor": 0, "model_id": "15d8f3a8b0d6490288a86015d9990f99"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "d742faf5c53a45cead4718366b221697"}
+{"version_major": 2, "version_minor": 0, "model_id": "9d98c3a0581445e8bc18ac3576a88a32"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "f9932c9ce8884fbbb63c0edd3c9d6e92"}
+{"version_major": 2, "version_minor": 0, "model_id": "d67740fb902941e8a2f3b77a7eb082cb"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "fc3fbf7c421b4b45824f7301538f51a9"}
+{"version_major": 2, "version_minor": 0, "model_id": "685208d532284aa1890e39be44c59fb8"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "640583ccdab1423db7fa540a32afa1c1"}
+{"version_major": 2, "version_minor": 0, "model_id": "b5bda64361c74ab590df4db2b8792e3e"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "58940e3394934ea686c1dfcd279fa7a2"}
+{"version_major": 2, "version_minor": 0, "model_id": "b20dad682c7946fe9f58d0fe3e23977a"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "a1b2443762e649faa36cbdc7b8cee446"}
+{"version_major": 2, "version_minor": 0, "model_id": "6bb7b4cc9ec04067aaa3c93223159054"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "9a74f14f3bf44bdb9e593541fbafda8e"}
+{"version_major": 2, "version_minor": 0, "model_id": "10d4db31115344c8b8c5758fe5249608"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "1b91a6c14b8c4c5e802fd72a4796dd7c"}
+{"version_major": 2, "version_minor": 0, "model_id": "d4ce60a151e14975b556ddc1a0076767"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "e7b058375c1b46e596079e3678787d31"}
+{"version_major": 2, "version_minor": 0, "model_id": "01ae2edfd4fe43baba02ab3da4837059"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "ed3c03c5d842491e8ae8087182cc3b3c"}
+{"version_major": 2, "version_minor": 0, "model_id": "a9dfe1971b6943588d42ef0db7b239a3"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "8708baef8f6046c8944600efa22c6ee3"}
+{"version_major": 2, "version_minor": 0, "model_id": "961e98b171b040f2ab328c2d22a9110b"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "fe5b26c426ff476baa0039a83cd97146"}
+{"version_major": 2, "version_minor": 0, "model_id": "2c2c7bcd81e44106a7c5eb5a900b4697"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "fdc27a7737b745859dda07bc7eab6eb2"}
+{"version_major": 2, "version_minor": 0, "model_id": "9e8d17cf918f401db967d4c023736d41"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "849736f63d984b68b49a409dea708b22"}
+{"version_major": 2, "version_minor": 0, "model_id": "b8e1946db2584c49be9963a0310b933b"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "08a20213e6a445c5807b202d01286e1b"}
+{"version_major": 2, "version_minor": 0, "model_id": "29695fd48ea64135b94c66244b01ad84"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "0b97a7be0882478e9d56839cdb0cf718"}
+{"version_major": 2, "version_minor": 0, "model_id": "27e6fc46ac2946dd9394f18ea9de34fd"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "f05174ba45024ab29299c1a03174e7b5"}
+{"version_major": 2, "version_minor": 0, "model_id": "ccf0447c089d4e1787ee7e84678c07a0"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "dfb0cf081aba466cbd12340107cb8514"}
+{"version_major": 2, "version_minor": 0, "model_id": "4d645bb46f4d4da39f2f905ca04aa9d2"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "f21edaec57bd4bffa94d46b220919815"}
+{"version_major": 2, "version_minor": 0, "model_id": "525f11c4c58c4b5692c0ae7d95cd7c1f"}
 </script></div>
 </div>
 </div>
@@ -792,7 +803,78 @@ To enable them in other operations, rebuild TensorFlow with the appropriate comp
                                <span class="n">remove_mass_pt_window</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
                                <span class="n">remove_unlabeled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                <span class="n">return_spectators</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                               <span class="n">max_entry</span> <span class="o">=</span> <span class="mi">200000</span><span class="p">)</span> <span class="c1"># basically, no maximum</span>
+                               <span class="n">max_entry</span><span class="o">=</span><span class="mi">200000</span><span class="p">)</span> <span class="c1"># basically, no maximum</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">OSError</span><span class="g g-Whitespace">                                   </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_6424</span><span class="o">/</span><span class="mf">2932239055.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># load testing file</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">test_files</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;root://eospublic.cern.ch//eos/opendata/cms/datascience/HiggsToBBNtupleProducerTool/HiggsToBBNTuple_HiggsToBB_QCD_RunII_13TeV_MC/test/ntuple_merged_0.root&#39;</span><span class="p">]</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">test_generator</span> <span class="o">=</span> <span class="n">DataGenerator</span><span class="p">(</span><span class="n">test_files</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">spectators</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">8192</span><span class="p">,</span> <span class="n">n_dim</span><span class="o">=</span><span class="n">ntracks</span><span class="p">,</span> 
+<span class="g g-Whitespace">      </span><span class="mi">4</span>                                <span class="n">remove_mass_pt_window</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>                                <span class="n">remove_unlabeled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+
+<span class="nn">~/work/capstone-particle-physics-domain/capstone-particle-physics-domain/weeks/DataGenerator.py</span> in <span class="ni">__init__</span><span class="nt">(self, list_files, features, labels, spectators, batch_size, n_dim, remove_mass_pt_window, remove_unlabeled, return_spectators, max_entry, scale_mass_pt)</span>
+<span class="g g-Whitespace">     </span><span class="mi">30</span>         <span class="n">running_total</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="g g-Whitespace">     </span><span class="mi">31</span>         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">file_name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">list_files</span><span class="p">):</span>
+<span class="ne">---&gt; </span><span class="mi">32</span>             <span class="n">root_file</span> <span class="o">=</span> <span class="n">uproot</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">33</span>             <span class="bp">self</span><span class="o">.</span><span class="n">open_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">root_file</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">34</span>             <span class="n">tree</span> <span class="o">=</span> <span class="n">root_file</span><span class="p">[</span><span class="s1">&#39;deepntuplizer/tree&#39;</span><span class="p">]</span>
+
+<span class="nn">/usr/share/miniconda/envs/ml-latest/lib/python3.9/site-packages/uproot/reading.py</span> in <span class="ni">open</span><span class="nt">(path, object_cache, array_cache, custom_classes, decompression_executor, interpretation_executor, **options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">147</span>         <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">148</span> 
+<span class="ne">--&gt; </span><span class="mi">149</span>     <span class="n">file</span> <span class="o">=</span> <span class="n">ReadOnlyFile</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">150</span>         <span class="n">file_path</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">151</span>         <span class="n">object_cache</span><span class="o">=</span><span class="n">object_cache</span><span class="p">,</span>
+
+<span class="nn">/usr/share/miniconda/envs/ml-latest/lib/python3.9/site-packages/uproot/reading.py</span> in <span class="ni">__init__</span><span class="nt">(self, file_path, object_cache, array_cache, custom_classes, decompression_executor, interpretation_executor, **options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">587</span>             <span class="n">file_path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_options</span>
+<span class="g g-Whitespace">    </span><span class="mi">588</span>         <span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">589</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_source</span> <span class="o">=</span> <span class="n">Source</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">590</span>             <span class="n">file_path</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_options</span>  <span class="c1"># NOTE: a comma after **options breaks Python 2</span>
+<span class="g g-Whitespace">    </span><span class="mi">591</span>         <span class="p">)</span>
+
+<span class="nn">/usr/share/miniconda/envs/ml-latest/lib/python3.9/site-packages/uproot/source/xrootd.py</span> in <span class="ni">__init__</span><span class="nt">(self, file_path, **options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">264</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_file_path</span> <span class="o">=</span> <span class="n">file_path</span>
+<span class="g g-Whitespace">    </span><span class="mi">265</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_num_bytes</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="ne">--&gt; </span><span class="mi">266</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_open</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">267</span> 
+<span class="g g-Whitespace">    </span><span class="mi">268</span>     <span class="k">def</span> <span class="nf">_open</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<span class="nn">/usr/share/miniconda/envs/ml-latest/lib/python3.9/site-packages/uproot/source/xrootd.py</span> in <span class="ni">_open</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">267</span> 
+<span class="g g-Whitespace">    </span><span class="mi">268</span>     <span class="k">def</span> <span class="nf">_open</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">269</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_resource</span> <span class="o">=</span> <span class="n">XRootDResource</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_file_path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_timeout</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">270</span> 
+<span class="g g-Whitespace">    </span><span class="mi">271</span>         <span class="c1"># this ThreadPool does not need a resource, it&#39;s only used to submit</span>
+
+<span class="nn">/usr/share/miniconda/envs/ml-latest/lib/python3.9/site-packages/uproot/source/xrootd.py</span> in <span class="ni">__init__</span><span class="nt">(self, file_path, timeout)</span>
+<span class="g g-Whitespace">     </span><span class="mi">80</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_file_path</span> <span class="o">=</span> <span class="n">file_path</span>
+<span class="g g-Whitespace">     </span><span class="mi">81</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_timeout</span> <span class="o">=</span> <span class="n">timeout</span>
+<span class="ne">---&gt; </span><span class="mi">82</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_open</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">83</span> 
+<span class="g g-Whitespace">     </span><span class="mi">84</span>     <span class="k">def</span> <span class="nf">_open</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<span class="nn">/usr/share/miniconda/envs/ml-latest/lib/python3.9/site-packages/uproot/source/xrootd.py</span> in <span class="ni">_open</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">     </span><span class="mi">89</span>         <span class="n">status</span><span class="p">,</span> <span class="n">dummy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_file</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_file_path</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_xrd_timeout</span><span class="p">())</span>
+<span class="g g-Whitespace">     </span><span class="mi">90</span>         <span class="k">if</span> <span class="n">status</span><span class="o">.</span><span class="n">error</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">91</span>             <span class="bp">self</span><span class="o">.</span><span class="n">_xrd_error</span><span class="p">(</span><span class="n">status</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">92</span> 
+<span class="g g-Whitespace">     </span><span class="mi">93</span>     <span class="k">def</span> <span class="nf">__getstate__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<span class="nn">/usr/share/miniconda/envs/ml-latest/lib/python3.9/site-packages/uproot/source/xrootd.py</span> in <span class="ni">_xrd_error</span><span class="nt">(self, status)</span>
+<span class="g g-Whitespace">    </span><span class="mi">115</span> 
+<span class="g g-Whitespace">    </span><span class="mi">116</span>         <span class="k">else</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">117</span>             <span class="k">raise</span> <span class="ne">OSError</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">118</span>                 <span class="sd">&quot;&quot;&quot;XRootD error: {0}</span>
+<span class="g g-Whitespace">    </span><span class="mi">119</span><span class="sd"> in file {1}&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+
+<span class="ne">OSError</span>: XRootD error: [ERROR] Operation expired
+<span class="ow">in</span> <span class="n">file</span> <span class="n">root</span><span class="p">:</span><span class="o">//</span><span class="n">eospublic</span><span class="o">.</span><span class="n">cern</span><span class="o">.</span><span class="n">ch</span><span class="o">//</span><span class="n">eos</span><span class="o">/</span><span class="n">opendata</span><span class="o">/</span><span class="n">cms</span><span class="o">/</span><span class="n">datascience</span><span class="o">/</span><span class="n">HiggsToBBNtupleProducerTool</span><span class="o">/</span><span class="n">HiggsToBBNTuple_HiggsToBB_QCD_RunII_13TeV_MC</span><span class="o">/</span><span class="n">test</span><span class="o">/</span><span class="n">ntuple_merged_0</span><span class="o">.</span><span class="n">root</span>
 </pre></div>
 </div>
 </div>
@@ -814,24 +896,6 @@ To enable them in other operations, rebuild TensorFlow with the appropriate comp
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "7f72b1980c7f430bad527c03c447266b"}
-</script><div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_3762</span><span class="o">/</span><span class="mf">3495037422.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span>     <span class="n">spec_array_test</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span>     <span class="n">predict_array_adv</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">keras_model_adv</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>
-<span class="ne">---&gt; </span><span class="mi">10</span> <span class="n">predict_array_adv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">predict_array_adv</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="n">label_array_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">label_array_test</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="n">spec_array_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">spec_array_test</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-
-<span class="nn">&lt;__array_function__ internals&gt;</span> in <span class="ni">concatenate</span><span class="nt">(*args, **kwargs)</span>
-
-<span class="ne">ValueError</span>: need at least one array to concatenate
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -847,8 +911,8 @@ To enable them in other operations, rebuild TensorFlow with the appropriate comp
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;True positive rate&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;False positive rate&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mf">0.001</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mf">0.001</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -858,9 +922,7 @@ To enable them in other operations, rebuild TensorFlow with the appropriate comp
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">find_nearest</span><span class="p">(</span><span class="n">array</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
-    <span class="n">idx</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">array</span><span class="o">-</span><span class="n">value</span><span class="p">))</span><span class="o">.</span><span class="n">argmin</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">idx</span><span class="p">,</span> <span class="n">array</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">find_nearest</span>
 </pre></div>
 </div>
 </div>
@@ -870,33 +932,33 @@ To enable them in other operations, rebuild TensorFlow with the appropriate comp
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 <span class="k">for</span> <span class="n">wp</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">]:</span>
     <span class="n">idx</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span> <span class="n">find_nearest</span><span class="p">(</span><span class="n">fpr_adv</span><span class="p">,</span> <span class="n">wp</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">spec_array_test</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">21</span><span class="p">),</span> 
-             <span class="n">weights</span> <span class="o">=</span> <span class="n">label_array_test</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">predict_array_adv</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">threshold_adv</span><span class="p">[</span><span class="n">idx</span><span class="p">]),</span>
-             <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span><span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;QCD, </span><span class="si">{}% F</span><span class="s1">PR cut&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">wp</span><span class="o">*</span><span class="mi">100</span><span class="p">)),</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">spec_array_test</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">21</span><span class="p">),</span> 
+             <span class="n">weights</span><span class="o">=</span><span class="n">label_array_test</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">predict_array_adv</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">threshold_adv</span><span class="p">[</span><span class="n">idx</span><span class="p">]),</span>
+             <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;QCD, </span><span class="si">{}% F</span><span class="s1">PR cut&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">wp</span><span class="o">*</span><span class="mi">100</span><span class="p">)),</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$m_</span><span class="si">{SD}</span><span class="s1">$&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Normalized probability&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 <span class="k">for</span> <span class="n">wp</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">]:</span>
     <span class="n">idx</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span> <span class="n">find_nearest</span><span class="p">(</span><span class="n">fpr_adv</span><span class="p">,</span> <span class="n">wp</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">spec_array_test</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">21</span><span class="p">),</span> 
-             <span class="n">weights</span> <span class="o">=</span> <span class="n">label_array_test</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">predict_array_adv</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">threshold_adv</span><span class="p">[</span><span class="n">idx</span><span class="p">]),</span>
-             <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span><span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;H(bb), </span><span class="si">{}% F</span><span class="s1">PR cut&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">wp</span><span class="o">*</span><span class="mi">100</span><span class="p">)),</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">spec_array_test</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">21</span><span class="p">),</span> 
+             <span class="n">weights</span><span class="o">=</span><span class="n">label_array_test</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">predict_array_adv</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">threshold_adv</span><span class="p">[</span><span class="n">idx</span><span class="p">]),</span>
+             <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;H(bb), </span><span class="si">{}% F</span><span class="s1">PR cut&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">wp</span><span class="o">*</span><span class="mi">100</span><span class="p">)),</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$m_</span><span class="si">{SD}</span><span class="s1">$&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Normalized probability&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">predict_array_adv</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">21</span><span class="p">),</span> 
-             <span class="n">weights</span> <span class="o">=</span> <span class="n">label_array_test</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mf">0.1</span><span class="p">,</span>
-             <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;H(bb)&#39;</span><span class="p">)</span>
+             <span class="n">weights</span><span class="o">=</span><span class="n">label_array_test</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mf">0.1</span><span class="p">,</span>
+             <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;H(bb)&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">predict_array_adv</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">21</span><span class="p">),</span> 
-             <span class="n">weights</span> <span class="o">=</span> <span class="n">label_array_test</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span>
-             <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;QCD&#39;</span><span class="p">)</span>
+             <span class="n">weights</span><span class="o">=</span><span class="n">label_array_test</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span>
+             <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;QCD&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
@@ -904,10 +966,10 @@ To enable them in other operations, rebuild TensorFlow with the appropriate comp
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">spec_array_test</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">21</span><span class="p">),</span> 
              <span class="n">weights</span> <span class="o">=</span> <span class="n">label_array_test</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mf">0.1</span><span class="p">,</span>
-             <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;H(bb)&#39;</span><span class="p">)</span>
+             <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;H(bb)&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">spec_array_test</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">21</span><span class="p">),</span> 
              <span class="n">weights</span> <span class="o">=</span> <span class="n">label_array_test</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span>
-             <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;QCD&#39;</span><span class="p">)</span>
+             <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;QCD&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>

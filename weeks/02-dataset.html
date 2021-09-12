@@ -42,6 +42,8 @@
     <script src="../_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
@@ -698,30 +700,27 @@ The latter means there may a variable number per jet.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Returns a dictionary</span>
-<span class="n">labels</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">arrays</span><span class="p">(</span><span class="n">branches</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;label_QCD_b&#39;</span><span class="p">,</span> 
-                               <span class="s1">&#39;label_QCD_bb&#39;</span><span class="p">,</span> 
-                               <span class="s1">&#39;label_QCD_c&#39;</span><span class="p">,</span> 
-                               <span class="s1">&#39;label_QCD_cc&#39;</span><span class="p">,</span> 
-                               <span class="s1">&#39;label_QCD_others&#39;</span><span class="p">,</span> 
-                               <span class="s1">&#39;label_H_bb&#39;</span><span class="p">,</span> 
-                               <span class="s1">&#39;sample_isQCD&#39;</span><span class="p">],</span> 
-                     <span class="n">entrystop</span><span class="o">=</span><span class="mi">20000</span><span class="p">,</span>
-                     <span class="n">namedecode</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">arrays</span><span class="p">([</span><span class="s1">&#39;label_QCD_b&#39;</span><span class="p">,</span>
+                      <span class="s1">&#39;label_QCD_bb&#39;</span><span class="p">,</span> 
+                      <span class="s1">&#39;label_QCD_c&#39;</span><span class="p">,</span> 
+                      <span class="s1">&#39;label_QCD_cc&#39;</span><span class="p">,</span> 
+                      <span class="s1">&#39;label_QCD_others&#39;</span><span class="p">,</span> 
+                      <span class="s1">&#39;label_H_bb&#39;</span><span class="p">,</span>
+                      <span class="s1">&#39;sample_isQCD&#39;</span><span class="p">],</span> 
+                     <span class="n">entry_stop</span><span class="o">=</span><span class="mi">20000</span><span class="p">,</span>
+                     <span class="n">library</span><span class="o">=</span><span class="s1">&#39;np&#39;</span><span class="p">)</span>
 <span class="n">labels</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_3595</span><span class="o">/</span><span class="mf">3380590306.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Returns a dictionary</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">arrays</span><span class="p">(</span><span class="n">branches</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;label_QCD_b&#39;</span><span class="p">,</span> 
-<span class="g g-Whitespace">      </span><span class="mi">3</span>                                <span class="s1">&#39;label_QCD_bb&#39;</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span>                                <span class="s1">&#39;label_QCD_c&#39;</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span>                                <span class="s1">&#39;label_QCD_cc&#39;</span><span class="p">,</span>
-
-<span class="ne">TypeError</span>: arrays() got an unexpected keyword argument &#39;branches&#39;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;label_QCD_b&#39;: array([0, 0, 0, ..., 0, 0, 0], dtype=int32),
+ &#39;label_QCD_bb&#39;: array([0, 0, 0, ..., 0, 0, 0], dtype=int32),
+ &#39;label_QCD_c&#39;: array([0, 0, 0, ..., 0, 0, 0], dtype=int32),
+ &#39;label_QCD_cc&#39;: array([0, 0, 0, ..., 0, 1, 1], dtype=int32),
+ &#39;label_QCD_others&#39;: array([1, 1, 1, ..., 1, 0, 0], dtype=int32),
+ &#39;label_H_bb&#39;: array([0, 0, 0, ..., 0, 0, 0], dtype=int32),
+ &#39;sample_isQCD&#39;: array([1, 1, 1, ..., 1, 1, 1], dtype=int32)}
 </pre></div>
 </div>
 </div>
@@ -760,6 +759,11 @@ The latter means there may a variable number per jet.</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -768,14 +772,19 @@ The latter means there may a variable number per jet.</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.93785
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># jet features, namely transverse momemntum (pt) and soft-drop mass  (sdmass or msd)</span>
-<span class="n">jet_features</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">arrays</span><span class="p">(</span><span class="n">branches</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;fj_pt&#39;</span><span class="p">,</span> 
-                                     <span class="s1">&#39;fj_sdmass&#39;</span><span class="p">],</span>
-                          <span class="n">entrystop</span><span class="o">=</span><span class="mi">20000</span><span class="p">,</span>
-                          <span class="n">namedecode</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+<span class="n">jet_features</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">arrays</span><span class="p">([</span><span class="s1">&#39;fj_pt&#39;</span><span class="p">,</span> 
+                            <span class="s1">&#39;fj_sdmass&#39;</span><span class="p">],</span>
+                          <span class="n">entry_stop</span><span class="o">=</span><span class="mi">20000</span><span class="p">,</span>
+                          <span class="n">library</span><span class="o">=</span><span class="s1">&#39;np&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -805,18 +814,28 @@ The latter means there may a variable number per jet.</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/02-dataset_15_0.png" src="../_images/02-dataset_15_0.png" />
+<img alt="../_images/02-dataset_15_1.png" src="../_images/02-dataset_15_1.png" />
+</div>
 </div>
 </div>
 <div class="section" id="jagged-arrys">
 <h2>Jagged arrys<a class="headerlink" href="#jagged-arrys" title="Permalink to this headline">¶</a></h2>
-<p>Now let’s look at a jagged array, like those related to track features, where there can be a variable number of tracks per jet.</p>
+<p>Now let’s look at an jagged (or awkward) array, like those related to track features, where there can be a variable number of tracks per jet.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">track_features</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">arrays</span><span class="p">(</span><span class="n">branches</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;track_pt&#39;</span><span class="p">,</span>
-                                       <span class="s1">&#39;label_H_bb&#39;</span><span class="p">],</span>
-                             <span class="n">entrystop</span><span class="o">=</span><span class="mi">20000</span><span class="p">,</span>
-                             <span class="n">namedecode</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">awkward</span> <span class="k">as</span> <span class="nn">ak</span>
+<span class="n">track_features</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">arrays</span><span class="p">([</span><span class="s1">&#39;track_pt&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;label_H_bb&#39;</span><span class="p">],</span>
+                             <span class="n">entry_stop</span><span class="o">=</span><span class="mi">20000</span><span class="p">,</span>
+                             <span class="n">library</span><span class="o">=</span><span class="s1">&#39;ak&#39;</span><span class="p">)</span>
 <span class="n">track_features</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Array [{track_pt: [1.05, ... label_H_bb: 0}] type=&#39;20000 * {&quot;track_pt&quot;: var * f...&#39;&gt;
 </pre></div>
 </div>
 </div>
@@ -829,6 +848,11 @@ The latter means there may a variable number per jet.</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>251.27692
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -836,25 +860,21 @@ The latter means there may a variable number per jet.</p>
 </pre></div>
 </div>
 </div>
-</div>
-<p>Note, behind the scenes jagged arrays are just like normal numpy arrays, except there’s additional structure, ecoded in the starts/stops/counts vectors.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">track_features</span><span class="p">[</span><span class="s1">&#39;track_pt&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">starts</span>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Array [1.05, 0.957, 1.46, ... 1.62, 1.23] type=&#39;21 * float32&#39;&gt;
 </pre></div>
 </div>
 </div>
 </div>
+<p>Note, behind the scenes, jagged arrays are just like normal numpy arrays, except there’s additional structure, retreivable from the <code class="docutils literal notranslate"><span class="pre">ak.num</span></code> function, which tells us the (variable) number of tracks per jet.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">track_features</span><span class="p">[</span><span class="s1">&#39;track_pt&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">stops</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ak</span><span class="o">.</span><span class="n">num</span><span class="p">(</span><span class="n">track_features</span><span class="p">[</span><span class="s1">&#39;track_pt&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">track_features</span><span class="p">[</span><span class="s1">&#39;track_pt&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">counts</span>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Array [21, 35, 24, 32, 28, ... 16, 25, 20, 45] type=&#39;20000 * int64&#39;&gt;
 </pre></div>
 </div>
 </div>
@@ -866,8 +886,8 @@ The latter means there may a variable number per jet.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">track_features</span><span class="p">[</span><span class="s1">&#39;track_pt&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span><span class="n">bins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">101</span><span class="p">),</span><span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;All tracks&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">track_features</span><span class="p">[</span><span class="s1">&#39;track_pt&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span><span class="n">bins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">101</span><span class="p">),</span><span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;Max. $p_</span><span class="si">{T}</span><span class="s1">$ track per jet&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">ak</span><span class="o">.</span><span class="n">flatten</span><span class="p">(</span><span class="n">track_features</span><span class="p">[</span><span class="s1">&#39;track_pt&#39;</span><span class="p">]),</span><span class="n">bins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">101</span><span class="p">),</span><span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;All tracks&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">ak</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">track_features</span><span class="p">[</span><span class="s1">&#39;track_pt&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">),</span><span class="n">bins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">101</span><span class="p">),</span><span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;Max. $p_</span><span class="si">{T}</span><span class="s1">$ track per jet&#39;</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Track $p_</span><span class="si">{T}</span><span class="s1">$&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Fraction of tracks&#39;</span><span class="p">)</span>
@@ -875,6 +895,9 @@ The latter means there may a variable number per jet.</p>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/02-dataset_24_0.png" src="../_images/02-dataset_24_0.png" />
 </div>
 </div>
 </div>
@@ -886,7 +909,7 @@ The simplest way to do this is to use zero-padding and truncation to “cap” t
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">track_features</span><span class="p">[</span><span class="s1">&#39;track_pt&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">counts</span><span class="p">,</span><span class="n">bins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">101</span><span class="p">),</span><span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">ak</span><span class="o">.</span><span class="n">num</span><span class="p">(</span><span class="n">track_features</span><span class="p">[</span><span class="s1">&#39;track_pt&#39;</span><span class="p">]),</span><span class="n">bins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">101</span><span class="p">),</span><span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Number of tracks&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Fraction of jets&#39;</span><span class="p">)</span>
@@ -894,13 +917,38 @@ The simplest way to do this is to use zero-padding and truncation to “cap” t
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/02-dataset_26_0.png" src="../_images/02-dataset_26_0.png" />
+</div>
 </div>
 <p>In this case, 60 seems to be a reasonable number.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">track_features</span><span class="p">[</span><span class="s1">&#39;track_pt&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="n">clip</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">regular</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">max_tracks</span> <span class="o">=</span> <span class="mi">60</span>
+<span class="n">pad_value</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">ak</span><span class="o">.</span><span class="n">fill_none</span><span class="p">(</span><span class="n">ak</span><span class="o">.</span><span class="n">pad_none</span><span class="p">(</span><span class="n">track_features</span><span class="p">[</span><span class="s1">&#39;track_pt&#39;</span><span class="p">],</span> <span class="n">max_tracks</span><span class="p">,</span> <span class="n">clip</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">),</span> <span class="n">pad_value</span><span class="p">)</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <span class="n">a</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(20000, 60)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1.05371094,  0.95654297,  1.45703125, ...,  0.        ,
+         0.        ,  0.        ],
+       [ 2.78320312,  3.52539062, 49.09375   , ...,  0.        ,
+         0.        ,  0.        ],
+       [ 1.53027344,  6.81640625,  2.92578125, ...,  0.        ,
+         0.        ,  0.        ],
+       ...,
+       [ 1.08105469,  2.5234375 , 10.265625  , ...,  0.        ,
+         0.        ,  0.        ],
+       [ 4.8125    ,  2.6796875 ,  3.98242188, ...,  0.        ,
+         0.        ,  0.        ],
+       [ 2.41015625,  1.43457031,  2.46289062, ...,  0.        ,
+         0.        ,  0.        ]])
 </pre></div>
 </div>
 </div>

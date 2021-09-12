@@ -42,6 +42,8 @@
     <script src="../_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
@@ -405,7 +407,7 @@
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">feature_array</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">spec_array</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">get_features_labels</span><span class="p">(</span><span class="s1">&#39;root://eospublic.cern.ch//eos/opendata/cms/datascience/HiggsToBBNtupleProducerTool/HiggsToBBNTuple_HiggsToBB_QCD_RunII_13TeV_MC/train/ntuple_merged_10.root&#39;</span><span class="p">,</span> 
                                                          <span class="n">features</span><span class="p">,</span> <span class="n">spectators</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span>
                                                          <span class="n">remove_mass_pt_window</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                                                         <span class="n">entrystop</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+                                                         <span class="n">entry_stop</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
 <span class="c1"># make image</span>
 <span class="n">X</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">make_image</span><span class="p">(</span><span class="n">feature_array</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="c1"># image is a 4D tensor (n_samples, n_pixels_x, n_pixels_y, n_channels)</span>
@@ -413,23 +415,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_3711</span><span class="o">/</span><span class="mf">2751616353.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">feature_array</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">spec_array</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">get_features_labels</span><span class="p">(</span><span class="s1">&#39;root://eospublic.cern.ch//eos/opendata/cms/datascience/HiggsToBBNtupleProducerTool/HiggsToBBNTuple_HiggsToBB_QCD_RunII_13TeV_MC/train/ntuple_merged_10.root&#39;</span><span class="p">,</span> 
-<span class="g g-Whitespace">      </span><span class="mi">2</span>                                                          <span class="n">features</span><span class="p">,</span> <span class="n">spectators</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span>                                                          <span class="n">remove_mass_pt_window</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span>                                                          <span class="n">entrystop</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="c1"># make image</span>
-
-<span class="nn">~/work/capstone-particle-physics-domain/capstone-particle-physics-domain/weeks/utils.py</span> in <span class="ni">get_features_labels</span><span class="nt">(file_name, features, spectators, labels, remove_mass_pt_window, entrystop)</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="n">root_file</span> <span class="o">=</span> <span class="n">uproot</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="n">tree</span> <span class="o">=</span> <span class="n">root_file</span><span class="p">[</span><span class="s1">&#39;deepntuplizer/tree&#39;</span><span class="p">]</span>
-<span class="ne">----&gt; </span><span class="mi">8</span>     <span class="n">feature_array</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">arrays</span><span class="p">(</span><span class="n">branches</span><span class="o">=</span><span class="n">features</span><span class="p">,</span> 
-<span class="g g-Whitespace">      </span><span class="mi">9</span>                                 <span class="n">entrystop</span><span class="o">=</span><span class="n">entrystop</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span>                                 <span class="n">namedecode</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
-
-<span class="ne">TypeError</span>: arrays() got an unexpected keyword argument &#39;branches&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(9375, 224, 224, 1)
 </pre></div>
 </div>
 </div>
@@ -455,6 +441,10 @@
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/05-jet-images_5_0.png" src="../_images/05-jet-images_5_0.png" />
+<img alt="../_images/05-jet-images_5_1.png" src="../_images/05-jet-images_5_1.png" />
 </div>
 </div>
 </div>
@@ -490,6 +480,57 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2021-09-12 03:50:20.259298: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE4.1 SSE4.2 AVX AVX2 AVX512F FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;model&quot;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+input (InputLayer)           [(None, 224, 224, 1)]     0         
+_________________________________________________________________
+bn_1 (BatchNormalization)    (None, 224, 224, 1)       4         
+_________________________________________________________________
+conv2d_1 (Conv2D)            (None, 224, 224, 64)      640       
+_________________________________________________________________
+max_pooling2d (MaxPooling2D) (None, 112, 112, 64)      0         
+_________________________________________________________________
+bn_2 (BatchNormalization)    (None, 112, 112, 64)      256       
+_________________________________________________________________
+activation (Activation)      (None, 112, 112, 64)      0         
+_________________________________________________________________
+conv2d_2 (Conv2D)            (None, 112, 112, 32)      18464     
+_________________________________________________________________
+max_pooling2d_1 (MaxPooling2 (None, 56, 56, 32)        0         
+_________________________________________________________________
+bn_3 (BatchNormalization)    (None, 56, 56, 32)        128       
+_________________________________________________________________
+activation_1 (Activation)    (None, 56, 56, 32)        0         
+_________________________________________________________________
+conv2d_3 (Conv2D)            (None, 56, 56, 32)        9248      
+_________________________________________________________________
+max_pooling2d_2 (MaxPooling2 (None, 28, 28, 32)        0         
+_________________________________________________________________
+bn_4 (BatchNormalization)    (None, 28, 28, 32)        128       
+_________________________________________________________________
+activation_2 (Activation)    (None, 28, 28, 32)        0         
+_________________________________________________________________
+flatten_1 (Flatten)          (None, 25088)             0         
+_________________________________________________________________
+dense_1 (Dense)              (None, 256)               6422784   
+_________________________________________________________________
+output (Dense)               (None, 2)                 514       
+=================================================================
+Total params: 6,452,166
+Trainable params: 6,451,908
+Non-trainable params: 258
+_________________________________________________________________
+None
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -503,12 +544,33 @@
 
 <span class="c1"># fit keras model</span>
 <span class="n">history_conv2d</span> <span class="o">=</span> <span class="n">keras_model_conv2d</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">validation_split</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span>
-                                                <span class="n">epochs</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> 
-                                                <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                                                <span class="n">callbacks</span> <span class="o">=</span> <span class="n">callbacks</span><span class="p">,</span> 
-                                                <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+                                        <span class="n">epochs</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> 
+                                        <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                        <span class="n">callbacks</span> <span class="o">=</span> <span class="n">callbacks</span><span class="p">,</span> 
+                                        <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="c1"># reload best weights</span>
 <span class="n">keras_model_conv2d</span><span class="o">.</span><span class="n">load_weights</span><span class="p">(</span><span class="s1">&#39;keras_model_conv2d_best.h5&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2021-09-12 03:50:30.121245: W tensorflow/core/framework/cpu_allocator_impl.cc:80] Allocation of 1505280000 exceeds 10% of free system memory.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2021-09-12 03:50:33.182312: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:116] None of the MLIR optimization passes are enabled (registered 2)
+2021-09-12 03:50:33.201971: I tensorflow/core/platform/profile_utils/cpu_utils.cc:112] CPU Frequency: 2095225000 Hz
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2021-09-12 03:50:35.864364: W tensorflow/core/framework/cpu_allocator_impl.cc:80] Allocation of 411041792 exceeds 10% of free system memory.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2021-09-12 03:50:37.668568: W tensorflow/core/framework/cpu_allocator_impl.cc:80] Allocation of 411041792 exceeds 10% of free system memory.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2021-09-12 03:50:39.369248: W tensorflow/core/framework/cpu_allocator_impl.cc:80] Allocation of 411041792 exceeds 10% of free system memory.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2021-09-12 03:50:41.046187: W tensorflow/core/framework/cpu_allocator_impl.cc:80] Allocation of 411041792 exceeds 10% of free system memory.
 </pre></div>
 </div>
 </div>
@@ -524,16 +586,38 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/05-jet-images_9_0.png" src="../_images/05-jet-images_9_0.png" />
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load testing file</span>
-<span class="n">feature_array_test</span><span class="p">,</span> <span class="n">label_array_test</span><span class="p">,</span> <span class="n">spec_array_test</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">get_features_labels</span><span class="p">(</span><span class="s1">&#39;root://eospublic.cern.ch//eos/opendata/cms/datascience/HiggsToBBNtupleProducerTool/HiggsToBBNTuple_HiggsToBB_QCD_RunII_13TeV_MC/test/ntuple_merged_0.root&#39;</span><span class="p">,</span> 
-                                                         <span class="n">features</span><span class="p">,</span> <span class="n">spectators</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span>
-                                                         <span class="n">remove_mass_pt_window</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">feature_array_test</span><span class="p">,</span> <span class="n">label_array_test</span><span class="p">,</span> <span class="n">spec_array_test</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">get_features_labels</span><span class="p">(</span><span class="s1">&#39;root://eospublic.cern.ch//eos/opendata/cms/datascience/HiggsToBBNtupleProducerTool/HiggsToBBNTuple_HiggsToBB_QCD_RunII_13TeV_MC/test/ntuple_merged_0.root&#39;</span><span class="p">,</span>
+                                                                                  <span class="n">features</span><span class="p">,</span> <span class="n">spectators</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span>
+                                                                                  <span class="n">remove_mass_pt_window</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
                       
 <span class="c1"># make image</span>
 <span class="n">X_test</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">make_image</span><span class="p">(</span><span class="n">feature_array_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">MemoryError</span><span class="g g-Whitespace">                               </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_4399</span><span class="o">/</span><span class="mf">4121787654.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> 
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="c1"># make image</span>
+<span class="ne">----&gt; </span><span class="mi">7</span> <span class="n">X_test</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">make_image</span><span class="p">(</span><span class="n">feature_array_test</span><span class="p">)</span>
+
+<span class="nn">~/work/capstone-particle-physics-domain/capstone-particle-physics-domain/weeks/utils.py</span> in <span class="ni">make_image</span><span class="nt">(feature_array, n_pixels, img_ranges)</span>
+<span class="g g-Whitespace">     </span><span class="mi">58</span>     <span class="n">x</span> <span class="o">=</span> <span class="n">feature_array</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>  <span class="c1"># etarel</span>
+<span class="g g-Whitespace">     </span><span class="mi">59</span>     <span class="n">y</span> <span class="o">=</span> <span class="n">feature_array</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span>  <span class="c1"># phirel</span>
+<span class="ne">---&gt; </span><span class="mi">60</span>     <span class="n">img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">wgt</span><span class="p">),</span> <span class="n">n_pixels</span><span class="p">,</span> <span class="n">n_pixels</span><span class="p">))</span>
+<span class="g g-Whitespace">     </span><span class="mi">61</span>     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">wgt</span><span class="p">)):</span>
+<span class="g g-Whitespace">     </span><span class="mi">62</span>         <span class="n">hist2d</span><span class="p">,</span> <span class="n">xedges</span><span class="p">,</span> <span class="n">yedges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram2d</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+
+<span class="ne">MemoryError</span>: Unable to allocate 70.3 GiB for an array with shape (188007, 224, 224) and data type float64
 </pre></div>
 </div>
 </div>
@@ -552,8 +636,8 @@
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;True positive rate&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;False positive rate&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mf">0.001</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mf">0.001</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>

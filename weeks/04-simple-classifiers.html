@@ -42,6 +42,8 @@
     <script src="../_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
@@ -408,29 +410,8 @@
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load training file</span>
 <span class="n">feature_array</span><span class="p">,</span> <span class="n">label_array</span><span class="p">,</span> <span class="n">spec_array</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">get_features_labels</span><span class="p">(</span><span class="s1">&#39;root://eospublic.cern.ch//eos/opendata/cms/datascience/HiggsToBBNtupleProducerTool/HiggsToBBNTuple_HiggsToBB_QCD_RunII_13TeV_MC/train/ntuple_merged_10.root&#39;</span><span class="p">,</span> 
                                                                    <span class="n">features</span><span class="p">,</span> <span class="n">spectators</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span>
-                                                             <span class="n">remove_mass_pt_window</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                                                             <span class="n">entrystop</span><span class="o">=</span><span class="mi">20000</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_3648</span><span class="o">/</span><span class="mf">60281719.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># load training file</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">feature_array</span><span class="p">,</span> <span class="n">label_array</span><span class="p">,</span> <span class="n">spec_array</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">get_features_labels</span><span class="p">(</span><span class="s1">&#39;root://eospublic.cern.ch//eos/opendata/cms/datascience/HiggsToBBNtupleProducerTool/HiggsToBBNTuple_HiggsToBB_QCD_RunII_13TeV_MC/train/ntuple_merged_10.root&#39;</span><span class="p">,</span> 
-<span class="g g-Whitespace">      </span><span class="mi">3</span>                                                                    <span class="n">features</span><span class="p">,</span> <span class="n">spectators</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span>                                                              <span class="n">remove_mass_pt_window</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span>                                                              <span class="n">entrystop</span><span class="o">=</span><span class="mi">20000</span><span class="p">)</span>
-
-<span class="nn">~/work/capstone-particle-physics-domain/capstone-particle-physics-domain/weeks/utils.py</span> in <span class="ni">get_features_labels</span><span class="nt">(file_name, features, spectators, labels, remove_mass_pt_window, entrystop)</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="n">root_file</span> <span class="o">=</span> <span class="n">uproot</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="n">tree</span> <span class="o">=</span> <span class="n">root_file</span><span class="p">[</span><span class="s1">&#39;deepntuplizer/tree&#39;</span><span class="p">]</span>
-<span class="ne">----&gt; </span><span class="mi">8</span>     <span class="n">feature_array</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">arrays</span><span class="p">(</span><span class="n">branches</span><span class="o">=</span><span class="n">features</span><span class="p">,</span> 
-<span class="g g-Whitespace">      </span><span class="mi">9</span>                                 <span class="n">entrystop</span><span class="o">=</span><span class="n">entrystop</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span>                                 <span class="n">namedecode</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
-
-<span class="ne">TypeError</span>: arrays() got an unexpected keyword argument &#39;branches&#39;
+                                                                   <span class="n">remove_mass_pt_window</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                                                   <span class="n">entry_stop</span><span class="o">=</span><span class="mi">20000</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -457,6 +438,11 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SGDClassifier()
+</pre></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="fully-connected-neural-network-classifier">
@@ -476,6 +462,35 @@
 <span class="n">keras_model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="n">outputs</span><span class="p">)</span>
 <span class="n">keras_model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;adam&#39;</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">keras_model</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;model&quot;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+input (InputLayer)           [(None, 27)]              0         
+_________________________________________________________________
+bn_1 (BatchNormalization)    (None, 27)                108       
+_________________________________________________________________
+dense_1 (Dense)              (None, 64)                1792      
+_________________________________________________________________
+dense_2 (Dense)              (None, 32)                2080      
+_________________________________________________________________
+dense_3 (Dense)              (None, 32)                1056      
+_________________________________________________________________
+output (Dense)               (None, 2)                 66        
+=================================================================
+Total params: 5,102
+Trainable params: 5,048
+Non-trainable params: 54
+_________________________________________________________________
+None
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2021-09-12 03:42:52.822684: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE4.1 SSE4.2 AVX AVX2 AVX512F FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
 </pre></div>
 </div>
 </div>
@@ -499,6 +514,12 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2021-09-12 03:42:52.912482: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:116] None of the MLIR optimization passes are enabled (registered 2)
+2021-09-12 03:42:52.913321: I tensorflow/core/platform/profile_utils/cpu_utils.cc:112] CPU Frequency: 2095225000 Hz
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -511,28 +532,17 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/04-simple-classifiers_12_0.png" src="../_images/04-simple-classifiers_12_0.png" />
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load testing file</span>
 <span class="n">feature_array_test</span><span class="p">,</span> <span class="n">label_array_test</span><span class="p">,</span> <span class="n">spec_array_test</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">get_features_labels</span><span class="p">(</span><span class="s1">&#39;root://eospublic.cern.ch//eos/opendata/cms/datascience/HiggsToBBNtupleProducerTool/HiggsToBBNTuple_HiggsToBB_QCD_RunII_13TeV_MC/test/ntuple_merged_0.root&#39;</span><span class="p">,</span> 
                                                                                   <span class="n">features</span><span class="p">,</span> <span class="n">spectators</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span>
-                                                                            <span class="n">remove_mass_pt_window</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                                                                            <span class="n">entrystop</span><span class="o">=</span><span class="mi">30000</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">f158bee48d8a</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># load testing file</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">feature_array_test</span><span class="p">,</span> <span class="n">label_array_test</span><span class="p">,</span> <span class="n">spec_array_test</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">get_features_labels</span><span class="p">(</span><span class="s1">&#39;root://eospublic.cern.ch//eos/opendata/cms/datascience/HiggsToBBNtupleProducerTool/HiggsToBBNTuple_HiggsToBB_QCD_RunII_13TeV_MC/test/ntuple_merged_0.root&#39;</span><span class="p">,</span> 
-<span class="g g-Whitespace">      </span><span class="mi">3</span>                                                                                   <span class="n">features</span><span class="p">,</span> <span class="n">spectators</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span>                                                                             <span class="n">remove_mass_pt_window</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span>                                                                             <span class="n">entrystop</span><span class="o">=</span><span class="mi">30000</span><span class="p">)</span>
-
-<span class="ne">NameError</span>: name &#39;utils&#39; is not defined
+                                                                                  <span class="n">remove_mass_pt_window</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                                                                  <span class="n">entry_stop</span><span class="o">=</span><span class="mi">30000</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -564,6 +574,9 @@
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/04-simple-classifiers_14_0.png" src="../_images/04-simple-classifiers_14_0.png" />
 </div>
 </div>
 </div>
