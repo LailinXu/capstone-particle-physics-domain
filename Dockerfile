@@ -1,4 +1,4 @@
-FROM ucsdets/scipy-ml-notebook:cuda11
+FROM ucsdets/scipy-ml-notebook:2021.3.1
 
 LABEL maintainer="Javier Duarte <jduarte@ucsd.edu>"
 
