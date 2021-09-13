@@ -17,23 +17,31 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-# load testing file
-test_files = ['root://eospublic.cern.ch//eos/opendata/cms/datascience/HiggsToBBNtupleProducerTool/HiggsToBBNTuple_HiggsToBB_QCD_RunII_13TeV_MC/test/ntuple_merged_0.root']
-test_generator = DataGenerator(test_files, features, labels, spectators, batch_size=8192, n_dim=ntracks, 
-                               remove_mass_pt_window=True, 
-                               remove_unlabeled=True,
-                               return_spectators=True,
-                               max_entry=200000) # basically, no maximum
+from DataGenerator import DataGenerator
+# load training and validation generators 
+train_files = ['root://eospublic.cern.ch//eos/opendata/cms/datascience/HiggsToBBNtupleProducerTool/HiggsToBBNTuple_HiggsToBB_QCD_RunII_13TeV_MC/train/ntuple_merged_10.root']
+val_files = ['root://eospublic.cern.ch//eos/opendata/cms/datascience/HiggsToBBNtupleProducerTool/HiggsToBBNTuple_HiggsToBB_QCD_RunII_13TeV_MC/train/ntuple_merged_11.root']
+
+
+train_generator = DataGenerator(train_files, features, labels, spectators, batch_size=1024, n_dim=ntracks, 
+                                remove_mass_pt_window=False, 
+                                remove_unlabeled=True, max_entry=5000,
+                                return_spectators=True, scale_mass_pt=[100., 10000.])
+
+val_generator = DataGenerator(val_files, features, labels, spectators, batch_size=1024, n_dim=ntracks, 
+                              remove_mass_pt_window=False, 
+                              remove_unlabeled=True, max_entry=5000, 
+                              return_spectators=True, scale_mass_pt=[100., 10000.])
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mOSError[0m                                   Traceback (most recent call last)
-[0;32m/tmp/ipykernel_6424/2932239055.py[0m in [0;36m<module>[0;34m[0m
-[1;32m      1[0m [0;31m# load testing file[0m[0;34m[0m[0;34m[0m[0m
-[1;32m      2[0m [0mtest_files[0m [0;34m=[0m [0;34m[[0m[0;34m'root://eospublic.cern.ch//eos/opendata/cms/datascience/HiggsToBBNtupleProducerTool/HiggsToBBNTuple_HiggsToBB_QCD_RunII_13TeV_MC/test/ntuple_merged_0.root'[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
-[0;32m----> 3[0;31m test_generator = DataGenerator(test_files, features, labels, spectators, batch_size=8192, n_dim=ntracks, 
-[0m[1;32m      4[0m                                [0mremove_mass_pt_window[0m[0;34m=[0m[0;32mTrue[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
-[1;32m      5[0m                                [0mremove_unlabeled[0m[0;34m=[0m[0;32mTrue[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+[0;32m/tmp/ipykernel_6963/1116280325.py[0m in [0;36m<module>[0;34m[0m
+[1;32m      5[0m [0;34m[0m[0m
+[1;32m      6[0m [0;34m[0m[0m
+[0;32m----> 7[0;31m train_generator = DataGenerator(train_files, features, labels, spectators, batch_size=1024, n_dim=ntracks, 
+[0m[1;32m      8[0m                                 [0mremove_mass_pt_window[0m[0;34m=[0m[0;32mFalse[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      9[0m                                 [0mremove_unlabeled[0m[0;34m=[0m[0;32mTrue[0m[0;34m,[0m [0mmax_entry[0m[0;34m=[0m[0;36m5000[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
 
 [0;32m~/work/capstone-particle-physics-domain/capstone-particle-physics-domain/weeks/DataGenerator.py[0m in [0;36m__init__[0;34m(self, list_files, features, labels, spectators, batch_size, n_dim, remove_mass_pt_window, remove_unlabeled, return_spectators, max_entry, scale_mass_pt)[0m
 [1;32m     30[0m         [0mrunning_total[0m [0;34m=[0m [0;36m0[0m[0;34m[0m[0;34m[0m[0m
@@ -92,7 +100,7 @@ test_generator = DataGenerator(test_files, features, labels, spectators, batch_s
 [1;32m    119[0m in file {1}""".format(
 
 [0;31mOSError[0m: XRootD error: [ERROR] Operation expired
-in file root://eospublic.cern.ch//eos/opendata/cms/datascience/HiggsToBBNtupleProducerTool/HiggsToBBNTuple_HiggsToBB_QCD_RunII_13TeV_MC/test/ntuple_merged_0.root
+in file root://eospublic.cern.ch//eos/opendata/cms/datascience/HiggsToBBNtupleProducerTool/HiggsToBBNTuple_HiggsToBB_QCD_RunII_13TeV_MC/train/ntuple_merged_10.root
 OSError: XRootD error: [ERROR] Operation expired
-in file root://eospublic.cern.ch//eos/opendata/cms/datascience/HiggsToBBNtupleProducerTool/HiggsToBBNTuple_HiggsToBB_QCD_RunII_13TeV_MC/test/ntuple_merged_0.root
+in file root://eospublic.cern.ch//eos/opendata/cms/datascience/HiggsToBBNtupleProducerTool/HiggsToBBNTuple_HiggsToBB_QCD_RunII_13TeV_MC/train/ntuple_merged_10.root
 

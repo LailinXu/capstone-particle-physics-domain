@@ -26,7 +26,7 @@ test_generator = DataGenerator(test_files, features, labels, spectators, batch_s
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mOSError[0m                                   Traceback (most recent call last)
-[0;32m/tmp/ipykernel_4036/67902189.py[0m in [0;36m<module>[0;34m[0m
+[0;32m/tmp/ipykernel_3914/67902189.py[0m in [0;36m<module>[0;34m[0m
 [1;32m      1[0m [0;31m# load testing file[0m[0;34m[0m[0;34m[0m[0m
 [1;32m      2[0m [0mtest_files[0m [0;34m=[0m [0;34m[[0m[0;34m'root://eospublic.cern.ch//eos/opendata/cms/datascience/HiggsToBBNtupleProducerTool/HiggsToBBNTuple_HiggsToBB_QCD_RunII_13TeV_MC/test/ntuple_merged_0.root'[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
 [0;32m----> 3[0;31m test_generator = DataGenerator(test_files, features, labels, spectators, batch_size=1024, n_dim=ntracks, 

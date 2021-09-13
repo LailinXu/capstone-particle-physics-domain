@@ -18,29 +18,30 @@ Traceback (most recent call last):
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
 # load testing file
-feature_array_test, label_array_test, spec_array_test = utils.get_features_labels('root://eospublic.cern.ch//eos/opendata/cms/datascience/HiggsToBBNtupleProducerTool/HiggsToBBNTuple_HiggsToBB_QCD_RunII_13TeV_MC/test/ntuple_merged_0.root',
-                                                                                  features, spectators, labels,
-                                                                                  remove_mass_pt_window=False)
-                      
-# make image
-X_test = utils.make_image(feature_array_test)
+test_files = ['root://eospublic.cern.ch//eos/opendata/cms/datascience/HiggsToBBNtupleProducerTool/HiggsToBBNTuple_HiggsToBB_QCD_RunII_13TeV_MC/test/ntuple_merged_0.root'
+             ]
+test_generator = DataGenerator(test_files, features, labels, spectators, batch_size=8192, n_dim=ntracks, 
+                               remove_mass_pt_window=True, 
+                               remove_unlabeled=True,
+                               return_spectators=True,
+                               max_entry=200000) # basically, no maximum
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mOSError[0m                                   Traceback (most recent call last)
-[0;32m/tmp/ipykernel_4715/4121787654.py[0m in [0;36m<module>[0;34m[0m
-[1;32m      1[0m [0;31m# load testing file[0m[0;34m[0m[0;34m[0m[0m
-[0;32m----> 2[0;31m feature_array_test, label_array_test, spec_array_test = utils.get_features_labels('root://eospublic.cern.ch//eos/opendata/cms/datascience/HiggsToBBNtupleProducerTool/HiggsToBBNTuple_HiggsToBB_QCD_RunII_13TeV_MC/test/ntuple_merged_0.root',
-[0m[1;32m      3[0m                                                                                   [0mfeatures[0m[0;34m,[0m [0mspectators[0m[0;34m,[0m [0mlabels[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
-[1;32m      4[0m                                                                                   remove_mass_pt_window=False)
-[1;32m      5[0m [0;34m[0m[0m
+[0;32m/tmp/ipykernel_6920/4272680061.py[0m in [0;36m<module>[0;34m[0m
+[1;32m      2[0m test_files = ['root://eospublic.cern.ch//eos/opendata/cms/datascience/HiggsToBBNtupleProducerTool/HiggsToBBNTuple_HiggsToBB_QCD_RunII_13TeV_MC/test/ntuple_merged_0.root'
+[1;32m      3[0m              ]
+[0;32m----> 4[0;31m test_generator = DataGenerator(test_files, features, labels, spectators, batch_size=8192, n_dim=ntracks, 
+[0m[1;32m      5[0m                                [0mremove_mass_pt_window[0m[0;34m=[0m[0;32mTrue[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      6[0m                                [0mremove_unlabeled[0m[0;34m=[0m[0;32mTrue[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
 
-[0;32m~/work/capstone-particle-physics-domain/capstone-particle-physics-domain/weeks/utils.py[0m in [0;36mget_features_labels[0;34m(file_name, features, spectators, labels, remove_mass_pt_window, entry_stop)[0m
-[1;32m     15[0m [0;32mdef[0m [0mget_features_labels[0m[0;34m([0m[0mfile_name[0m[0;34m,[0m [0mfeatures[0m[0;34m,[0m [0mspectators[0m[0;34m,[0m [0mlabels[0m[0;34m,[0m [0mremove_mass_pt_window[0m[0;34m=[0m[0;32mTrue[0m[0;34m,[0m [0mentry_stop[0m[0;34m=[0m[0;32mNone[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[1;32m     16[0m     [0;31m# load file[0m[0;34m[0m[0;34m[0m[0m
-[0;32m---> 17[0;31m     [0mroot_file[0m [0;34m=[0m [0muproot[0m[0;34m.[0m[0mopen[0m[0;34m([0m[0mfile_name[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m     18[0m     [0mtree[0m [0;34m=[0m [0mroot_file[0m[0;34m[[0m[0;34m'deepntuplizer/tree'[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
-[1;32m     19[0m     feature_array = tree.arrays(features,
+[0;32m~/work/capstone-particle-physics-domain/capstone-particle-physics-domain/weeks/DataGenerator.py[0m in [0;36m__init__[0;34m(self, list_files, features, labels, spectators, batch_size, n_dim, remove_mass_pt_window, remove_unlabeled, return_spectators, max_entry, scale_mass_pt)[0m
+[1;32m     30[0m         [0mrunning_total[0m [0;34m=[0m [0;36m0[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     31[0m         [0;32mfor[0m [0mi[0m[0;34m,[0m [0mfile_name[0m [0;32min[0m [0menumerate[0m[0;34m([0m[0mself[0m[0;34m.[0m[0mlist_files[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m---> 32[0;31m             [0mroot_file[0m [0;34m=[0m [0muproot[0m[0;34m.[0m[0mopen[0m[0;34m([0m[0mfile_name[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m     33[0m             [0mself[0m[0;34m.[0m[0mopen_files[0m[0;34m.[0m[0mappend[0m[0;34m([0m[0mroot_file[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     34[0m             [0mtree[0m [0;34m=[0m [0mroot_file[0m[0;34m[[0m[0;34m'deepntuplizer/tree'[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
 
 [0;32m/usr/share/miniconda/envs/ml-latest/lib/python3.9/site-packages/uproot/reading.py[0m in [0;36mopen[0;34m(path, object_cache, array_cache, custom_classes, decompression_executor, interpretation_executor, **options)[0m
 [1;32m    147[0m         )

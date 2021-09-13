@@ -42,8 +42,6 @@
     <script src="../_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
@@ -472,7 +470,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2021-09-12 04:49:09.645159: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE4.1 SSE4.2 AVX AVX2 AVX512F FMA
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2021-09-13 01:38:38.069455: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE4.1 SSE4.2 AVX AVX2 FMA
 To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
 </pre></div>
 </div>
@@ -562,260 +560,15 @@ None
 </pre></div>
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="pretrain-discriminator-and-regressor-models">
-<h2>Pretrain discriminator and regressor models<a class="headerlink" href="#pretrain-discriminator-and-regressor-models" title="Permalink to this headline">¶</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># pretrain discriminator</span>
-<span class="n">keras_model_disc</span><span class="o">.</span><span class="n">trainable</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="n">keras_model_disc</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;adam&#39;</span><span class="p">,</span>
-                         <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">n_epoch</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">)):</span>
-    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">train_generator</span><span class="p">,</span><span class="n">total</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">train_generator</span><span class="p">),</span><span class="n">leave</span><span class="o">=</span><span class="nb">bool</span><span class="p">(</span><span class="n">n_epoch</span><span class="o">==</span><span class="mi">19</span><span class="p">)):</span>
-        <span class="n">keras_model_disc</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        
-        
-<span class="c1"># pretrain regressor</span>
-<span class="n">keras_model_reg</span><span class="o">.</span><span class="n">trainable</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="n">keras_model_disc</span><span class="o">.</span><span class="n">trainable</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="n">keras_model_reg</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="n">sgd_opt</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;mse&#39;</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">n_epoch</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">)):</span>
-    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">train_generator</span><span class="p">,</span><span class="n">total</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">train_generator</span><span class="p">),</span><span class="n">leave</span><span class="o">=</span><span class="nb">bool</span><span class="p">(</span><span class="n">n_epoch</span><span class="o">==</span><span class="mi">19</span><span class="p">)):</span>
-        <span class="n">keras_model_reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>                 
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "7d5fce55192e41debd97c28fddb5a8ae"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "d62b3c2dabf34f60ab9ada847233f2f0"}
-</script><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2021-09-12 04:49:18.475587: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:116] None of the MLIR optimization passes are enabled (registered 2)
-2021-09-12 04:49:18.475956: I tensorflow/core/platform/profile_utils/cpu_utils.cc:112] CPU Frequency: 2095225000 Hz
-</pre></div>
-</div>
-<script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "8c1df3bd545549caa351c8bba781a6f0"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "ecf5802761dd4c2fb41b34e091c8f305"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "d69eb32b689148f6be9b5ffdf350cb2e"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "28e1484ed0e140d3a3e756c3adba58d4"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "35e0e78f332045ab8dd546ec1dac17b6"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "874d10a62e2245ada9516478e506e0ab"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "c145b4e4b9bd4515b600a8cf132ba350"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "e5c393291e414ec399c966bac1a05867"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "1c8d7458c6514a4f8feb49bac79da9ac"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "beaab7160ed949c4ae9dcd3d354badd3"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "9de3d04bee5a4e51b8604d192f8e8741"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "fcf6dd7ebaa4401b852e10b83ccd9c5e"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "ef107913a9c74c21aa60a52e7cc3e13f"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "2f1c8fca0e544fc4b316eb495926596e"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "25468d9b1ccc4f029d6fe9306bc59c4f"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "690974446de240a2aa14a0a14eb6a0a6"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "fe82dc8fb3ca459b8b6568a177e2cd1a"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "86c6c7d10ccc421a80159a4a079f8de7"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "0647030f6c1c484b84f384e847a7e2be"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "2c9933cad46a42ef945c6999a31ede76"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "a1c781eecd3943668250e00e690b62a1"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "8dc63d0c30c84c8d8b45845bf6d87974"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "4ea4ac2bbcb6437b83029ec7b6d43081"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "e25750b555254efbad08821ef433afbb"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "4375713cba534b0f82337748762f72d3"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "4777891cdac34a30a6e2fe155287051a"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "4334f221736346d696026ea7391db8f6"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "3c086960a29a4c4a8c700a8521fab920"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "370ef031426240dda562c39e6227c6ba"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "f9dfff621fd941ddba9efe7c43f00134"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "f4bd0dbb7bdc4ea392bf2b0cda388974"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "74eb752d2e844b54a1a5174905d2b7de"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "5cba251178344b058f23d520efe1d2c1"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "d19c94a449ba4cbdb12debe92b3c37db"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "55bf6c5afc2f489e84fef21ab7d2e180"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "205fe07471c348358119a6ebca3d9ba1"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "b34a9bdf9f8944e1aa94b98f56d3e546"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "5a39be922d2d43c8bd45b3b6458d8ddf"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "a5882bd5cfba4baea79453ce572204ba"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "7b7e670feab742ddb5b88362a6b27504"}
-</script></div>
-</div>
-</div>
-<div class="section" id="main-training-loop">
-<h2>Main training loop<a class="headerlink" href="#main-training-loop" title="Permalink to this headline">¶</a></h2>
-<p>During the main training loop, we do two things:</p>
-<ol class="simple">
-<li><p>Train the discriminator model with the combined loss function $<span class="math notranslate nohighlight">\(L = L_\mathrm{class} - \lambda L_\mathrm{reg}\)</span>$</p></li>
-<li><p>Train the regression model to learn the mass from with the standard MSE loss function $<span class="math notranslate nohighlight">\(L_\mathrm{reg}\)</span>$</p></li>
-</ol>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># alternate training discriminator and regressor                    </span>
-<span class="k">for</span> <span class="n">n_epoch</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">40</span><span class="p">)):</span>
-    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">train_generator</span><span class="p">,</span><span class="n">total</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">train_generator</span><span class="p">),</span><span class="n">leave</span><span class="o">=</span><span class="nb">bool</span><span class="p">(</span><span class="n">n_epoch</span><span class="o">==</span><span class="mi">39</span><span class="p">)):</span>
-        <span class="c1"># train discriminator</span>
-        <span class="n">keras_model_reg</span><span class="o">.</span><span class="n">trainable</span> <span class="o">=</span> <span class="kc">False</span>
-        <span class="n">keras_model_disc</span><span class="o">.</span><span class="n">trainable</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="n">keras_model_adv</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="n">sgd_opt</span><span class="p">,</span> 
-                        <span class="n">loss</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span> <span class="s1">&#39;mse&#39;</span><span class="p">],</span>
-                        <span class="n">loss_weights</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="n">lam</span><span class="p">])</span>    
-        <span class="n">keras_model_adv</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-
-        <span class="c1"># train regressor</span>
-        <span class="n">keras_model_reg</span><span class="o">.</span><span class="n">trainable</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="n">keras_model_disc</span><span class="o">.</span><span class="n">trainable</span> <span class="o">=</span> <span class="kc">False</span>
-        <span class="n">keras_model_reg</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="n">sgd_opt</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;mse&#39;</span><span class="p">)</span>
-        <span class="n">keras_model_reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span><span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">keras_model_adv</span><span class="o">.</span><span class="n">save_weights</span><span class="p">(</span><span class="s1">&#39;keras_model_adv_best.h5&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "27e930b535ec452bbbdf6ea6aad1783b"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "db086090fe8e4c078dcc3168cc31b2c2"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "8319e43711e74d3d976ece431e33d4af"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "4d3ec26957e6425a9cacc76be2bd87ac"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "36f25cdc152346a0944806f08bc47c03"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "80b7585e9fd64a3fac6a5919274fa26b"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "0527048643924879bbb9a77455db3c55"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "0979a4fea20f41ba956f6ae697bcac0b"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "9f5ee67f512b40aab36926f222a4e68d"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "fb8d010df76d49e2920f9ddb609c2259"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "5eef89bd21d0400a8e909c0c605374c7"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "a3f1137171ce487bb984aeaa1e952fe8"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "33f063673230484d8e1c01bffdfcca8b"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "83fdceb508e64d30ab9ec486ce7c467d"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "21c4e38982084a739c611de6220637ef"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "303141f592384016a297d85c15367349"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "55b84f39073f4dffb6cdaf29a0497566"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "3d8a05f994b24d39a3c82edb47a9ff9c"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "b62acb91b2df4e62adfa67f3c54cad47"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "42069dfb106c4f54a06769d38b511bbb"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "3348169b32a64664b4e86b8940d52cac"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "15d8f3a8b0d6490288a86015d9990f99"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "9d98c3a0581445e8bc18ac3576a88a32"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "d67740fb902941e8a2f3b77a7eb082cb"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "685208d532284aa1890e39be44c59fb8"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "b5bda64361c74ab590df4db2b8792e3e"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "b20dad682c7946fe9f58d0fe3e23977a"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "6bb7b4cc9ec04067aaa3c93223159054"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "10d4db31115344c8b8c5758fe5249608"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "d4ce60a151e14975b556ddc1a0076767"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "01ae2edfd4fe43baba02ab3da4837059"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "a9dfe1971b6943588d42ef0db7b239a3"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "961e98b171b040f2ab328c2d22a9110b"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "2c2c7bcd81e44106a7c5eb5a900b4697"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "9e8d17cf918f401db967d4c023736d41"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "b8e1946db2584c49be9963a0310b933b"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "29695fd48ea64135b94c66244b01ad84"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "27e6fc46ac2946dd9394f18ea9de34fd"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "ccf0447c089d4e1787ee7e84678c07a0"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "4d645bb46f4d4da39f2f905ca04aa9d2"}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "525f11c4c58c4b5692c0ae7d95cd7c1f"}
-</script></div>
-</div>
-</div>
-<div class="section" id="test">
-<h2>Test<a class="headerlink" href="#test" title="Permalink to this headline">¶</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load testing file</span>
-<span class="n">test_files</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;root://eospublic.cern.ch//eos/opendata/cms/datascience/HiggsToBBNtupleProducerTool/HiggsToBBNTuple_HiggsToBB_QCD_RunII_13TeV_MC/test/ntuple_merged_0.root&#39;</span><span class="p">]</span>
-<span class="n">test_generator</span> <span class="o">=</span> <span class="n">DataGenerator</span><span class="p">(</span><span class="n">test_files</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">spectators</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">8192</span><span class="p">,</span> <span class="n">n_dim</span><span class="o">=</span><span class="n">ntracks</span><span class="p">,</span> 
-                               <span class="n">remove_mass_pt_window</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
-                               <span class="n">remove_unlabeled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                               <span class="n">return_spectators</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                               <span class="n">max_entry</span><span class="o">=</span><span class="mi">200000</span><span class="p">)</span> <span class="c1"># basically, no maximum</span>
-</pre></div>
-</div>
-</div>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">OSError</span><span class="g g-Whitespace">                                   </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_6424</span><span class="o">/</span><span class="mf">2932239055.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># load testing file</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">test_files</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;root://eospublic.cern.ch//eos/opendata/cms/datascience/HiggsToBBNtupleProducerTool/HiggsToBBNTuple_HiggsToBB_QCD_RunII_13TeV_MC/test/ntuple_merged_0.root&#39;</span><span class="p">]</span>
-<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">test_generator</span> <span class="o">=</span> <span class="n">DataGenerator</span><span class="p">(</span><span class="n">test_files</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">spectators</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">8192</span><span class="p">,</span> <span class="n">n_dim</span><span class="o">=</span><span class="n">ntracks</span><span class="p">,</span> 
-<span class="g g-Whitespace">      </span><span class="mi">4</span>                                <span class="n">remove_mass_pt_window</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span>                                <span class="n">remove_unlabeled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_6963</span><span class="o">/</span><span class="mf">1116280325.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> 
+<span class="g g-Whitespace">      </span><span class="mi">6</span> 
+<span class="ne">----&gt; </span><span class="mi">7</span> <span class="n">train_generator</span> <span class="o">=</span> <span class="n">DataGenerator</span><span class="p">(</span><span class="n">train_files</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">spectators</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">n_dim</span><span class="o">=</span><span class="n">ntracks</span><span class="p">,</span> 
+<span class="g g-Whitespace">      </span><span class="mi">8</span>                                 <span class="n">remove_mass_pt_window</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span>                                 <span class="n">remove_unlabeled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">max_entry</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span>
 
 <span class="nn">~/work/capstone-particle-physics-domain/capstone-particle-physics-domain/weeks/DataGenerator.py</span> in <span class="ni">__init__</span><span class="nt">(self, list_files, features, labels, spectators, batch_size, n_dim, remove_mass_pt_window, remove_unlabeled, return_spectators, max_entry, scale_mass_pt)</span>
 <span class="g g-Whitespace">     </span><span class="mi">30</span>         <span class="n">running_total</span> <span class="o">=</span> <span class="mi">0</span>
@@ -874,7 +627,78 @@ None
 <span class="g g-Whitespace">    </span><span class="mi">119</span><span class="sd"> in file {1}&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
 
 <span class="ne">OSError</span>: XRootD error: [ERROR] Operation expired
-<span class="ow">in</span> <span class="n">file</span> <span class="n">root</span><span class="p">:</span><span class="o">//</span><span class="n">eospublic</span><span class="o">.</span><span class="n">cern</span><span class="o">.</span><span class="n">ch</span><span class="o">//</span><span class="n">eos</span><span class="o">/</span><span class="n">opendata</span><span class="o">/</span><span class="n">cms</span><span class="o">/</span><span class="n">datascience</span><span class="o">/</span><span class="n">HiggsToBBNtupleProducerTool</span><span class="o">/</span><span class="n">HiggsToBBNTuple_HiggsToBB_QCD_RunII_13TeV_MC</span><span class="o">/</span><span class="n">test</span><span class="o">/</span><span class="n">ntuple_merged_0</span><span class="o">.</span><span class="n">root</span>
+<span class="ow">in</span> <span class="n">file</span> <span class="n">root</span><span class="p">:</span><span class="o">//</span><span class="n">eospublic</span><span class="o">.</span><span class="n">cern</span><span class="o">.</span><span class="n">ch</span><span class="o">//</span><span class="n">eos</span><span class="o">/</span><span class="n">opendata</span><span class="o">/</span><span class="n">cms</span><span class="o">/</span><span class="n">datascience</span><span class="o">/</span><span class="n">HiggsToBBNtupleProducerTool</span><span class="o">/</span><span class="n">HiggsToBBNTuple_HiggsToBB_QCD_RunII_13TeV_MC</span><span class="o">/</span><span class="n">train</span><span class="o">/</span><span class="n">ntuple_merged_10</span><span class="o">.</span><span class="n">root</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="pretrain-discriminator-and-regressor-models">
+<h2>Pretrain discriminator and regressor models<a class="headerlink" href="#pretrain-discriminator-and-regressor-models" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># pretrain discriminator</span>
+<span class="n">keras_model_disc</span><span class="o">.</span><span class="n">trainable</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">keras_model_disc</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;adam&#39;</span><span class="p">,</span>
+                         <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">n_epoch</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">)):</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">train_generator</span><span class="p">,</span><span class="n">total</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">train_generator</span><span class="p">),</span><span class="n">leave</span><span class="o">=</span><span class="nb">bool</span><span class="p">(</span><span class="n">n_epoch</span><span class="o">==</span><span class="mi">19</span><span class="p">)):</span>
+        <span class="n">keras_model_disc</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        
+        
+<span class="c1"># pretrain regressor</span>
+<span class="n">keras_model_reg</span><span class="o">.</span><span class="n">trainable</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">keras_model_disc</span><span class="o">.</span><span class="n">trainable</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">keras_model_reg</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="n">sgd_opt</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;mse&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">n_epoch</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">)):</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">train_generator</span><span class="p">,</span><span class="n">total</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">train_generator</span><span class="p">),</span><span class="n">leave</span><span class="o">=</span><span class="nb">bool</span><span class="p">(</span><span class="n">n_epoch</span><span class="o">==</span><span class="mi">19</span><span class="p">)):</span>
+        <span class="n">keras_model_reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>                 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="main-training-loop">
+<h2>Main training loop<a class="headerlink" href="#main-training-loop" title="Permalink to this headline">¶</a></h2>
+<p>During the main training loop, we do two things:</p>
+<ol class="simple">
+<li><p>Train the discriminator model with the combined loss function $<span class="math notranslate nohighlight">\(L = L_\mathrm{class} - \lambda L_\mathrm{reg}\)</span>$</p></li>
+<li><p>Train the regression model to learn the mass from with the standard MSE loss function $<span class="math notranslate nohighlight">\(L_\mathrm{reg}\)</span>$</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># alternate training discriminator and regressor                    </span>
+<span class="k">for</span> <span class="n">n_epoch</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">40</span><span class="p">)):</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">train_generator</span><span class="p">,</span><span class="n">total</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">train_generator</span><span class="p">),</span><span class="n">leave</span><span class="o">=</span><span class="nb">bool</span><span class="p">(</span><span class="n">n_epoch</span><span class="o">==</span><span class="mi">39</span><span class="p">)):</span>
+        <span class="c1"># train discriminator</span>
+        <span class="n">keras_model_reg</span><span class="o">.</span><span class="n">trainable</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">keras_model_disc</span><span class="o">.</span><span class="n">trainable</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">keras_model_adv</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="n">sgd_opt</span><span class="p">,</span> 
+                        <span class="n">loss</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span> <span class="s1">&#39;mse&#39;</span><span class="p">],</span>
+                        <span class="n">loss_weights</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="n">lam</span><span class="p">])</span>    
+        <span class="n">keras_model_adv</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="c1"># train regressor</span>
+        <span class="n">keras_model_reg</span><span class="o">.</span><span class="n">trainable</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">keras_model_disc</span><span class="o">.</span><span class="n">trainable</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">keras_model_reg</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="n">sgd_opt</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;mse&#39;</span><span class="p">)</span>
+        <span class="n">keras_model_reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span><span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">keras_model_adv</span><span class="o">.</span><span class="n">save_weights</span><span class="p">(</span><span class="s1">&#39;keras_model_adv_best.h5&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="test">
+<h2>Test<a class="headerlink" href="#test" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load testing file</span>
+<span class="n">test_files</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;root://eospublic.cern.ch//eos/opendata/cms/datascience/HiggsToBBNtupleProducerTool/HiggsToBBNTuple_HiggsToBB_QCD_RunII_13TeV_MC/test/ntuple_merged_0.root&#39;</span><span class="p">]</span>
+<span class="n">test_generator</span> <span class="o">=</span> <span class="n">DataGenerator</span><span class="p">(</span><span class="n">test_files</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">spectators</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">8192</span><span class="p">,</span> <span class="n">n_dim</span><span class="o">=</span><span class="n">ntracks</span><span class="p">,</span> 
+                               <span class="n">remove_mass_pt_window</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+                               <span class="n">remove_unlabeled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                               <span class="n">return_spectators</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                               <span class="n">max_entry</span><span class="o">=</span><span class="mi">200000</span><span class="p">)</span> <span class="c1"># basically, no maximum</span>
 </pre></div>
 </div>
 </div>

@@ -17,30 +17,57 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-# load testing file
-feature_array_test, label_array_test, spec_array_test = utils.get_features_labels('root://eospublic.cern.ch//eos/opendata/cms/datascience/HiggsToBBNtupleProducerTool/HiggsToBBNTuple_HiggsToBB_QCD_RunII_13TeV_MC/test/ntuple_merged_0.root',
-                                                                                  features, spectators, labels,
-                                                                                  remove_mass_pt_window=False)
-                      
-# make image
-X_test = utils.make_image(feature_array_test)
+from GraphDataset import GraphDataset
+if local:
+    file_names = ['/teams/DSC180A_FA20_A00/b06particlephysics/train/ntuple_merged_10.root']
+    file_names_test = ['/teams/DSC180A_FA20_A00/b06particlephysics/test/ntuple_merged_0.root']
+else:
+    file_names = ['root://eospublic.cern.ch//eos/opendata/cms/datascience/HiggsToBBNtupleProducerTool/HiggsToBBNTuple_HiggsToBB_QCD_RunII_13TeV_MC/train/ntuple_merged_10.root']
+    file_names_test = ['root://eospublic.cern.ch//eos/opendata/cms/datascience/HiggsToBBNtupleProducerTool/HiggsToBBNTuple_HiggsToBB_QCD_RunII_13TeV_MC/test/ntuple_merged_0.root']
+
+graph_dataset = GraphDataset('gdata_train', features, labels, spectators, n_events=1000, n_events_merge=1, 
+                             file_names=file_names)
+
+test_dataset = GraphDataset('gdata_test', features, labels, spectators, n_events=2000, n_events_merge=1, 
+                             file_names=file_names_test)
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mOSError[0m                                   Traceback (most recent call last)
-[0;32m/tmp/ipykernel_4715/4121787654.py[0m in [0;36m<module>[0;34m[0m
-[1;32m      1[0m [0;31m# load testing file[0m[0;34m[0m[0;34m[0m[0m
-[0;32m----> 2[0;31m feature_array_test, label_array_test, spec_array_test = utils.get_features_labels('root://eospublic.cern.ch//eos/opendata/cms/datascience/HiggsToBBNtupleProducerTool/HiggsToBBNTuple_HiggsToBB_QCD_RunII_13TeV_MC/test/ntuple_merged_0.root',
-[0m[1;32m      3[0m                                                                                   [0mfeatures[0m[0;34m,[0m [0mspectators[0m[0;34m,[0m [0mlabels[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
-[1;32m      4[0m                                                                                   remove_mass_pt_window=False)
-[1;32m      5[0m [0;34m[0m[0m
+[0;32m/tmp/ipykernel_7109/2481067679.py[0m in [0;36m<module>[0;34m[0m
+[1;32m      7[0m     [0mfile_names_test[0m [0;34m=[0m [0;34m[[0m[0;34m'root://eospublic.cern.ch//eos/opendata/cms/datascience/HiggsToBBNtupleProducerTool/HiggsToBBNTuple_HiggsToBB_QCD_RunII_13TeV_MC/test/ntuple_merged_0.root'[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
+[1;32m      8[0m [0;34m[0m[0m
+[0;32m----> 9[0;31m graph_dataset = GraphDataset('gdata_train', features, labels, spectators, n_events=1000, n_events_merge=1, 
+[0m[1;32m     10[0m                              file_names=file_names)
+[1;32m     11[0m [0;34m[0m[0m
 
-[0;32m~/work/capstone-particle-physics-domain/capstone-particle-physics-domain/weeks/utils.py[0m in [0;36mget_features_labels[0;34m(file_name, features, spectators, labels, remove_mass_pt_window, entry_stop)[0m
-[1;32m     15[0m [0;32mdef[0m [0mget_features_labels[0m[0;34m([0m[0mfile_name[0m[0;34m,[0m [0mfeatures[0m[0;34m,[0m [0mspectators[0m[0;34m,[0m [0mlabels[0m[0;34m,[0m [0mremove_mass_pt_window[0m[0;34m=[0m[0;32mTrue[0m[0;34m,[0m [0mentry_stop[0m[0;34m=[0m[0;32mNone[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[1;32m     16[0m     [0;31m# load file[0m[0;34m[0m[0;34m[0m[0m
-[0;32m---> 17[0;31m     [0mroot_file[0m [0;34m=[0m [0muproot[0m[0;34m.[0m[0mopen[0m[0;34m([0m[0mfile_name[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m     18[0m     [0mtree[0m [0;34m=[0m [0mroot_file[0m[0;34m[[0m[0;34m'deepntuplizer/tree'[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
-[1;32m     19[0m     feature_array = tree.arrays(features,
+[0;32m~/work/capstone-particle-physics-domain/capstone-particle-physics-domain/weeks/GraphDataset.py[0m in [0;36m__init__[0;34m(self, root, features, labels, spectators, transform, pre_transform, n_events, n_events_merge, file_names, remove_unlabeled)[0m
+[1;32m     32[0m         [0mself[0m[0;34m.[0m[0mfile_names[0m [0;34m=[0m [0mfile_names[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     33[0m         [0mself[0m[0;34m.[0m[0mremove_unlabeled[0m [0;34m=[0m [0mremove_unlabeled[0m[0;34m[0m[0;34m[0m[0m
+[0;32m---> 34[0;31m         [0msuper[0m[0;34m([0m[0mGraphDataset[0m[0;34m,[0m [0mself[0m[0;34m)[0m[0;34m.[0m[0m__init__[0m[0;34m([0m[0mroot[0m[0;34m,[0m [0mtransform[0m[0;34m,[0m [0mpre_transform[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m     35[0m [0;34m[0m[0m
+[1;32m     36[0m     [0;34m@[0m[0mproperty[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m/usr/share/miniconda/envs/ml-latest/lib/python3.9/site-packages/torch_geometric/data/dataset.py[0m in [0;36m__init__[0;34m(self, root, transform, pre_transform, pre_filter)[0m
+[1;32m     84[0m [0;34m[0m[0m
+[1;32m     85[0m         [0;32mif[0m [0;34m'process'[0m [0;32min[0m [0mself[0m[0;34m.[0m[0m__class__[0m[0;34m.[0m[0m__dict__[0m[0;34m.[0m[0mkeys[0m[0;34m([0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m---> 86[0;31m             [0mself[0m[0;34m.[0m[0m_process[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m     87[0m [0;34m[0m[0m
+[1;32m     88[0m     [0;32mdef[0m [0mindices[0m[0;34m([0m[0mself[0m[0;34m)[0m [0;34m->[0m [0mSequence[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m/usr/share/miniconda/envs/ml-latest/lib/python3.9/site-packages/torch_geometric/data/dataset.py[0m in [0;36m_process[0;34m(self)[0m
+[1;32m    163[0m [0;34m[0m[0m
+[1;32m    164[0m         [0mmakedirs[0m[0;34m([0m[0mself[0m[0;34m.[0m[0mprocessed_dir[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 165[0;31m         [0mself[0m[0;34m.[0m[0mprocess[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    166[0m [0;34m[0m[0m
+[1;32m    167[0m         [0mpath[0m [0;34m=[0m [0mosp[0m[0;34m.[0m[0mjoin[0m[0;34m([0m[0mself[0m[0;34m.[0m[0mprocessed_dir[0m[0;34m,[0m [0;34m'pre_transform.pt'[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/work/capstone-particle-physics-domain/capstone-particle-physics-domain/weeks/GraphDataset.py[0m in [0;36mprocess[0;34m(self)[0m
+[1;32m     69[0m         """
+[1;32m     70[0m         [0;32mfor[0m [0mraw_path[0m [0;32min[0m [0mself[0m[0;34m.[0m[0mraw_file_names[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m---> 71[0;31m             [0mroot_file[0m [0;34m=[0m [0muproot[0m[0;34m.[0m[0mopen[0m[0;34m([0m[0mraw_path[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m     72[0m [0;34m[0m[0m
+[1;32m     73[0m             [0mtree[0m [0;34m=[0m [0mroot_file[0m[0;34m[[0m[0;34m'deepntuplizer/tree'[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
 
 [0;32m/usr/share/miniconda/envs/ml-latest/lib/python3.9/site-packages/uproot/reading.py[0m in [0;36mopen[0;34m(path, object_cache, array_cache, custom_classes, decompression_executor, interpretation_executor, **options)[0m
 [1;32m    147[0m         )
@@ -92,7 +119,7 @@ X_test = utils.make_image(feature_array_test)
 [1;32m    119[0m in file {1}""".format(
 
 [0;31mOSError[0m: XRootD error: [ERROR] Operation expired
-in file root://eospublic.cern.ch//eos/opendata/cms/datascience/HiggsToBBNtupleProducerTool/HiggsToBBNTuple_HiggsToBB_QCD_RunII_13TeV_MC/test/ntuple_merged_0.root
+in file root://eospublic.cern.ch//eos/opendata/cms/datascience/HiggsToBBNtupleProducerTool/HiggsToBBNTuple_HiggsToBB_QCD_RunII_13TeV_MC/train/ntuple_merged_10.root
 OSError: XRootD error: [ERROR] Operation expired
-in file root://eospublic.cern.ch//eos/opendata/cms/datascience/HiggsToBBNtupleProducerTool/HiggsToBBNTuple_HiggsToBB_QCD_RunII_13TeV_MC/test/ntuple_merged_0.root
+in file root://eospublic.cern.ch//eos/opendata/cms/datascience/HiggsToBBNtupleProducerTool/HiggsToBBNTuple_HiggsToBB_QCD_RunII_13TeV_MC/train/ntuple_merged_10.root
 
