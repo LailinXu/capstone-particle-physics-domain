@@ -10,6 +10,7 @@ from pathlib import Path
 import yaml
 from tqdm.notebook import tqdm
 import awkward as ak
+from utils import get_file_handler
 
 
 class GraphDataset(Dataset):
@@ -68,20 +69,23 @@ class GraphDataset(Dataset):
             k (int): Number of process (0,...,max_events // n_proc) to determine where to read file
         """
         for raw_path in self.raw_file_names:
-            root_file = uproot.open(raw_path)
+            with uproot.open(raw_path, **get_file_handler(raw_path)) as root_file:
 
-            tree = root_file['deepntuplizer/tree']
+                tree = root_file['deepntuplizer/tree']
 
-            feature_array = tree.arrays(self.features,
-                                        entry_stop=self.n_events,
-                                        library='ak')
+                feature_array = tree.arrays(self.features,
+                                            entry_stop=self.n_events,
+                                            library='ak')
 
-            label_array_all = tree.arrays(self.labels,
-                                          entry_stop=self.n_events,
-                                          library='np')
+                label_array_all = tree.arrays(self.labels,
+                                              entry_stop=self.n_events,
+                                              library='np')
+
+                spec_array = tree.arrays(self.spectators,
+                                         entry_stop=self.n_events,
+                                         library='np')
 
             n_samples = label_array_all[self.labels[0]].shape[0]
-
             y = np.zeros((n_samples, 2))
             y[:, 0] = label_array_all['sample_isQCD'] * (label_array_all['label_QCD_b'] +
                                                          label_array_all['label_QCD_bb'] +
@@ -90,9 +94,6 @@ class GraphDataset(Dataset):
                                                          label_array_all['label_QCD_others'])
             y[:, 1] = label_array_all['label_H_bb']
 
-            spec_array = tree.arrays(self.spectators,
-                                     entry_stop=self.n_events,
-                                     library='np')
             z = np.stack([spec_array[spec] for spec in self.spectators], axis=1)
 
             for i in tqdm(range(n_samples)):

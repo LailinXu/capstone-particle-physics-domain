@@ -2,7 +2,7 @@ import tensorflow
 import tensorflow.keras as keras
 import numpy as np
 import uproot
-from utils import to_np_array
+from utils import to_np_array, get_file_handler
 
 
 class DataGenerator(tensorflow.keras.utils.Sequence):
@@ -29,15 +29,14 @@ class DataGenerator(tensorflow.keras.utils.Sequence):
         self.open_files = [None]*len(self.list_files)
         running_total = 0
         for i, file_name in enumerate(self.list_files):
-            root_file = uproot.open(file_name)
-            self.open_files.append(root_file)
-            tree = root_file['deepntuplizer/tree']
-            tree_length = min(tree.num_entries, max_entry)
+            with uproot.open(file_name, **get_file_handler(file_name)) as root_file:
+                self.open_files.append(root_file)
+                tree = root_file['deepntuplizer/tree']
+                tree_length = min(tree.num_entries, max_entry)
             self.global_IDs.append(np.arange(running_total, running_total+tree_length))
             self.local_IDs.append(np.arange(0, tree_length))
             self.file_mapping.append(np.repeat([i], tree_length))
             running_total += tree_length
-            root_file.close()
         self.global_IDs = np.concatenate(self.global_IDs)
         self.local_IDs = np.concatenate(self.local_IDs)
         self.file_mapping = np.concatenate(self.file_mapping)
@@ -62,7 +61,7 @@ class DataGenerator(tensorflow.keras.utils.Sequence):
         for ifile, file_name in enumerate(self.list_files):
             if ifile in unique_files:
                 if self.open_files[ifile] is None:
-                    self.open_files[ifile] = uproot.open(file_name)
+                    self.open_files[ifile] = uproot.open(file_name, **get_file_handler(file_name))
             else:
                 if self.open_files[ifile] is not None:
                     self.open_files[ifile].close()
@@ -110,7 +109,7 @@ class DataGenerator(tensorflow.keras.utils.Sequence):
 
         # Double check that file is open
         if self.open_files[ifile] is None:
-            root_file = uproot.open(self.list_file[ifile])
+            root_file = uproot.open(self.list_file[ifile], **get_file_handler(self.list_file[ifile]))
         else:
             root_file = self.open_files[ifile]
 

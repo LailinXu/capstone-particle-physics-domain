@@ -2,6 +2,18 @@ import uproot
 import numpy as np
 import awkward as ak
 
+# fix for XRootD/uproot4 issue: https://github.com/scikit-hep/uproot4/discussions/355
+
+
+def get_file_handler(file_name):
+    xrootd_src = file_name.startswith("root://")
+    if not xrootd_src:
+        return {"file_handler": uproot.MultithreadedFileSource}  # otherwise the memory maps overload available Vmem
+    elif xrootd_src:
+        # uncomment below for MultithreadedXRootDSource
+        return {"xrootd_handler": uproot.source.xrootd.MultithreadedXRootDSource}
+    return {}
+
 
 def find_nearest(array, value):
     idx = (np.abs(array-value)).argmin()
@@ -14,7 +26,7 @@ def to_np_array(ak_array, max_n=100, pad=0):
 
 def get_features_labels(file_name, features, spectators, labels, remove_mass_pt_window=True, entry_stop=None):
     # load file
-    root_file = uproot.open(file_name)
+    root_file = uproot.open(file_name, **get_file_handler(file_name))
     tree = root_file['deepntuplizer/tree']
     feature_array = tree.arrays(features,
                                 entry_stop=entry_stop,
