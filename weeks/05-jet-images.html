@@ -42,6 +42,8 @@
     <script src="../_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
@@ -479,7 +481,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2021-09-13 00:28:49.192788: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE4.1 SSE4.2 AVX AVX2 FMA
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2021-09-13 04:28:14.785721: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE4.1 SSE4.2 AVX AVX2 AVX512F FMA
 To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
 </pre></div>
 </div>
@@ -552,23 +554,23 @@ None
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2021-09-13 00:28:59.661824: W tensorflow/core/framework/cpu_allocator_impl.cc:80] Allocation of 1505280000 exceeds 10% of free system memory.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2021-09-13 04:28:25.072852: W tensorflow/core/framework/cpu_allocator_impl.cc:80] Allocation of 1505280000 exceeds 10% of free system memory.
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2021-09-13 00:29:03.078582: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:116] None of the MLIR optimization passes are enabled (registered 2)
-2021-09-13 00:29:03.095022: I tensorflow/core/platform/profile_utils/cpu_utils.cc:112] CPU Frequency: 2397220000 Hz
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2021-09-13 04:28:29.064363: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:116] None of the MLIR optimization passes are enabled (registered 2)
+2021-09-13 04:28:29.083822: I tensorflow/core/platform/profile_utils/cpu_utils.cc:112] CPU Frequency: 2095225000 Hz
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2021-09-13 00:29:05.524680: W tensorflow/core/framework/cpu_allocator_impl.cc:80] Allocation of 411041792 exceeds 10% of free system memory.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2021-09-13 04:28:32.096830: W tensorflow/core/framework/cpu_allocator_impl.cc:80] Allocation of 411041792 exceeds 10% of free system memory.
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2021-09-13 00:29:07.590859: W tensorflow/core/framework/cpu_allocator_impl.cc:80] Allocation of 411041792 exceeds 10% of free system memory.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2021-09-13 04:28:33.929118: W tensorflow/core/framework/cpu_allocator_impl.cc:80] Allocation of 411041792 exceeds 10% of free system memory.
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2021-09-13 00:29:09.579403: W tensorflow/core/framework/cpu_allocator_impl.cc:80] Allocation of 411041792 exceeds 10% of free system memory.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2021-09-13 04:28:35.659709: W tensorflow/core/framework/cpu_allocator_impl.cc:80] Allocation of 411041792 exceeds 10% of free system memory.
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2021-09-13 00:29:11.621109: W tensorflow/core/framework/cpu_allocator_impl.cc:80] Allocation of 411041792 exceeds 10% of free system memory.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2021-09-13 04:28:37.359858: W tensorflow/core/framework/cpu_allocator_impl.cc:80] Allocation of 411041792 exceeds 10% of free system memory.
 </pre></div>
 </div>
 </div>
@@ -602,72 +604,20 @@ None
 </div>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">OSError</span><span class="g g-Whitespace">                                   </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_4715</span><span class="o">/</span><span class="mf">4121787654.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># load testing file</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">feature_array_test</span><span class="p">,</span> <span class="n">label_array_test</span><span class="p">,</span> <span class="n">spec_array_test</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">get_features_labels</span><span class="p">(</span><span class="s1">&#39;root://eospublic.cern.ch//eos/opendata/cms/datascience/HiggsToBBNtupleProducerTool/HiggsToBBNTuple_HiggsToBB_QCD_RunII_13TeV_MC/test/ntuple_merged_0.root&#39;</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span>                                                                                   <span class="n">features</span><span class="p">,</span> <span class="n">spectators</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span>                                                                                   <span class="n">remove_mass_pt_window</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="ne">MemoryError</span><span class="g g-Whitespace">                               </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_5392</span><span class="o">/</span><span class="mf">4121787654.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="g g-Whitespace">      </span><span class="mi">5</span> 
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="c1"># make image</span>
+<span class="ne">----&gt; </span><span class="mi">7</span> <span class="n">X_test</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">make_image</span><span class="p">(</span><span class="n">feature_array_test</span><span class="p">)</span>
 
-<span class="nn">~/work/capstone-particle-physics-domain/capstone-particle-physics-domain/weeks/utils.py</span> in <span class="ni">get_features_labels</span><span class="nt">(file_name, features, spectators, labels, remove_mass_pt_window, entry_stop)</span>
-<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="k">def</span> <span class="nf">get_features_labels</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">spectators</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">remove_mass_pt_window</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">entry_stop</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="g g-Whitespace">     </span><span class="mi">16</span>     <span class="c1"># load file</span>
-<span class="ne">---&gt; </span><span class="mi">17</span>     <span class="n">root_file</span> <span class="o">=</span> <span class="n">uproot</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">18</span>     <span class="n">tree</span> <span class="o">=</span> <span class="n">root_file</span><span class="p">[</span><span class="s1">&#39;deepntuplizer/tree&#39;</span><span class="p">]</span>
-<span class="g g-Whitespace">     </span><span class="mi">19</span>     <span class="n">feature_array</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">arrays</span><span class="p">(</span><span class="n">features</span><span class="p">,</span>
+<span class="nn">~/work/capstone-particle-physics-domain/capstone-particle-physics-domain/weeks/utils.py</span> in <span class="ni">make_image</span><span class="nt">(feature_array, n_pixels, img_ranges)</span>
+<span class="g g-Whitespace">     </span><span class="mi">70</span>     <span class="n">x</span> <span class="o">=</span> <span class="n">feature_array</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>  <span class="c1"># etarel</span>
+<span class="g g-Whitespace">     </span><span class="mi">71</span>     <span class="n">y</span> <span class="o">=</span> <span class="n">feature_array</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span>  <span class="c1"># phirel</span>
+<span class="ne">---&gt; </span><span class="mi">72</span>     <span class="n">img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">wgt</span><span class="p">),</span> <span class="n">n_pixels</span><span class="p">,</span> <span class="n">n_pixels</span><span class="p">))</span>
+<span class="g g-Whitespace">     </span><span class="mi">73</span>     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">wgt</span><span class="p">)):</span>
+<span class="g g-Whitespace">     </span><span class="mi">74</span>         <span class="n">hist2d</span><span class="p">,</span> <span class="n">xedges</span><span class="p">,</span> <span class="n">yedges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram2d</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
 
-<span class="nn">/usr/share/miniconda/envs/ml-latest/lib/python3.9/site-packages/uproot/reading.py</span> in <span class="ni">open</span><span class="nt">(path, object_cache, array_cache, custom_classes, decompression_executor, interpretation_executor, **options)</span>
-<span class="g g-Whitespace">    </span><span class="mi">147</span>         <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">148</span> 
-<span class="ne">--&gt; </span><span class="mi">149</span>     <span class="n">file</span> <span class="o">=</span> <span class="n">ReadOnlyFile</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">150</span>         <span class="n">file_path</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">151</span>         <span class="n">object_cache</span><span class="o">=</span><span class="n">object_cache</span><span class="p">,</span>
-
-<span class="nn">/usr/share/miniconda/envs/ml-latest/lib/python3.9/site-packages/uproot/reading.py</span> in <span class="ni">__init__</span><span class="nt">(self, file_path, object_cache, array_cache, custom_classes, decompression_executor, interpretation_executor, **options)</span>
-<span class="g g-Whitespace">    </span><span class="mi">587</span>             <span class="n">file_path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_options</span>
-<span class="g g-Whitespace">    </span><span class="mi">588</span>         <span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">589</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_source</span> <span class="o">=</span> <span class="n">Source</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">590</span>             <span class="n">file_path</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_options</span>  <span class="c1"># NOTE: a comma after **options breaks Python 2</span>
-<span class="g g-Whitespace">    </span><span class="mi">591</span>         <span class="p">)</span>
-
-<span class="nn">/usr/share/miniconda/envs/ml-latest/lib/python3.9/site-packages/uproot/source/xrootd.py</span> in <span class="ni">__init__</span><span class="nt">(self, file_path, **options)</span>
-<span class="g g-Whitespace">    </span><span class="mi">264</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_file_path</span> <span class="o">=</span> <span class="n">file_path</span>
-<span class="g g-Whitespace">    </span><span class="mi">265</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_num_bytes</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="ne">--&gt; </span><span class="mi">266</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_open</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">267</span> 
-<span class="g g-Whitespace">    </span><span class="mi">268</span>     <span class="k">def</span> <span class="nf">_open</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-
-<span class="nn">/usr/share/miniconda/envs/ml-latest/lib/python3.9/site-packages/uproot/source/xrootd.py</span> in <span class="ni">_open</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">267</span> 
-<span class="g g-Whitespace">    </span><span class="mi">268</span>     <span class="k">def</span> <span class="nf">_open</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="ne">--&gt; </span><span class="mi">269</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_resource</span> <span class="o">=</span> <span class="n">XRootDResource</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_file_path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_timeout</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">270</span> 
-<span class="g g-Whitespace">    </span><span class="mi">271</span>         <span class="c1"># this ThreadPool does not need a resource, it&#39;s only used to submit</span>
-
-<span class="nn">/usr/share/miniconda/envs/ml-latest/lib/python3.9/site-packages/uproot/source/xrootd.py</span> in <span class="ni">__init__</span><span class="nt">(self, file_path, timeout)</span>
-<span class="g g-Whitespace">     </span><span class="mi">80</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_file_path</span> <span class="o">=</span> <span class="n">file_path</span>
-<span class="g g-Whitespace">     </span><span class="mi">81</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_timeout</span> <span class="o">=</span> <span class="n">timeout</span>
-<span class="ne">---&gt; </span><span class="mi">82</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_open</span><span class="p">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">83</span> 
-<span class="g g-Whitespace">     </span><span class="mi">84</span>     <span class="k">def</span> <span class="nf">_open</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-
-<span class="nn">/usr/share/miniconda/envs/ml-latest/lib/python3.9/site-packages/uproot/source/xrootd.py</span> in <span class="ni">_open</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">     </span><span class="mi">89</span>         <span class="n">status</span><span class="p">,</span> <span class="n">dummy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_file</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_file_path</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_xrd_timeout</span><span class="p">())</span>
-<span class="g g-Whitespace">     </span><span class="mi">90</span>         <span class="k">if</span> <span class="n">status</span><span class="o">.</span><span class="n">error</span><span class="p">:</span>
-<span class="ne">---&gt; </span><span class="mi">91</span>             <span class="bp">self</span><span class="o">.</span><span class="n">_xrd_error</span><span class="p">(</span><span class="n">status</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">92</span> 
-<span class="g g-Whitespace">     </span><span class="mi">93</span>     <span class="k">def</span> <span class="nf">__getstate__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-
-<span class="nn">/usr/share/miniconda/envs/ml-latest/lib/python3.9/site-packages/uproot/source/xrootd.py</span> in <span class="ni">_xrd_error</span><span class="nt">(self, status)</span>
-<span class="g g-Whitespace">    </span><span class="mi">115</span> 
-<span class="g g-Whitespace">    </span><span class="mi">116</span>         <span class="k">else</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">117</span>             <span class="k">raise</span> <span class="ne">OSError</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">118</span>                 <span class="sd">&quot;&quot;&quot;XRootD error: {0}</span>
-<span class="g g-Whitespace">    </span><span class="mi">119</span><span class="sd"> in file {1}&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-
-<span class="ne">OSError</span>: XRootD error: [ERROR] Operation expired
-<span class="ow">in</span> <span class="n">file</span> <span class="n">root</span><span class="p">:</span><span class="o">//</span><span class="n">eospublic</span><span class="o">.</span><span class="n">cern</span><span class="o">.</span><span class="n">ch</span><span class="o">//</span><span class="n">eos</span><span class="o">/</span><span class="n">opendata</span><span class="o">/</span><span class="n">cms</span><span class="o">/</span><span class="n">datascience</span><span class="o">/</span><span class="n">HiggsToBBNtupleProducerTool</span><span class="o">/</span><span class="n">HiggsToBBNTuple_HiggsToBB_QCD_RunII_13TeV_MC</span><span class="o">/</span><span class="n">test</span><span class="o">/</span><span class="n">ntuple_merged_0</span><span class="o">.</span><span class="n">root</span>
+<span class="ne">MemoryError</span>: Unable to allocate 70.3 GiB for an array with shape (188007, 224, 224) and data type float64
 </pre></div>
 </div>
 </div>

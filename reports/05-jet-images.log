@@ -27,72 +27,19 @@ X_test = utils.make_image(feature_array_test)
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mOSError[0m                                   Traceback (most recent call last)
-[0;32m/tmp/ipykernel_4715/4121787654.py[0m in [0;36m<module>[0;34m[0m
-[1;32m      1[0m [0;31m# load testing file[0m[0;34m[0m[0;34m[0m[0m
-[0;32m----> 2[0;31m feature_array_test, label_array_test, spec_array_test = utils.get_features_labels('root://eospublic.cern.ch//eos/opendata/cms/datascience/HiggsToBBNtupleProducerTool/HiggsToBBNTuple_HiggsToBB_QCD_RunII_13TeV_MC/test/ntuple_merged_0.root',
-[0m[1;32m      3[0m                                                                                   [0mfeatures[0m[0;34m,[0m [0mspectators[0m[0;34m,[0m [0mlabels[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
-[1;32m      4[0m                                                                                   remove_mass_pt_window=False)
+[0;31mMemoryError[0m                               Traceback (most recent call last)
+[0;32m/tmp/ipykernel_5392/4121787654.py[0m in [0;36m<module>[0;34m[0m
 [1;32m      5[0m [0;34m[0m[0m
+[1;32m      6[0m [0;31m# make image[0m[0;34m[0m[0;34m[0m[0m
+[0;32m----> 7[0;31m [0mX_test[0m [0;34m=[0m [0mutils[0m[0;34m.[0m[0mmake_image[0m[0;34m([0m[0mfeature_array_test[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m
+[0;32m~/work/capstone-particle-physics-domain/capstone-particle-physics-domain/weeks/utils.py[0m in [0;36mmake_image[0;34m(feature_array, n_pixels, img_ranges)[0m
+[1;32m     70[0m     [0mx[0m [0;34m=[0m [0mfeature_array[0m[0;34m[[0m[0;34m:[0m[0;34m,[0m [0;36m1[0m[0;34m][0m  [0;31m# etarel[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     71[0m     [0my[0m [0;34m=[0m [0mfeature_array[0m[0;34m[[0m[0;34m:[0m[0;34m,[0m [0;36m2[0m[0;34m][0m  [0;31m# phirel[0m[0;34m[0m[0;34m[0m[0m
+[0;32m---> 72[0;31m     [0mimg[0m [0;34m=[0m [0mnp[0m[0;34m.[0m[0mzeros[0m[0;34m([0m[0mshape[0m[0;34m=[0m[0;34m([0m[0mlen[0m[0;34m([0m[0mwgt[0m[0;34m)[0m[0;34m,[0m [0mn_pixels[0m[0;34m,[0m [0mn_pixels[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m     73[0m     [0;32mfor[0m [0mi[0m [0;32min[0m [0mrange[0m[0;34m([0m[0mlen[0m[0;34m([0m[0mwgt[0m[0;34m)[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     74[0m         hist2d, xedges, yedges = np.histogram2d(x[i], y[i],
 
-[0;32m~/work/capstone-particle-physics-domain/capstone-particle-physics-domain/weeks/utils.py[0m in [0;36mget_features_labels[0;34m(file_name, features, spectators, labels, remove_mass_pt_window, entry_stop)[0m
-[1;32m     15[0m [0;32mdef[0m [0mget_features_labels[0m[0;34m([0m[0mfile_name[0m[0;34m,[0m [0mfeatures[0m[0;34m,[0m [0mspectators[0m[0;34m,[0m [0mlabels[0m[0;34m,[0m [0mremove_mass_pt_window[0m[0;34m=[0m[0;32mTrue[0m[0;34m,[0m [0mentry_stop[0m[0;34m=[0m[0;32mNone[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[1;32m     16[0m     [0;31m# load file[0m[0;34m[0m[0;34m[0m[0m
-[0;32m---> 17[0;31m     [0mroot_file[0m [0;34m=[0m [0muproot[0m[0;34m.[0m[0mopen[0m[0;34m([0m[0mfile_name[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m     18[0m     [0mtree[0m [0;34m=[0m [0mroot_file[0m[0;34m[[0m[0;34m'deepntuplizer/tree'[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
-[1;32m     19[0m     feature_array = tree.arrays(features,
-
-[0;32m/usr/share/miniconda/envs/ml-latest/lib/python3.9/site-packages/uproot/reading.py[0m in [0;36mopen[0;34m(path, object_cache, array_cache, custom_classes, decompression_executor, interpretation_executor, **options)[0m
-[1;32m    147[0m         )
-[1;32m    148[0m [0;34m[0m[0m
-[0;32m--> 149[0;31m     file = ReadOnlyFile(
-[0m[1;32m    150[0m         [0mfile_path[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
-[1;32m    151[0m         [0mobject_cache[0m[0;34m=[0m[0mobject_cache[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
-
-[0;32m/usr/share/miniconda/envs/ml-latest/lib/python3.9/site-packages/uproot/reading.py[0m in [0;36m__init__[0;34m(self, file_path, object_cache, array_cache, custom_classes, decompression_executor, interpretation_executor, **options)[0m
-[1;32m    587[0m             [0mfile_path[0m[0;34m,[0m [0mself[0m[0;34m.[0m[0m_options[0m[0;34m[0m[0;34m[0m[0m
-[1;32m    588[0m         )
-[0;32m--> 589[0;31m         self._source = Source(
-[0m[1;32m    590[0m             [0mfile_path[0m[0;34m,[0m [0;34m**[0m[0mself[0m[0;34m.[0m[0m_options[0m  [0;31m# NOTE: a comma after **options breaks Python 2[0m[0;34m[0m[0;34m[0m[0m
-[1;32m    591[0m         )
-
-[0;32m/usr/share/miniconda/envs/ml-latest/lib/python3.9/site-packages/uproot/source/xrootd.py[0m in [0;36m__init__[0;34m(self, file_path, **options)[0m
-[1;32m    264[0m         [0mself[0m[0;34m.[0m[0m_file_path[0m [0;34m=[0m [0mfile_path[0m[0;34m[0m[0;34m[0m[0m
-[1;32m    265[0m         [0mself[0m[0;34m.[0m[0m_num_bytes[0m [0;34m=[0m [0;32mNone[0m[0;34m[0m[0;34m[0m[0m
-[0;32m--> 266[0;31m         [0mself[0m[0;34m.[0m[0m_open[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m    267[0m [0;34m[0m[0m
-[1;32m    268[0m     [0;32mdef[0m [0m_open[0m[0;34m([0m[0mself[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-
-[0;32m/usr/share/miniconda/envs/ml-latest/lib/python3.9/site-packages/uproot/source/xrootd.py[0m in [0;36m_open[0;34m(self)[0m
-[1;32m    267[0m [0;34m[0m[0m
-[1;32m    268[0m     [0;32mdef[0m [0m_open[0m[0;34m([0m[0mself[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[0;32m--> 269[0;31m         [0mself[0m[0;34m.[0m[0m_resource[0m [0;34m=[0m [0mXRootDResource[0m[0;34m([0m[0mself[0m[0;34m.[0m[0m_file_path[0m[0;34m,[0m [0mself[0m[0;34m.[0m[0m_timeout[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m    270[0m [0;34m[0m[0m
-[1;32m    271[0m         [0;31m# this ThreadPool does not need a resource, it's only used to submit[0m[0;34m[0m[0;34m[0m[0m
-
-[0;32m/usr/share/miniconda/envs/ml-latest/lib/python3.9/site-packages/uproot/source/xrootd.py[0m in [0;36m__init__[0;34m(self, file_path, timeout)[0m
-[1;32m     80[0m         [0mself[0m[0;34m.[0m[0m_file_path[0m [0;34m=[0m [0mfile_path[0m[0;34m[0m[0;34m[0m[0m
-[1;32m     81[0m         [0mself[0m[0;34m.[0m[0m_timeout[0m [0;34m=[0m [0mtimeout[0m[0;34m[0m[0;34m[0m[0m
-[0;32m---> 82[0;31m         [0mself[0m[0;34m.[0m[0m_open[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m     83[0m [0;34m[0m[0m
-[1;32m     84[0m     [0;32mdef[0m [0m_open[0m[0;34m([0m[0mself[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-
-[0;32m/usr/share/miniconda/envs/ml-latest/lib/python3.9/site-packages/uproot/source/xrootd.py[0m in [0;36m_open[0;34m(self)[0m
-[1;32m     89[0m         [0mstatus[0m[0;34m,[0m [0mdummy[0m [0;34m=[0m [0mself[0m[0;34m.[0m[0m_file[0m[0;34m.[0m[0mopen[0m[0;34m([0m[0mself[0m[0;34m.[0m[0m_file_path[0m[0;34m,[0m [0mtimeout[0m[0;34m=[0m[0mself[0m[0;34m.[0m[0m_xrd_timeout[0m[0;34m([0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[1;32m     90[0m         [0;32mif[0m [0mstatus[0m[0;34m.[0m[0merror[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[0;32m---> 91[0;31m             [0mself[0m[0;34m.[0m[0m_xrd_error[0m[0;34m([0m[0mstatus[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m     92[0m [0;34m[0m[0m
-[1;32m     93[0m     [0;32mdef[0m [0m__getstate__[0m[0;34m([0m[0mself[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-
-[0;32m/usr/share/miniconda/envs/ml-latest/lib/python3.9/site-packages/uproot/source/xrootd.py[0m in [0;36m_xrd_error[0;34m(self, status)[0m
-[1;32m    115[0m [0;34m[0m[0m
-[1;32m    116[0m         [0;32melse[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[0;32m--> 117[0;31m             raise OSError(
-[0m[1;32m    118[0m                 """XRootD error: {0}
-[1;32m    119[0m in file {1}""".format(
-
-[0;31mOSError[0m: XRootD error: [ERROR] Operation expired
-in file root://eospublic.cern.ch//eos/opendata/cms/datascience/HiggsToBBNtupleProducerTool/HiggsToBBNTuple_HiggsToBB_QCD_RunII_13TeV_MC/test/ntuple_merged_0.root
-OSError: XRootD error: [ERROR] Operation expired
-in file root://eospublic.cern.ch//eos/opendata/cms/datascience/HiggsToBBNtupleProducerTool/HiggsToBBNTuple_HiggsToBB_QCD_RunII_13TeV_MC/test/ntuple_merged_0.root
+[0;31mMemoryError[0m: Unable to allocate 70.3 GiB for an array with shape (188007, 224, 224) and data type float64
+MemoryError: Unable to allocate 70.3 GiB for an array with shape (188007, 224, 224) and data type float64
 
