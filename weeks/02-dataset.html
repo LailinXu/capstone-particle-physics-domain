@@ -939,6 +939,19 @@ The simplest way to do this is to use zero-padding and truncation to “cap” t
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(20000, 60)
 </pre></div>
 </div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_3727/2162417970.py:3: DeprecationWarning: In version 1.7.0 (target date: 2021-10-01), this will be changed.
+
+To raise these warnings as errors (and get stack traces to find out where they&#39;re called), run
+
+    import warnings
+    warnings.filterwarnings(&quot;error&quot;, module=&quot;awkward.*&quot;)
+
+after the first `import awkward` or use `@pytest.mark.filterwarnings(&quot;error:::awkward.*&quot;)` in pytest.
+
+Issue: ak.fill_none needs an explicit `axis` because the default will change to `axis=-1`.
+  a = ak.fill_none(ak.pad_none(track_features[&#39;track_pt&#39;], max_tracks, clip=True, axis=-1), pad_value).to_numpy()
+</pre></div>
+</div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1.05371094,  0.95654297,  1.45703125, ...,  0.        ,
          0.        ,  0.        ],
        [ 2.78320312,  3.52539062, 49.09375   , ...,  0.        ,
