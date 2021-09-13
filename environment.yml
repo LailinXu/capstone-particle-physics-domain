@@ -1,6 +1,6 @@
 name: ml-latest
 channels:
-    - rusty1s
+    - pyg
     - pytorch
     - conda-forge
 dependencies:
@@ -15,7 +15,7 @@ dependencies:
     - torchvision
     - torchaudio
     - cpuonly
-    - pytorch-geometric
+    - pyg
     - mplhep
     - tqdm
     - autopep8
