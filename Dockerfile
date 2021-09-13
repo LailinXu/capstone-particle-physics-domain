@@ -21,7 +21,7 @@ RUN bash install_xrootd.sh && \
 ENV PATH /opt/xrootd/bin:${PATH}
 ENV LD_LIBRARY_PATH /opt/xrootd/lib
 
-RUN conda install -c rusty1s -c conda-forge uproot xrootd scikit-learn matplotlib tqdm pytorch-geometric
+RUN conda install -c pyg -c conda-forge uproot xrootd scikit-learn matplotlib tqdm pyg autopep8
 
 RUN pip install --no-cache-dir mplhep \
     && pip install --no-cache-dir -U jupyter-book
