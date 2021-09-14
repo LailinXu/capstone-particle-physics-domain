@@ -4,7 +4,7 @@
 
 # Particle Physics and Machine Learning
 
-UCSD Data Science Capstone (<https://dsc-capstone.github.io/>) particle physics domain (DSC 180AB B06).
+UCSD Data Science Capstone (<https://dsc-capstone.github.io/>) particle physics domain (DSC 180AB A11).
 
 Developed by Javier Duarte <https://orcid.org/0000-0002-5076-7096>, Frank Würthwein <https://orcid.org/0000-0001-5912-6124>.
 
@@ -22,7 +22,7 @@ The bulk of the first half of the project will focus on the task of identifying 
 Specifically, reproducing (or surpassing) results in this paper (not necessarily with the same ML technique):
 * [Interaction networks for the identification of boosted \\(H \to b\bar{b}\\)](https://arxiv.org/abs/1909.12285)
 
-This implies reproducing Figure 4, Figure 5, and if time permits Figure 8 in this paper {cite}`Moreno:2019neq`.
+This implies reproducing Figure 4, Figure 5, and if time permits Figure 8 in this paper {cite:p}`Moreno:2019neq`.
 
 The latter-half of Quarter 1 will introduce you to further topics to inform possible avenues for further research.
 
@@ -60,12 +60,11 @@ The weekly tasks are the building blocks for the project proposals/assignments d
 
 ## Discussion
 
-- Wed: 2:00 - 2:50 pm
+- Tues: 4:00 - 4:50 pm, SDSC 230E
 
 ## Office Hours
 
 Farouk Mokhtar 
-- Wed: 10:00 - 11:00 am
-- Fri: 1:00 - 2:00 pm
+- TBD
 - Sign up here: <https://calendly.com/fmokhtar/dsc-180a-office-hour>
 
