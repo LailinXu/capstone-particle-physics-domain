@@ -22,8 +22,8 @@
       
 
     
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -33,21 +33,21 @@
     
   <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
 
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script >
+    <script>
         const thebe_selector = ".thebe"
         const thebe_selector_input = "pre"
         const thebe_selector_output = ".output"
@@ -385,7 +385,7 @@
         
               <div>
                 
-  <div class="section" id="week-7-notebook-optimizing-other-objectives">
+  <div class="tex2jax_ignore mathjax_ignore section" id="week-7-notebook-optimizing-other-objectives">
 <h1>Week 7 Notebook: Optimizing Other Objectives<a class="headerlink" href="#week-7-notebook-optimizing-other-objectives" title="Permalink to this headline">¶</a></h1>
 <p>This week, we will look at optimizing multiple objectives simultaneously. In particular, we will look at pivoting with adversarial neural networks <span id="id1">[<a class="reference internal" href="../zreferences.html#id18">17</a>, <a class="reference internal" href="../zreferences.html#id19">18</a>, <a class="reference internal" href="../zreferences.html#id20">19</a>]</span>.</p>
 <p>We will borrow the implementation from: <a class="reference external" href="https://github.com/glouppe/paper-learning-to-pivot">https://github.com/glouppe/paper-learning-to-pivot</a></p>
@@ -476,7 +476,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2021-10-05 19:52:02.480159: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE4.1 SSE4.2 AVX AVX2 AVX512F FMA
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2021-10-19 21:14:03.972999: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE4.1 SSE4.2 AVX AVX2 FMA
 To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
 </pre></div>
 </div>
@@ -592,93 +592,93 @@ None
 </div>
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "038ada13af4946c2a1581d1f65f0ba74"}
+{"version_major": 2, "version_minor": 0, "model_id": "17ef5b3a14e1454091598b39b556de6b"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "0e7649c8c025404ba92ce23351eb85f7"}
-</script><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2021-10-05 19:52:16.923929: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:116] None of the MLIR optimization passes are enabled (registered 2)
-2021-10-05 19:52:16.924628: I tensorflow/core/platform/profile_utils/cpu_utils.cc:112] CPU Frequency: 2593905000 Hz
+{"version_major": 2, "version_minor": 0, "model_id": "33ae45fa3c60481c82915dfe21dca999"}
+</script><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2021-10-19 21:14:20.032860: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:116] None of the MLIR optimization passes are enabled (registered 2)
+2021-10-19 21:14:20.033983: I tensorflow/core/platform/profile_utils/cpu_utils.cc:112] CPU Frequency: 2294685000 Hz
 </pre></div>
 </div>
 <script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "e1b60c8a13714a60802e99a20c2d9929"}
+{"version_major": 2, "version_minor": 0, "model_id": "e5e89c63077a4760bfa722a38c0f45a4"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "1c1b9053b715475487a6bf68086506c2"}
+{"version_major": 2, "version_minor": 0, "model_id": "4728370ada474a809e99fc86f753d4f6"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "bf9ac3dfb96b473b897ba8d4aa2dce1a"}
+{"version_major": 2, "version_minor": 0, "model_id": "22841c5602804a08870689d1e8db27d7"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "ce4a68180c8940e6975680bfdc207839"}
+{"version_major": 2, "version_minor": 0, "model_id": "688673ee43df403baf088df3d524dd07"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "6e79db271d7f440d99cb341af4ad7e3d"}
+{"version_major": 2, "version_minor": 0, "model_id": "938ed45493384246810901de71b72f24"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "466502d5b7834e3599f09ab6daf18e49"}
+{"version_major": 2, "version_minor": 0, "model_id": "09d95b43f072432d8c08316702634f38"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "5c001a51c23f40c4935a27c05659c714"}
+{"version_major": 2, "version_minor": 0, "model_id": "fc9fa027fa44482cbf1a8277785f2849"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "981bbc86035940078a3f75bbb80ba722"}
+{"version_major": 2, "version_minor": 0, "model_id": "bf4d936d681247569b37b710763de51e"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "b7a629771aee491a9127f81ace6eacfb"}
+{"version_major": 2, "version_minor": 0, "model_id": "10f5929c7c0a4b3191628fa6cff014ad"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "b7aa325d25674d06b2b94491f1e32a8a"}
+{"version_major": 2, "version_minor": 0, "model_id": "b65bfea1fcf149e69d4e204dcea27334"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "8307f228c3ba497e9005adae905b97eb"}
+{"version_major": 2, "version_minor": 0, "model_id": "d42dac2cf5764353adedcbd270ed1cf3"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "2b1d21f03229436eb0642c94eb47ec95"}
+{"version_major": 2, "version_minor": 0, "model_id": "956900044af04ec89bdf26c7c55e245e"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "15706291fb4b4560a5ef73135250a59b"}
+{"version_major": 2, "version_minor": 0, "model_id": "1f73201e2fb6442d9ef7ff83d73dcf29"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "0b47f61fb95b4c5aa4f754a49da4c781"}
+{"version_major": 2, "version_minor": 0, "model_id": "5b67961a40244fde8ac4dbe43c3592f3"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "86ff3944e3434dd4955966b9c9c7dbb7"}
+{"version_major": 2, "version_minor": 0, "model_id": "c762b2a0833a4609878ec919bc38748f"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "8e9ec5f6b39a46e8b44430af2eda318b"}
+{"version_major": 2, "version_minor": 0, "model_id": "c0bac713e98f421ca04ea508256e6166"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "4b51e63ba5da4606b321fe350c7dcec4"}
+{"version_major": 2, "version_minor": 0, "model_id": "fff95490b5b341e3859b16f977db2212"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "8fc9dafb31be4a40804a9ba284933753"}
+{"version_major": 2, "version_minor": 0, "model_id": "587946e1a9474c83a06102e41a71fbbe"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "9498219db1474093b2e9969f96453d91"}
+{"version_major": 2, "version_minor": 0, "model_id": "95d1cc2728f642e78aa4c5cb768e5a36"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "7c9f2d93854947a3bdfbdff99935033b"}
+{"version_major": 2, "version_minor": 0, "model_id": "4bd4e64e36e5436b8ca0776b2ebae1e2"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "9a7bc4ed7f54412c8c00c350a9989a6e"}
+{"version_major": 2, "version_minor": 0, "model_id": "e8a029b47ba14be9a3a327991050e64b"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "73c0423f0c244ba6b0efdb77da6bbf19"}
+{"version_major": 2, "version_minor": 0, "model_id": "86af4fa560594cd8af95cecd93498ca7"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "253b60dde6594880bac24c864b1e7d3a"}
+{"version_major": 2, "version_minor": 0, "model_id": "a4651c0682044074b2677b0d3408ae2c"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "231b0263a0974c56b703cfed4b5844aa"}
+{"version_major": 2, "version_minor": 0, "model_id": "c23d99827f6c470fb37a9ad8b9d76403"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "8b01097626874df6931055ce046ca723"}
+{"version_major": 2, "version_minor": 0, "model_id": "96c2068641f74445a865fb2c28824254"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "778e9f7cc3f4481791ba2109acdd5af8"}
+{"version_major": 2, "version_minor": 0, "model_id": "8849222b2fe141f18493b5a362dbc4c2"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "01a8ede0095542b6ba0807b6c2f50c35"}
+{"version_major": 2, "version_minor": 0, "model_id": "43caa202517242b2a293f64640f6263f"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "01178578ca97456fbcf7711296a3ac02"}
+{"version_major": 2, "version_minor": 0, "model_id": "43f791a5db994ba29924a9bd2d1a0b9a"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "342c595cebb34ac8a4502cfb32846c28"}
+{"version_major": 2, "version_minor": 0, "model_id": "7b9b3640aa8b4312a4e39d36805994cb"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "76463865d8f74975a369328d04f07db4"}
+{"version_major": 2, "version_minor": 0, "model_id": "a40d791ea2fc48efbecdafd8333eecbb"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "623a8e2d550942a7a08ab2d921544d89"}
+{"version_major": 2, "version_minor": 0, "model_id": "7b13b9b20c4b45d6b4e6af3e594848e3"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "f10facdb35774d789e9642213288aa68"}
+{"version_major": 2, "version_minor": 0, "model_id": "6b88c92438b145c38e4fafa524dd9a64"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "9e6296c6ff19465d842b6fe5c2cc5834"}
+{"version_major": 2, "version_minor": 0, "model_id": "f1699f0800184e39bdc73c8d66b0ad56"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "8d67806cf9bd4d739f33f7fda99db0f1"}
+{"version_major": 2, "version_minor": 0, "model_id": "b89483f653484e4bb1d8dde852070cc9"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "4cd5c5ed09614851a8ebe506fd6589d8"}
+{"version_major": 2, "version_minor": 0, "model_id": "caefd85b36ec467489c3496ca3446e50"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "a11898bd26894fc9ba45d73f1fc9b3bf"}
+{"version_major": 2, "version_minor": 0, "model_id": "f13002c9db5743ec97c36d2bae919d71"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "35fb410763c8484895bc404b2879529f"}
+{"version_major": 2, "version_minor": 0, "model_id": "261a442d4f4a48128c0124cfd8637443"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "bd3d5bff434e4f2399693d06b3407c84"}
+{"version_major": 2, "version_minor": 0, "model_id": "81b8ba19257d452fb05b97b6c9c2c76e"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "b165d57b1530491b9589a30900e566ca"}
+{"version_major": 2, "version_minor": 0, "model_id": "170be93585ce4db28fc0e5d56ad212a0"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "1319750c0323416ead5ecfe6ba42cb17"}
+{"version_major": 2, "version_minor": 0, "model_id": "628e4aa4ab884630a5c705f703805ef3"}
 </script></div>
 </div>
 </div>
@@ -713,87 +713,87 @@ None
 </div>
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "9b6882b6cbbe4738bec3c3812efa1d02"}
+{"version_major": 2, "version_minor": 0, "model_id": "f890252e09e1419db77ab1075facc21d"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "14b714157b8548cf80f1f2d52645e7d3"}
+{"version_major": 2, "version_minor": 0, "model_id": "b1fb1ac2d8fe4f699c36b6880d911305"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "7406470408fc4887b00d6d4c934b7804"}
+{"version_major": 2, "version_minor": 0, "model_id": "929ec85968274f0eba2c0ad2bacaedd5"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "123c29ef6c7f413bbe463b59d3dbbc11"}
+{"version_major": 2, "version_minor": 0, "model_id": "f0868d92a54b43a1b87d081d72e66550"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "057f7fecfdbb475fa6bf862ef604e28e"}
+{"version_major": 2, "version_minor": 0, "model_id": "fa7b8a7ed7044be48c7bedcf0be2dd31"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "940e76273e6f4f65ab88c8ac3ff9ee29"}
+{"version_major": 2, "version_minor": 0, "model_id": "77f0d3740a75466391ff909659f187c3"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "acb13f9f67d6400abfd3123e2c143468"}
+{"version_major": 2, "version_minor": 0, "model_id": "b8ca09451635455a8c7fb45f15dbec40"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "393b6a40a1da45a6ada73fb96bfb1d26"}
+{"version_major": 2, "version_minor": 0, "model_id": "10200ebc1c63465bafa24cfe1cc8d995"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "bc31c81bc1a047c1a0eb2f6d1fb85553"}
+{"version_major": 2, "version_minor": 0, "model_id": "fd49ebb2f9f8422c8e23e9bcd3462bd5"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "cb2638f156534cdf937a7e2dc595545e"}
+{"version_major": 2, "version_minor": 0, "model_id": "4d7bc5330fb14108b42121cbbc7d6853"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "6a2b8f2cd5104ffa8147eea3d25b5708"}
+{"version_major": 2, "version_minor": 0, "model_id": "2032e802ebbf4312b725135e8c2a4266"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "8e43a03e4459464a9a434bfd069828e1"}
+{"version_major": 2, "version_minor": 0, "model_id": "fdb14c4d19b2422b9a2c3bfbeccb4c56"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "166a233b7dd64d64abb26a6e14ecfe2b"}
+{"version_major": 2, "version_minor": 0, "model_id": "b56dfc01ae5a4c2981a80fd7c842ef37"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "90965c0903de4ac88151e69695562c4c"}
+{"version_major": 2, "version_minor": 0, "model_id": "29deb19f6ac44f049cc6603968fff563"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "9a910ae913da41a2bb58fdca41526d16"}
+{"version_major": 2, "version_minor": 0, "model_id": "f9be315b91c64d09bb337c01dbbdd04d"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "f7212ac0604248e2837ec04f3ec45dbc"}
+{"version_major": 2, "version_minor": 0, "model_id": "3eba226244404d2ea7efac78238da866"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "6c41a6b4be1d4bc69a5a2cd0781f123c"}
+{"version_major": 2, "version_minor": 0, "model_id": "d175f21b28b74c099535bd871a7d75ca"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "b7bcc8b1e07d46f29a12439793d55560"}
+{"version_major": 2, "version_minor": 0, "model_id": "7b81aa008bbb4e189838593e60ff43ba"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "03ff74e2542b4828acb66beb176fa702"}
+{"version_major": 2, "version_minor": 0, "model_id": "3e1e1d5a66f349d4bcae8e291540ce27"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "c8f844ef8be84f499c0cbf01ece94755"}
+{"version_major": 2, "version_minor": 0, "model_id": "7b053fe359654035b409f019ea714fdc"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "1aea9fd92940428097aa5d07933f8166"}
+{"version_major": 2, "version_minor": 0, "model_id": "681642c83e644efaa4e7e3401a432aff"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "ce64026944004d0daf8c5a7737513703"}
+{"version_major": 2, "version_minor": 0, "model_id": "2cab393e073940a6b6641b791d89d31f"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "e5440646f6134d19914ad3387ca23928"}
+{"version_major": 2, "version_minor": 0, "model_id": "d4ffc04ac9c547138a9bbb47cf67a376"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "a44dde65ad2a46a89556dc9afc766129"}
+{"version_major": 2, "version_minor": 0, "model_id": "624a94f70a564fa3a8f03fb39ed0ae8c"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "5d889c23e2444067b0adc35bdcb33d26"}
+{"version_major": 2, "version_minor": 0, "model_id": "a0436702c310469c9b444c40abd892b2"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "263b8e64bde3430fa4223c6eade6e481"}
+{"version_major": 2, "version_minor": 0, "model_id": "d03ca26164334baea86b60fa96645122"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "e107dbe4a56a48ca85f31ed3b0853d97"}
+{"version_major": 2, "version_minor": 0, "model_id": "5a12e3655f3541408e45050412cb59da"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "b4a2e29c4f394dbd97479503715f0f57"}
+{"version_major": 2, "version_minor": 0, "model_id": "6efe5b3fbe904512b9e6bc8207fc4637"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "164baabec3b24b56a04990ce67e0b635"}
+{"version_major": 2, "version_minor": 0, "model_id": "1094870a300d450fac881a98307ab929"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "a158e98c44234ca29fa48311092af57d"}
+{"version_major": 2, "version_minor": 0, "model_id": "fc8f393b5b0e4c0685e1a037eccf5a25"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "908064a55450493998efa3d587dfeb1a"}
+{"version_major": 2, "version_minor": 0, "model_id": "960e3b0ee8ae470fbee110406540689d"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "ad6f903b2c9343f7b6fc59e1500b9021"}
+{"version_major": 2, "version_minor": 0, "model_id": "5ba2a228e218495286cf789db24a6fb7"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "a3ee8255dd1d4e88ad64f8a2905e4723"}
+{"version_major": 2, "version_minor": 0, "model_id": "1ed3124a4d39444c902cef787588fb7f"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "740f357fbf4949fb8f15793f94a26ed4"}
+{"version_major": 2, "version_minor": 0, "model_id": "f29d9fa0f08e4afa91fdc2d477299ec1"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "a7ab1ce4328b4c0f946e20ae8d041fbe"}
+{"version_major": 2, "version_minor": 0, "model_id": "8da558a72b094460b25878d2d480d354"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "970753c3a4d54701923e5721008fa991"}
+{"version_major": 2, "version_minor": 0, "model_id": "76f1fe7e95514f398be69c4b9419f1c6"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "5c7204c9a60942a38fdcabc19262125a"}
+{"version_major": 2, "version_minor": 0, "model_id": "20c4488728bf448fa301329ca96fa0bf"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "3706591db0e0440c9d9541d9b244d254"}
+{"version_major": 2, "version_minor": 0, "model_id": "d3333a73f8114e5fa3818e1db2e6d66a"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "f4701132bc05432b88923bd5de84a1aa"}
+{"version_major": 2, "version_minor": 0, "model_id": "5c8570a5745143e592e3300f1c136fa5"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "2194fa1f065042859b5ca568fedbe1f1"}
+{"version_major": 2, "version_minor": 0, "model_id": "15acfa5faf0b4f08b8133aa5e3945f09"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "4454aa1a16bd442baaaf7e6521642a0c"}
+{"version_major": 2, "version_minor": 0, "model_id": "b9dfcc2f4a9b43d996b9e218b3e6ef0a"}
 </script></div>
 </div>
 </div>
@@ -814,7 +814,7 @@ None
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">OSError</span><span class="g g-Whitespace">                                   </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_8455</span><span class="o">/</span><span class="mf">2932239055.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_8977</span><span class="o">/</span><span class="mf">2932239055.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># load testing file</span>
 <span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">test_files</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;root://eospublic.cern.ch//eos/opendata/cms/datascience/HiggsToBBNtupleProducerTool/HiggsToBBNTuple_HiggsToBB_QCD_RunII_13TeV_MC/test/ntuple_merged_0.root&#39;</span><span class="p">]</span>
 <span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">test_generator</span> <span class="o">=</span> <span class="n">DataGenerator</span><span class="p">(</span><span class="n">test_files</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">spectators</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">8192</span><span class="p">,</span> <span class="n">n_dim</span><span class="o">=</span><span class="n">ntracks</span><span class="p">,</span> 
@@ -836,11 +836,11 @@ None
 <span class="g g-Whitespace">    </span><span class="mi">151</span>         <span class="n">object_cache</span><span class="o">=</span><span class="n">object_cache</span><span class="p">,</span>
 
 <span class="nn">/usr/share/miniconda/envs/ml-latest/lib/python3.9/site-packages/uproot/reading.py</span> in <span class="ni">__init__</span><span class="nt">(self, file_path, object_cache, array_cache, custom_classes, decompression_executor, interpretation_executor, **options)</span>
-<span class="g g-Whitespace">    </span><span class="mi">587</span>             <span class="n">file_path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_options</span>
-<span class="g g-Whitespace">    </span><span class="mi">588</span>         <span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">589</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_source</span> <span class="o">=</span> <span class="n">Source</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">590</span>             <span class="n">file_path</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_options</span>  <span class="c1"># NOTE: a comma after **options breaks Python 2</span>
-<span class="g g-Whitespace">    </span><span class="mi">591</span>         <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">588</span>             <span class="n">file_path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_options</span>
+<span class="g g-Whitespace">    </span><span class="mi">589</span>         <span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">590</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_source</span> <span class="o">=</span> <span class="n">Source</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">591</span>             <span class="n">file_path</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_options</span>  <span class="c1"># NOTE: a comma after **options breaks Python 2</span>
+<span class="g g-Whitespace">    </span><span class="mi">592</span>         <span class="p">)</span>
 
 <span class="nn">/usr/share/miniconda/envs/ml-latest/lib/python3.9/site-packages/uproot/source/xrootd.py</span> in <span class="ni">__init__</span><span class="nt">(self, file_path, **options)</span>
 <span class="g g-Whitespace">    </span><span class="mi">445</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_file_path</span> <span class="o">=</span> <span class="n">file_path</span>
